@@ -11,4 +11,7 @@ public class DataBase {
     }
 
 
+    public static void updatePlayer(Player player){}
+
+
 }

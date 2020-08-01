@@ -51,6 +51,8 @@ public class Player {
     private Deck currentDeck;
     @Expose(serialize = true, deserialize = true)
     private Status playerStatusInGame;
+    @Expose(serialize = true, deserialize = true)
+    private Deck deckToChange;
 
     public Player(String userName, String passWord)  {
         this.userName = userName;
@@ -225,5 +227,13 @@ public class Player {
 
     public void setPlayerStatusInGame(Status playerStatusInGame) {
         this.playerStatusInGame = playerStatusInGame;
+    }
+
+    public Deck getDeckToChange() {
+        return deckToChange;
+    }
+
+    public void setDeckToChange(Deck deckToChange) {
+        this.deckToChange = deckToChange;
     }
 }

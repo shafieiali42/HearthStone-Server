@@ -3,6 +3,7 @@ package controller.request;
 import Models.Cards.CardClasses.Cards;
 import Models.Player.Player;
 import controller.Administer;
+import controller.CollectionController;
 import controller.response.Response;
 import controller.response.ShowSpecificCardsResponse;
 import database.DataBase;
@@ -14,13 +15,15 @@ public class ShowSpecificCardsRequest extends Request {
 
     private String group;
     private String userName;
+    private String panelName;
 
 
-    public ShowSpecificCardsRequest(String sendersToken, String userName, String group) {
+    public ShowSpecificCardsRequest(String sendersToken, String userName, String group,String panelName) {
         setRequestType("ShowSpecificCardsRequest");
         setRequestSendersToken(sendersToken);
         this.group = group;
         this.userName = userName;
+        this.panelName=panelName;
     }
 
     @Override
@@ -34,16 +37,37 @@ public class ShowSpecificCardsRequest extends Request {
             case "Salable":
                 cards = player.getSalableCards();
                 break;
-            case "":
-
+            case "LockCards":
+                cards = player.getLockCards();
                 break;
-            case "":
-
+            case "UnLockCards":
+                cards =player.getAllCardsOfPlayer();
+                break;
+            case "AllCards":
+                cards = Cards.getAllCards();
+                break;
+            case "NeutralCards":
+                cards = CollectionController.getCardsWithSpecificGroup("Neutral");
+                break;
+            case "PriestCards":
+                cards = CollectionController.getCardsWithSpecificGroup("Priest");
+                break;
+            case "HunterCards":
+                cards = CollectionController.getCardsWithSpecificGroup("Hunter");
+                break;
+            case "WarlockCards":
+                cards = CollectionController.getCardsWithSpecificGroup("Warlock");
+                break;
+            case "RogueCards":
+                cards = CollectionController.getCardsWithSpecificGroup("Rogue");
+                break;
+            case "MageCards":
+                cards = CollectionController.getCardsWithSpecificGroup("Mage");
                 break;
         }
 
         ArrayList<String> names = Administer.giveListOfCardsNames(cards);
-        Response response = new ShowSpecificCardsResponse(names,group);
+        Response response = new ShowSpecificCardsResponse(names,group,panelName);
         return response;
     }
 
@@ -62,5 +86,13 @@ public class ShowSpecificCardsRequest extends Request {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getPanelName() {
+        return panelName;
+    }
+
+    public void setPanelName(String panelName) {
+        this.panelName = panelName;
     }
 }
