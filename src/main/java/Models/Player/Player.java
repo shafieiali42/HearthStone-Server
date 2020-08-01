@@ -4,6 +4,7 @@ import Models.Cards.CardClasses.Cards;
 import Models.Deck.Deck;
 import Models.Heroes.*;
 import com.google.gson.annotations.Expose;
+import controller.Status;
 import utility.Log.LoggerOfProject;
 
 import java.io.IOException;
@@ -48,7 +49,8 @@ public class Player {
     private ArrayList<Deck> allDecksOfPlayer = new ArrayList<Deck>();
     @Expose(serialize = true, deserialize = true)
     private Deck currentDeck;
-
+    @Expose(serialize = true, deserialize = true)
+    private Status playerStatusInGame;
 
     public Player(String userName, String passWord)  {
         this.userName = userName;
@@ -215,5 +217,13 @@ public class Player {
 
     public void setCurrentHero(Heroes currentHero) {
         this.currentHero = currentHero;
+    }
+
+    public Status getPlayerStatusInGame() {
+        return playerStatusInGame;
+    }
+
+    public void setPlayerStatusInGame(Status playerStatusInGame) {
+        this.playerStatusInGame = playerStatusInGame;
     }
 }
