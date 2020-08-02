@@ -26,7 +26,7 @@ public class MakeNewDeckRequest extends Request {
         Player player = DataBase.fetchPlayer(userName);
         player.setPlayerStatusInGame(Status.MAKE_DECK);
         CollectionController.makeNewDeck(player, deckName, heroName);
-        Response response = new MakeNewDeckResponse(deckName, heroName);
+        Response response = new MakeNewDeckResponse(deckName);
         return response;
     }
 

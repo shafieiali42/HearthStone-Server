@@ -4,12 +4,12 @@ public class MakeNewDeckResponse extends Response {
 
 
     private String deckName;
-    private String heroName;
+//    private String heroName;
 
 
-    public MakeNewDeckResponse(String deckName, String heroName) {
+    public MakeNewDeckResponse(String deckName) {
         this.deckName = deckName;
-        this.heroName = heroName;
+//        this.heroName = heroName;
     }
 
 
@@ -21,11 +21,11 @@ public class MakeNewDeckResponse extends Response {
         this.deckName = deckName;
     }
 
-    public String getHeroName() {
-        return heroName;
-    }
-
-    public void setHeroName(String heroName) {
-        this.heroName = heroName;
-    }
+//    public String getHeroName() {
+//        return heroName;
+//    }
+//
+//    public void setHeroName(String heroName) {
+//        this.heroName = heroName;
+//    }
 }
