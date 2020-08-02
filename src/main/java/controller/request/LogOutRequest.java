@@ -1,8 +1,10 @@
 package controller.request;
 
+import Models.Player.Player;
 import controller.PlayerController;
 import controller.response.LogOutResponse;
 import controller.response.Response;
+import database.DataBase;
 
 public class LogOutRequest extends Request {
 
@@ -18,7 +20,8 @@ public class LogOutRequest extends Request {
 
     @Override
     public Response execute() {
-        Response response =new LogOutResponse(PlayerController.logOut());
+        Player player = DataBase.fetchPlayer(userName);
+        Response response =new LogOutResponse(PlayerController.logOut(player));
         return response;
     }
 

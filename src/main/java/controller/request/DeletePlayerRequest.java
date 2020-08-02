@@ -1,8 +1,10 @@
 package controller.request;
 
+import Models.Player.Player;
 import controller.PlayerController;
 import controller.response.DeletePlayerResponse;
 import controller.response.Response;
+import database.DataBase;
 
 public class DeletePlayerRequest extends Request {
 
@@ -18,7 +20,8 @@ public class DeletePlayerRequest extends Request {
 
     @Override
     public Response execute() {
-        Response response=new DeletePlayerResponse(PlayerController.deletePlayer(userName,password));
+        Player player= DataBase.fetchPlayer(userName);
+        Response response=new DeletePlayerResponse(PlayerController.deletePlayer(userName,password,player));
         return response;
     }
 

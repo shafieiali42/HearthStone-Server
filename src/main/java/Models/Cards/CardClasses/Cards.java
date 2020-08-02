@@ -1,8 +1,10 @@
 package Models.Cards.CardClasses;
 
 
+
 import Logic.PlayLogic.Alliance;
 import Models.Heroes.Heroes;
+
 import Visitors.CardVisitors.Visitable;
 import Visitors.CardVisitors.Visitor;
 import com.google.gson.annotations.Expose;

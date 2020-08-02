@@ -17,7 +17,7 @@ import java.util.List;
 public class PlayerController {
 
 
-    public static Player signIn(String userName, String passWord)  {
+    public static Player signIn(String userName, String passWord) {
 
         boolean validUserNameAndPassword = false;
         for (Player player : getAllPlayer()) {
@@ -91,49 +91,56 @@ public class PlayerController {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
-    public static Player signUp(String userName, String passWord)  {
+    public static Player signUp(String userName, String passWord) {
 
 
         boolean canSignUp = true;
-        for (Player player :getAllPlayer() ) {
+        for (Player player : getAllPlayer()) {
             if (userName.equals(player.getUserName())) {
                 canSignUp = false;
             }
         }
         if (canSignUp) {
             Player player = new Player(userName, passWord);
-            ControllerOfMainComponents.currentPlayer = player;
-            ControllerOfMainComponents.currentPlayer.setSignInOrSignup("Signup");
+//            ControllerOfMainComponents.currentPlayer = player;
+            player.setSignInOrSignup("Signup");
             player.setSignInOrSignup("Signup");
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             Calendar cal = Calendar.getInstance();
-            ControllerOfMainComponents.currentPlayer.getLoggerOfMyPlayer().info("USER: " + ControllerOfMainComponents.currentPlayer.getUserName());
-            ControllerOfMainComponents.currentPlayer.getLoggerOfMyPlayer().info("CREATED_AT:" + dateFormat.format(cal.getTime()));
-            ControllerOfMainComponents.currentPlayer.getLoggerOfMyPlayer().info("PASSWORD: " + ControllerOfMainComponents.currentPlayer.getPassWord());
-            ControllerOfMainComponents.currentPlayer.getLoggerOfMyPlayer().info("sign_up " + ControllerOfMainComponents.currentPlayer.getUserName());
+            player.getLoggerOfMyPlayer().info("USER: " + player.getUserName());
+            player.getLoggerOfMyPlayer().info("CREATED_AT:" + dateFormat.format(cal.getTime()));
+            player.getLoggerOfMyPlayer().info("PASSWORD: " + player.getPassWord());
+            player.getLoggerOfMyPlayer().info("sign_up " + player.getUserName());
             return player;
         } else {
             return null;
         }
     }
 
-    public static boolean logOut()  {
-        ParsePlayerObjectIntoJson.serializePlayer(ControllerOfMainComponents.currentPlayer);
-        ControllerOfMainComponents.currentPlayer.getLoggerOfMyPlayer().info("Log_out " + ControllerOfMainComponents.currentPlayer.getUserName());
-        ControllerOfMainComponents.currentPlayer.getLoggerOfMyPlayer().getHandlers()[0].close();
-        ControllerOfMainComponents.currentPlayer = null;
-        return true;
+    public static boolean logOut(Player player) {
+        try {
+            ParsePlayerObjectIntoJson.serializePlayer(player);
+            player.getLoggerOfMyPlayer().info("Log_out " + player.getUserName());
+            player.getLoggerOfMyPlayer().getHandlers()[0].close();
+            player = null;
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
-    public static boolean deletePlayer(String userName,String password)  {
-        if (password.equals(ControllerOfMainComponents.currentPlayer.getPassWord())) {
-            File temp = new File("logs/" + "temp.txt");
-            FileReader fileReader = new FileReader("logs/" + ControllerOfMainComponents.currentPlayer.getUserName() + ".log");
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            FileWriter fileWriter = null;
+    public static boolean deletePlayer(String userName, String password,Player player) {
+        if (password.equals(player.getPassWord())) {
             try {
+                File temp = new File("logs/" + "temp.txt");
+                FileReader fileReader = null;
+                fileReader = new FileReader("logs/" + player.getUserName() + ".log");
+                BufferedReader bufferedReader = new BufferedReader(fileReader);
+                FileWriter fileWriter = null;
                 fileWriter = new FileWriter(temp);
                 BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
                 String st = new String();
@@ -150,7 +157,7 @@ public class PlayerController {
                 fileReader.close();
                 fileWriter.close();
                 FileReader fileReader1 = new FileReader(temp);
-                FileWriter fileWriter1 = new FileWriter("logs/" + ControllerOfMainComponents.currentPlayer.getUserName() + ".log");
+                FileWriter fileWriter1 = new FileWriter("logs/" + player.getUserName() + ".log");
                 BufferedReader bufferedReader1 = new BufferedReader(fileReader1);
                 BufferedWriter bufferedWriter1 = new BufferedWriter(fileWriter1);
                 String string = new String();
@@ -163,7 +170,7 @@ public class PlayerController {
                 bufferedWriter1.close();
                 fileReader1.close();
                 fileWriter1.close();
-                ParsePlayerObjectIntoJson.removePlayer(ControllerOfMainComponents.currentPlayer);
+                ParsePlayerObjectIntoJson.removePlayer(player);
                 return true;
             } catch (IOException e) {
                 e.printStackTrace();
@@ -171,6 +178,7 @@ public class PlayerController {
         } else {
             return false;
         }
+        return false;
     }
 
 }
