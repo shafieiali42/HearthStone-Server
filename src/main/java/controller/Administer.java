@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 
 public class Administer {
 
@@ -41,7 +42,12 @@ public class Administer {
     }
 
 
-    public static void addGivenCardToCollectionDeck(Player player,String cardName, boolean isLock){ //todo
+    public static void addGivenCardToCollectionDeck(Player player, String cardName,
+                                                    boolean isLock){ //todo
+
+
+        HashMap<String,Integer> usesHashMap=player.getDeckToChange().getUsesHashMap();
+
         Cards cards = null;
         for (Cards cards1 : Cards.getAllCards()) {
             if (cards1.getName().equals(cardName)) {
@@ -50,20 +56,18 @@ public class Administer {
             }
         }
 
-
-        for (int i = 0; i < DeckPage.getInstance().getListOfLittleCardsPanelOfDeckToChange().size(); i++) {
+        for (int i = 0; i < usesHashMap.keySet().size(); i++) {
             assert cards != null;
             if (cards.getName().equalsIgnoreCase
-                    (DeckPage.getInstance().getListOfLittleCardsPanelOfDeckToChange().get(i).getNameLabel().getText())) {
-                if (Integer.parseInt(DeckPage.getInstance().getListOfLittleCardsPanelOfDeckToChange().get(i).
-                        getUsedLabel().getText()) < 2) {
+                    (usesHashMap.keySet().toArray()[i].toString())) {
+                if (Integer.parseInt(usesHashMap.values().toArray()[i].toString()) < 2) {
 
                     if (!isLock) {
                         player.getDeckToChange().getListOfCards().add(cards);
                     }
 //                    DeckViewer.getInstance().showCardsInDecK();
-                    int k = Integer.parseInt(DeckPage.getInstance().getListOfLittleCardsPanelOfDeckToChange().get(i).getUsedLabel().getText()) + 1;
-                    DeckPage.getInstance().getListOfLittleCardsPanelOfDeckToChange().get(i).getUsedLabel().setText(k + "");
+                    int k = Integer.parseInt(usesHashMap.values().toArray()[i].toString())+1;
+                    usesHashMap.put(usesHashMap.keySet().toArray()[i].toString(),k);
                     break;
                 } else if (!isLock) {
                     JOptionPane.showMessageDialog(null,

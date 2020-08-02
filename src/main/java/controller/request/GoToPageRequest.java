@@ -1,7 +1,10 @@
 package controller.request;
 
+import Models.Player.Player;
+import controller.Status;
 import controller.response.GoToPageResponse;
 import controller.response.Response;
+import database.DataBase;
 
 public class GoToPageRequest extends Request {
 
@@ -21,9 +24,9 @@ public class GoToPageRequest extends Request {
 
     @Override
     public Response execute() {
+        Player player = DataBase.fetchPlayer(userName);
 
-
-        if (ControllerOfMainComponents.getStatus().equals(Status.BUY_PAGE_FROM_COLLECTION)) {
+        if (player.getPlayerStatusInGame().equals(Status.BUY_PAGE_FROM_COLLECTION)) {
             pageName="CollectionPage";
         } else {
             pageName="MainMenuPage";

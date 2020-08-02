@@ -1,27 +1,22 @@
-package controller.request;
+package controller.response;
 
-import controller.response.Response;
+
 
 import java.util.HashMap;
 
-public class AddCardRequest extends Request {
+public class RemoveCardFromDeckToChangeResponse extends Response {
 
 
     private String userName;
-    private HashMap<String,Integer> usesMap;
+    private HashMap<String, Integer> usesMap;
 
 
-    public AddCardRequest(String userName, HashMap<String, Integer> usesMap) {
+    public RemoveCardFromDeckToChangeResponse(String userName, HashMap<String, Integer> usesMap) {
         this.userName = userName;
         this.usesMap = usesMap;
     }
 
-    @Override
-    public Response execute() {
 
-
-
-    }
 
 
     public String getUserName() {
@@ -31,6 +26,7 @@ public class AddCardRequest extends Request {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
 
     public HashMap<String, Integer> getUsesMap() {
         return usesMap;
