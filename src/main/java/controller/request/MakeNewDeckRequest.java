@@ -1,7 +1,7 @@
 package controller.request;
 
 import Models.Player.Player;
-import controller.CollectionController;
+import controller.controllers.CollectionController;
 import controller.Status;
 import controller.response.MakeNewDeckResponse;
 import controller.response.Response;

@@ -1,38 +1,35 @@
 package controller.request;
 
 import Models.Player.Player;
-import controller.controllers.PlayerController;
-import controller.response.LogOutResponse;
+import controller.Status;
+import controller.response.GoToPageResponse;
 import controller.response.Response;
 import database.DataBase;
 
-public class LogOutRequest extends Request {
-
+public class OkButtonOnFirstThreeCardsPageRequest extends Request {
 
     private String userName;
 
-
-    public LogOutRequest(String sendersToken, String userName) {
-        setRequestType("LogOutRequest");
-        setRequestSendersToken(sendersToken);
+    public OkButtonOnFirstThreeCardsPageRequest(String userName) {
         this.userName = userName;
     }
 
     @Override
     public Response execute() {
         Player player = DataBase.fetchPlayer(userName);
-        Response response =new LogOutResponse(PlayerController.logOut(player));
+        Response response = null;
+        player.setPlayerStatusInGame(Status.PLAY_PAGE);
+        response = new GoToPageResponse("GamePage");
         return response;
     }
 
-
+    @Override
     public String getUserName() {
         return userName;
     }
 
+    @Override
     public void setUserName(String userName) {
         this.userName = userName;
     }
-
-
 }

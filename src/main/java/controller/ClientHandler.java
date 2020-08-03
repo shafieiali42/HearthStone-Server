@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Scanner;
 
@@ -59,6 +60,7 @@ public class ClientHandler extends Thread {
                                 if (request.getRequestType().equalsIgnoreCase("LogInRequest")) {
                                     request.setRequestSendersToken(GenerateAuthtoken.generateNewToken());
                                     this.authToken = request.getRequestSendersToken();
+                                    Server.getSockets().put(request.getUserName(),this.socket);
                                     requests.add(request);
                                     executeRequests();
                                 }

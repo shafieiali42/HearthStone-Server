@@ -1,11 +1,10 @@
-package controller;
+package controller.controllers;
 
 import Models.Cards.CardClasses.Cards;
 import Models.Deck.Deck;
 import Models.Player.Player;
 
 import javax.swing.*;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;

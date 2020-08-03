@@ -2,7 +2,7 @@ package controller.request;
 
 import Models.Deck.Deck;
 import Models.Player.Player;
-import controller.Administer;
+import controller.controllers.Administer;
 import controller.response.Response;
 import controller.response.ShowDeckNumberResponse;
 import database.DataBase;

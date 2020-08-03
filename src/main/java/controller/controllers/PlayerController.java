@@ -1,4 +1,4 @@
-package controller;
+package controller.controllers;
 
 import Models.Cards.CardClasses.Cards;
 import Models.Player.ParsePlayerObjectIntoJson;

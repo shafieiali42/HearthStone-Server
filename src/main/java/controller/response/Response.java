@@ -1,6 +1,9 @@
 package controller.response;
 
+import java.net.Socket;
+
 public abstract class Response {
+
 
 
     private String responseReceiversToken;
@@ -24,4 +27,7 @@ public abstract class Response {
     public void setResponseType(String responseType) {
         this.responseType = responseType;
     }
+
+
+
 }

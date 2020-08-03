@@ -27,38 +27,54 @@ public class InGamePlayer {
     private Deck deck;
 
 
-
-    public InGamePlayer(){
+    public InGamePlayer() {
         this.handsCards = new ArrayList<>();
         this.battleGroundCards = new ArrayList<>();
-        passivesToChoose=new ArrayList<>();
-        deckCards=new ArrayList<>();
-        firstThreeCards=new ArrayList<>();
-        turn=1;
-        mana=1;
+        passivesToChoose = new ArrayList<>();
+        deckCards = new ArrayList<>();
+        firstThreeCards = new ArrayList<>();
+        turn = 1;
+        mana = 1;
     }
 
-    public InGamePlayer(Player player) {
-        this.player = player;
-        deckCards=new ArrayList<>();
-        for (Cards card:player.getCurrentDeck().getListOfCards()){
-            deckCards.add(card.copy());
+    public InGamePlayer(Player player, boolean deckReader) {
+        if (deckReader) {
+            this.player = player;
+            deckCards = new ArrayList<>();
+            this.handsCards = new ArrayList<>();
+            this.battleGroundCards = new ArrayList<>();
+            passivesToChoose = new ArrayList<>();
+            firstThreeCards = new ArrayList<>();
+            turn = 1;
+            mana = 1;
+        } else {
+            this.player = player;
+            deckCards = new ArrayList<>();
+            for (Cards card : player.getCurrentDeck().getListOfCards()) {
+                deckCards.add(card.copy());
+            }
+            hero = player.getCurrentHero();
+            Collections.shuffle(deckCards);
+            this.handsCards = new ArrayList<>();
+            this.battleGroundCards = new ArrayList<>();
+            passivesToChoose = new ArrayList<>();
+            firstThreeCards = new ArrayList<>();
+            turn = 1;
+            mana = 1;
+            initHandsCards();
+            initPassiveToChoose();
         }
-        hero=player.getCurrentHero();
-        Collections.shuffle(deckCards);
-        this.handsCards = new ArrayList<>();
-        this.battleGroundCards = new ArrayList<>();
-        passivesToChoose=new ArrayList<>();
-        firstThreeCards=new ArrayList<>();
-        turn=1;
-        mana=1;
-        initHandsCards();
-        initPassiveToChoose();
-
-
     }
 
 
+
+    public ArrayList<String> givePassiveToChooseNames(){
+        ArrayList<String>passiveToChooseNames=new ArrayList<>();
+        for (Passive passive:passivesToChoose){
+            passiveToChooseNames.add(passive.getName());
+        }
+        return passiveToChooseNames;
+    }
 
     public void initPassiveToChoose() {
         ArrayList<Integer> randomNumber = new ArrayList<Integer>();
@@ -85,7 +101,6 @@ public class InGamePlayer {
         deckCards.remove(0);
 
     }
-
 
 
     //getter and setters
@@ -119,6 +134,7 @@ public class InGamePlayer {
     public Player getPlayer() {
         return player;
     }
+
     public void setPlayer(Player player) {
         this.player = player;
     }
@@ -142,6 +158,7 @@ public class InGamePlayer {
     public ArrayList<Cards> getHandsCards() {
         return handsCards;
     }
+
     public void setHandsCards(ArrayList<Cards> handsCards) {
         this.handsCards = handsCards;
     }
@@ -149,6 +166,7 @@ public class InGamePlayer {
     public ArrayList<Minion> getBattleGroundCards() {
         return battleGroundCards;
     }
+
     public void setBattleGroundCards(ArrayList<Minion> battleGroundCards) {
         this.battleGroundCards = battleGroundCards;
     }
@@ -156,6 +174,7 @@ public class InGamePlayer {
     public Weapon getCurrentWeapon() {
         return currentWeapon;
     }
+
     public void setCurrentWeapon(Weapon currentWeapon) {
         this.currentWeapon = currentWeapon;
     }
@@ -163,6 +182,7 @@ public class InGamePlayer {
     public int getMana() {
         return mana;
     }
+
     public void setMana(int mana) {
         this.mana = mana;
     }
@@ -170,6 +190,7 @@ public class InGamePlayer {
     public int getTurn() {
         return turn;
     }
+
     public void setTurn(int turn) {
         this.turn = turn;
     }
@@ -177,6 +198,7 @@ public class InGamePlayer {
     public Passive getInfoPassive() {
         return infoPassive;
     }
+
     public void setInfoPassive(Passive infoPassive) {
         this.infoPassive = infoPassive;
     }
@@ -184,6 +206,7 @@ public class InGamePlayer {
     public ArrayList<Passive> getPassivesToChoose() {
         return passivesToChoose;
     }
+
     public void setPassivesToChoose(ArrayList<Passive> passivesToChoose) {
         this.passivesToChoose = passivesToChoose;
     }
@@ -191,6 +214,7 @@ public class InGamePlayer {
     public ArrayList<Cards> getFirstThreeCards() {
         return firstThreeCards;
     }
+
     public void setFirstThreeCards(ArrayList<Cards> firstThreeCards) {
         this.firstThreeCards = firstThreeCards;
     }

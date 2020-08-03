@@ -1,15 +1,11 @@
 package controller.request;
 
 import Models.Player.Player;
-import controller.CollectionController;
 import controller.Status;
 import controller.response.DoneCreatDeckResponse;
 import controller.response.Response;
 import controller.response.ShowJOptionPaneResponse;
 import database.DataBase;
-import utility.constant.Constant;
-
-import javax.swing.*;
 
 public class DoneCreatDeckRequest extends Request {
 

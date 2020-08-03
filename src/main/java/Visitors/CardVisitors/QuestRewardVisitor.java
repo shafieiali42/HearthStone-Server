@@ -138,7 +138,7 @@ public class QuestRewardVisitor implements Visitor {
                 strengthInNumbers.setManaSpendForQuest(strengthInNumbers.getManaSpendForQuest() + playingCard.getManaCost());
             }
             if (strengthInNumbers.getManaSpendForQuest() >= 10) {
-                if (Game.getInstance().getCurrentAlliance().equals(Alliance.ENEMY)) {
+                if (Game.getInstance().getCurrentAlliance().equals(Alliance.BLACK)) {
                     if (playingCard.getType().equalsIgnoreCase("Minion")) {
                         strengthInNumbers.setManaSpendForQuest(strengthInNumbers.getManaSpendForQuest() + playingCard.getManaCost());
                     }

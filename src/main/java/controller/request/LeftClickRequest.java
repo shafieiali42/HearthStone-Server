@@ -1,12 +1,10 @@
 package controller.request;
 
 import Models.Player.Player;
-import controller.Administer;
+import controller.controllers.Administer;
 import controller.Status;
 import controller.response.*;
 import database.DataBase;
-
-import java.util.HashMap;
 
 public class LeftClickRequest extends Request {
 

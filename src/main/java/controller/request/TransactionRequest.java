@@ -1,14 +1,11 @@
 package controller.request;
 
 import Models.Player.Player;
-import controller.Administer;
+import controller.controllers.Administer;
 import controller.response.Response;
 import controller.response.ShowJOptionPaneResponse;
 import controller.response.TransactionResponse;
 import database.DataBase;
-import utility.constant.Constant;
-
-import javax.swing.*;
 
 public class TransactionRequest extends Request {
 

@@ -2,8 +2,8 @@ package controller.request;
 
 import Models.Cards.CardClasses.Cards;
 import Models.Player.Player;
-import controller.Administer;
-import controller.CollectionController;
+import controller.controllers.Administer;
+import controller.controllers.CollectionController;
 import controller.response.Response;
 import controller.response.ShowSpecificCardsResponse;
 import database.DataBase;

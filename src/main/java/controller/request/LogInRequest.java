@@ -1,7 +1,7 @@
 package controller.request;
 
 import Models.Player.Player;
-import controller.PlayerController;
+import controller.controllers.PlayerController;
 import controller.response.LogInResponse;
 import controller.response.Response;
 

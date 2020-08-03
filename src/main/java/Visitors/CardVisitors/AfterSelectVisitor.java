@@ -66,7 +66,7 @@ public class AfterSelectVisitor implements Visitor {
     @Override
     public void visit(PharaohsBlessing pharaohsBlessing, ArrayList<Minion> battleGround, Minion target, Alliance alliance) {
 
-        if (alliance.equals(Alliance.ENEMY)) {
+        if (alliance.equals(Alliance.BLACK)) {
 
             JOptionPane.showMessageDialog(GamePartController.getMyMainFrame(),
                     "you cant do it on enemy minions", "Error", JOptionPane.ERROR_MESSAGE);
@@ -118,7 +118,7 @@ public class AfterSelectVisitor implements Visitor {
     @Override
     public void visit(Polymorph polymorph, ArrayList<Minion> battleGround, Minion target, Alliance alliance) {
 
-        if (alliance.equals(Alliance.FRIENDLY)) {
+        if (alliance.equals(Alliance.WHITE)) {
 
             JOptionPane.showMessageDialog(GamePartController.getMyMainFrame(),
                     "you cant do it on your friendly minion", "Error", JOptionPane.ERROR_MESSAGE);
