@@ -50,6 +50,30 @@ public class Server extends Thread {
 
 
 
+    public static Game giveGameWithPlayer(String userName){
+        for (Game game:runningGames){
+            if (game.getWhitePlayer().getPlayer().getUserName().equalsIgnoreCase(userName)){
+                return game;
+            }else if (game.getBlackPlayer().getPlayer().getUserName().equalsIgnoreCase(userName)){
+                return game;
+            }
+        }
+        return null;
+    }
+
+
+    public static InGamePlayer giveAnotherPlayer(String userName){
+        for (Game game:runningGames){
+            if (game.getWhitePlayer().getPlayer().getUserName().equalsIgnoreCase(userName)){
+                return game.getBlackPlayer();
+            }else if (game.getBlackPlayer().getPlayer().getUserName().equalsIgnoreCase(userName)){
+                return game.getWhitePlayer();
+            }
+        }
+        return null;
+    }
+
+
     public static Socket giveSocketWithUserName(String userName){
         for (String userNameInSockets:Server.sockets.keySet()){
             if (userNameInSockets.equalsIgnoreCase(userName)){

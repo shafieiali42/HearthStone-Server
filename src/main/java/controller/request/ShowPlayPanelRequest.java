@@ -4,7 +4,6 @@ import Models.Player.InGamePlayer;
 import Models.Player.Player;
 import controller.Status;
 import controller.controllers.GamePartController;
-import controller.response.GoToPageResponse;
 import controller.response.Response;
 import controller.response.ShowPlayPanelResponse;
 import database.DataBase;
@@ -12,12 +11,15 @@ import server.Server;
 
 import java.util.ArrayList;
 
-public class OkButtonOnFirstThreeCardsPageRequest extends Request {
+public class ShowPlayPanelRequest extends Request {
+
 
     private String userName;
+    private String state;
 
-    public OkButtonOnFirstThreeCardsPageRequest(String userName) {
+    public ShowPlayPanelRequest(String userName, String state) {
         this.userName = userName;
+        this.state = state;
     }
 
     @Override
@@ -32,15 +34,15 @@ public class OkButtonOnFirstThreeCardsPageRequest extends Request {
             ArrayList<String> whiteBattleGroundCards = GamePartController.giveNameOfCardsList(whitePlayer.getBattleGroundCards());
             response = new ShowPlayPanelResponse(userName, whiteHandsCards, null, whiteBattleGroundCards,
                     null, whitePlayer.getHero().getName(), blackPlayer.getHero().getName(),
-                    whitePlayer.getCurrentWeapon().getName(), blackPlayer.getCurrentWeapon().getName(),"StartGame");
-        }else {
+                    whitePlayer.getCurrentWeapon().getName(), blackPlayer.getCurrentWeapon().getName(), state);
+        } else {
             ArrayList<String> whiteHandsCards = GamePartController.giveNameOfCardsList(whitePlayer.getHandsCards());
             ArrayList<String> whiteBattleGroundCards = GamePartController.giveNameOfCardsList(whitePlayer.getBattleGroundCards());
             ArrayList<String> blackHandsCards = GamePartController.giveNameOfCardsList(blackPlayer.getHandsCards());
             ArrayList<String> blackBattleGroundCards = GamePartController.giveNameOfCardsList(blackPlayer.getBattleGroundCards());
             response = new ShowPlayPanelResponse(userName, whiteHandsCards, blackHandsCards, whiteBattleGroundCards,
                     blackBattleGroundCards, whitePlayer.getHero().getName(), blackPlayer.getHero().getName(),
-                    whitePlayer.getCurrentWeapon().getName(), blackPlayer.getCurrentWeapon().getName(),"StartGame");
+                    whitePlayer.getCurrentWeapon().getName(), blackPlayer.getCurrentWeapon().getName(), state);
         }
         return response;
     }
