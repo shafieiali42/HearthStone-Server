@@ -1,9 +1,14 @@
 package controller.request;
 
+import Logic.PlayLogic.Alliance;
+import Logic.PlayLogic.Game;
+import Models.Cards.CardClasses.Minion;
 import Models.Player.Player;
+import Visitors.CardVisitors.AfterSelectVisitor;
 import controller.Status;
 import controller.controllers.GamePartController;
 import controller.response.ChangeFirstThreeCardsResponse;
+import controller.response.DiscoverPageResponse;
 import controller.response.Response;
 import database.DataBase;
 import server.Server;
@@ -19,11 +24,12 @@ public class MousePressRequest extends Request {
     private boolean firstCardCanChangeInThreeCards;
     private boolean secondCardCanChangeInThreeCards;
     private boolean thirdCardCanChangeInThreeCards;
+    private Alliance alliance;
 
 
     public MousePressRequest(String userName, String cardName, String firstCardNameOfThreeCards, String secondCardNameOfThreeCards, String thirdCardNameOfThreeCards,
                              boolean firstCardCanChangeInThreeCards, boolean secondCardCanChangeInThreeCards,
-                             boolean thirdCardCanChangeInThreeCards) {
+                             boolean thirdCardCanChangeInThreeCards, Alliance alliance) {
 
         this.userName = userName;
         this.cardName = cardName;
@@ -33,11 +39,13 @@ public class MousePressRequest extends Request {
         this.firstCardCanChangeInThreeCards = firstCardCanChangeInThreeCards;
         this.secondCardCanChangeInThreeCards = secondCardCanChangeInThreeCards;
         this.thirdCardCanChangeInThreeCards = thirdCardCanChangeInThreeCards;
+        this.alliance = alliance;
     }
 
     @Override
     public Response execute() {
         Player player = DataBase.fetchPlayer(userName);
+        Game game = Server.giveGameWithPlayer(userName);
         Response response = null;
 
         if (player.getPlayerStatusInGame().equals(Status.FIRST_THREE_CARDS_PAGE)) {
@@ -49,8 +57,13 @@ public class MousePressRequest extends Request {
             response = new ChangeFirstThreeCardsResponse(changedCardIndex,
                     GamePartController.setNameOfFirstFriendlyThreeCards(Server.giveInGamePlayer(userName)));
 
+        } else if (player.getPlayerStatusInGame().equals(Status.DISCOVER_THREE_WEAPONS)) {
+            response = new DiscoverPageResponse(cardName);
+            GamePartController.getPlyingCardOfGameState(game).accept(new AfterSelectVisitor(),
+                    GamePartController.getBattleGround(game),
+                    GamePartController.getHandCards(game), GamePartController.getDeckCards(game),
+                    new Minion(), null, new Minion(), null, alliance);
         }
-
         return response;
     }
 

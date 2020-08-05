@@ -1,13 +1,20 @@
 package controller.controllers;
 
+import Logic.PlayLogic.Alliance;
 import Logic.PlayLogic.Game;
 import Models.Cards.CardClasses.Cards;
 import Models.Cards.CardClasses.Minion;
+import Models.Cards.CardClasses.Weapon;
+import Models.HeroPower.HeroPower;
+import Models.Heroes.Heroes;
 import Models.Player.InGamePlayer;
 import Visitors.CardVisitors.DrawCardVisitor;
 import Visitors.CardVisitors.EndTurnVisitor;
+import Visitors.CardVisitors.GetDamageVisitor;
 import Visitors.PassiveVisitor.InfoPassiveVisitor;
 import Visitors.PassiveVisitor.PassiveEndTurnVisitor;
+import Visitors.PowerVisitor.HeroPowerVisitor.HeroPowerVisitor;
+import Visitors.PowerVisitor.HeroPowerVisitor.TargetVisitorOfPowers;
 import controller.Status;
 import server.Server;
 
@@ -16,6 +23,443 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class GamePartController {
+
+
+
+    public static Heroes getTargetOfHeroPowerWitchIsHero(Game game) {
+        if (game.getTargetOfHeroPower() == -2) {
+            if (game.getTargetAllianceOfHeroPower().equals(Alliance.WHITE)) {
+                return game.getWhitePlayer().getHero();
+            } else if (game.getTargetAllianceOfHeroPower().equals(Alliance.BLACK)) {
+                return game.getBlackPlayer().getHero();
+            }
+        }
+
+        return null;
+
+    }
+
+
+    public static Minion getTargetOfHeroPower(Game game) {
+
+        if (game.getTargetAllianceOfHeroPower() == null) {
+            return null;
+        } else if (game.getTargetOfHeroPower() <= 0) {
+            return null;
+        }
+
+        if (game.getTargetAllianceOfHeroPower().equals(Alliance.WHITE)) {
+            return game.getWhitePlayer().getBattleGroundCards().get(game.getTargetOfHeroPower() - 1);
+        } else if (game.getTargetAllianceOfHeroPower().equals(Alliance.BLACK)) {
+            return game.getBlackPlayer().getBattleGroundCards().get(game.getTargetOfHeroPower() - 1);
+        }
+        return null;
+
+    }
+
+    public static Minion getTargetOfSpell(Game game) {
+
+        if (game.getAllianceOfSpellsTarget() == null) {
+            return null;
+        } else if (game.getTargetOfSpell() <= 0) {
+            return null;
+        }
+        if (game.getAllianceOfSpellsTarget().equals(Alliance.WHITE)) {
+            return game.getWhitePlayer().getBattleGroundCards().get(game.getTargetOfSpell() - 1);
+        } else if (game.getAllianceOfSpellsTarget().equals(Alliance.BLACK)) {
+            return game.getBlackPlayer().getBattleGroundCards().get(game.getTargetOfSpell() - 1);
+        }
+        return null;
+    }
+
+    public static void setTargetOfSpell(int number, Alliance alliance,Game game) {
+        game.setTargetOfSpell(number);
+        game.setAllianceOfSpellsTarget(alliance);
+    }
+
+    public static void setTargetForHeroPower(int number, Alliance alliance,Game game) {
+        game.setTargetOfHeroPower(number);
+        game.setTargetAllianceOfHeroPower(alliance);
+    }
+
+    public static void setAttacker(int attacker,Game game) {
+        game.setAttacker(attacker);
+    }
+
+    public static void setTarget(int target,Game game) {
+        game.setTarget(target);
+    }
+
+    public static void setAllianceOfTarget(Alliance alliance,Game game) {
+       game.setTargetAlliance(alliance);
+    }
+
+    public static void setAllianceAttacker(Alliance alliance,Game game) {
+        game.setAttackerAlliance(alliance);
+    }
+
+    public static Alliance getAllianceOfTarget(Game game) {
+        return game.getTargetAlliance();
+    }
+
+    public static Alliance getAllianceOfAttacker(Game game) {
+        return game.getAttackerAlliance();
+    }
+
+    public static int getAttacker(Game game) {
+        return game.getAttacker();
+    }
+
+    public static int getTarget(Game game) {
+        return game.getTarget();
+    }
+
+    public static Alliance getAlliance(int yCoordinateOfCard) {
+
+        Alliance allianceOfSpellTarget;
+        if (yCoordinateOfCard <= 385) {
+            allianceOfSpellTarget = Alliance.BLACK;
+        } else {
+            allianceOfSpellTarget = Alliance.WHITE;
+        }
+        return allianceOfSpellTarget;
+    }
+
+    public static Heroes getTargetOfSpellWitchIsHero(Game game) {//it actually doesnt use
+        if (game.getAllianceOfSpellsTarget().equals(Alliance.WHITE)) {
+            return game.getWhitePlayer().getHero();
+        } else if (game.getAllianceOfSpellsTarget().equals(Alliance.BLACK)) {
+            return game.getBlackPlayer().getHero();
+        }
+
+        return null;
+
+    }
+    public static ArrayList<Cards> getDeckCards(Game game) {
+        return game.getCurrentPlayer().getDeckCards();
+    }
+
+    public static HeroPower getHeroPower(Game game) {
+        return game.getCurrentPlayer().getHero().getHeroPower();
+    }
+    public static Cards getPlyingCardOfGameState(Game game) {
+        return game.getPlayingCard();
+    }
+
+    public static ArrayList<Minion> getBattleGround(Game game) {
+        return game.getCurrentPlayer().getBattleGroundCards();
+    }
+
+    public static ArrayList<Cards> getHandCards(Game game) {
+        return game.getCurrentPlayer().getHandsCards();
+    }
+
+    public static int getNumber(int xCoordinateOfCard) {
+        int number = 0;
+
+        if (xCoordinateOfCard > 45 && xCoordinateOfCard < 150) {
+            number = 1;
+
+        } else if (xCoordinateOfCard > 190 && xCoordinateOfCard < 295) {
+            number = 2;
+
+        } else if (xCoordinateOfCard > 335 && xCoordinateOfCard < 440) {
+            number = 3;
+
+        } else if (xCoordinateOfCard > 480 && xCoordinateOfCard < 585) {
+            number = 4;
+
+        } else if (xCoordinateOfCard > 625 && xCoordinateOfCard < 730) {
+            number = 5;
+
+        } else if (xCoordinateOfCard > 770 && xCoordinateOfCard < 830) {
+            number = 6;
+
+        } else if (xCoordinateOfCard > 915 && xCoordinateOfCard < 1010) {
+            number = 7;
+
+        }
+        return number;
+    }
+
+
+
+
+    public static int giveHeroHp(Alliance alliance,Game game) {
+        if (alliance.equals(Alliance.WHITE)) {
+            return game.getWhitePlayer().getHero().getHealthPower();
+        } else if (alliance.equals(Alliance.BLACK)) {
+            return game.getBlackPlayer().getHero().getHealthPower();
+        }
+        return -888888;
+    }
+
+    public static int giveHeroAttackPower(Alliance alliance,Game game) {
+        if (alliance.equals(Alliance.WHITE)) {
+            return game.getWhitePlayer().getHero().getAttackPower();
+        } else if (alliance.equals(Alliance.BLACK)) {
+            return game.getBlackPlayer().getHero().getAttackPower();
+        }
+        return -888888;
+    }
+
+    public static int giveWeaponDurability(Alliance alliance,Game game) {
+
+        if (alliance.equals(Alliance.WHITE)) {
+            return game.getWhitePlayer().getCurrentWeapon().getDurability();
+
+        } else if (alliance.equals(Alliance.BLACK)) {
+            return game.getBlackPlayer().getCurrentWeapon().getDurability();
+        }
+        return -555555;
+    }
+
+    public static int giveWeaponAttackPower(Alliance alliance,Game game) {
+        if (alliance.equals(Alliance.WHITE)) {
+            return game.getWhitePlayer().getCurrentWeapon().getAttackPower();
+
+        } else if (alliance.equals(Alliance.BLACK)) {
+            return game.getBlackPlayer().getCurrentWeapon().getAttackPower();
+        }
+        return -555555;
+    }
+
+    public static int giveMinionHpWithName(int numberOfCardInBattleGround, Alliance alliance,Game game) {
+        if (alliance.equals(Alliance.WHITE)) {
+            return game.getWhitePlayer().getBattleGroundCards().get(numberOfCardInBattleGround - 1).getHealthPower();
+
+        } else if (alliance.equals(Alliance.BLACK)) {
+            return game.getBlackPlayer().getBattleGroundCards().get(numberOfCardInBattleGround - 1).getHealthPower();
+        }
+        return -55555555;
+    }
+
+    public static int giveMinionAttackWithName(int numberOfCardInBattleGround, Alliance alliance,Game game) {
+
+        if (alliance.equals(Alliance.WHITE)) {
+            return game.getWhitePlayer().getBattleGroundCards().get(numberOfCardInBattleGround - 1).getAttackPower();
+
+        } else if (alliance.equals(Alliance.BLACK)) {
+            return game.getBlackPlayer().getBattleGroundCards().get(numberOfCardInBattleGround - 1).getAttackPower();
+        }
+        return -66666666;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //********************************************************************
+
+    public static String playHeroPower(Game game) {
+        String result="";
+        if (game.getCurrentPlayer().getMana() < game.getCurrentPlayer().getHero().getHeroPower().getMana()) {
+//            JOptionPane.showMessageDialog(null, "You don't have enough mana");
+            result="You don't have enough mana";
+            return result;
+        }
+        game.getCurrentPlayer().setMana(game.getCurrentPlayer().getMana() -
+                game.getCurrentPlayer().getHero().getHeroPower().getMana());
+
+        //for heroPowers witch doesnt need target
+
+        game.getCurrentPlayer().getHero().getHeroPower().accept(new HeroPowerVisitor(),
+                game.getCurrentPlayer(),
+                game.getCurrentPlayer().getBattleGroundCards(),
+                game.getFormerPlayer().getBattleGroundCards(),
+                game.getCurrentPlayer().getHandsCards(),
+                game.getFormerPlayer().getHandsCards(),
+                game.getCurrentPlayer().getDeckCards(),
+                game.getFormerPlayer().getDeckCards(),
+                new Minion(), null, null);//todo json
+
+        //for heroPowers witch need target
+        game.getCurrentPlayer().getHero().getHeroPower().accept(new TargetVisitorOfPowers(),
+                game.getCurrentPlayer(),
+                game.getCurrentPlayer().getBattleGroundCards(),
+                game.getFormerPlayer().getBattleGroundCards(),
+                game.getCurrentPlayer().getHandsCards(),
+                game.getFormerPlayer().getHandsCards(),
+                game.getCurrentPlayer().getDeckCards(),
+                game.getFormerPlayer().getDeckCards(),
+                new Minion(), null, null);//todo json
+
+        return result;
+    }
+
+
+    public static String attack(int attacker, int target, Alliance attackerAlliance, Alliance targetAlliance, Game game) {
+
+        String result = "NotEnd";
+
+        if (attacker == -5) {
+            return result;
+        } else if (target == -5) {
+            return result;
+        }
+
+
+        if (attacker == -2) {//Weapon
+
+            if (attackerAlliance.equals(targetAlliance)) {
+                return result;
+            }
+
+            if (target == -3) { //weapon vs hero
+                Heroes hero = game.getFormerPlayer().getHero();
+                Weapon weapon = game.getCurrentPlayer().getCurrentWeapon();
+                if (!weapon.isHasAttackInThisTurn() && hero.getCanBeAttacked()) {
+                    hero.setHealthPower(hero.getHealthPower() - weapon.getAttackPower());
+                    weapon.setDurability(weapon.getDurability() - 1);
+                    weapon.setHasAttackInThisTurn(true);
+                    result = removeDeadCharacters(game);
+                    Mapper.writeOnLogPanel(weapon.getName() + " Attack " + hero.getName());
+                }
+            } else {// weapon vs minion
+                Weapon weapon = game.getCurrentPlayer().getCurrentWeapon();
+                Minion minion = game.getFormerPlayer().getBattleGroundCards().get(target);
+                if (!weapon.isHasAttackInThisTurn() && minion.getCanBeAttacked()) {
+                    if (!minion.isDivineShield()) {
+                        minion.setHealthPower(minion.getHealthPower() - weapon.getAttackPower());
+                        game.getCurrentPlayer().getHero().setHealthPower
+                                (game.getCurrentPlayer().getHero().getHealthPower() - minion.getAttackPower());
+
+                        weapon.setDurability(weapon.getDurability() - 1);
+                        weapon.setHasAttackInThisTurn(true);
+
+                    } else {
+                        minion.setDivineShield(false);
+                        game.getCurrentPlayer().getHero().setHealthPower
+                                (game.getCurrentPlayer().getHero().getHealthPower() - minion.getAttackPower());
+                        weapon.setDurability(weapon.getDurability() - 1);
+                        weapon.setHasAttackInThisTurn(true);
+                    }
+                    minion.accept(new GetDamageVisitor(), game.getFormerPlayer().getBattleGroundCards(),
+                            null, null, minion, null, null, null, null);
+
+                    result = removeDeadCharacters(game);
+                    Mapper.writeOnLogPanel(weapon.getName() + " Attack " + minion.getName());
+                }
+            }
+        } else {
+
+            if (target == -3) {//target is hero    minion vs hero
+                Minion minion = game.getCurrentPlayer().getBattleGroundCards().get(attacker);
+                Heroes hero = game.getFormerPlayer().getHero();
+                if (minion.getIsActive() && !minion.getHasAttackInThisTurn() && hero.getCanBeAttacked()) {
+                    hero.setHealthPower(hero.getHealthPower() - minion.getAttackPower());
+                    minion.setHasAttackInThisTurn(true);
+                    result = removeDeadCharacters(game);
+                    Mapper.writeOnLogPanel(minion.getName() + " Attack " + hero.getName());
+                }
+            } else {//minion vs minion
+
+                if (attackerAlliance.equals(targetAlliance)) {
+                    return result;
+                }
+
+                Minion minion = game.getCurrentPlayer().getBattleGroundCards().get(attacker);
+                Minion minion2 = game.getFormerPlayer().getBattleGroundCards().get(target);
+
+                if (minion.getIsActive() && !minion.getHasAttackInThisTurn()) {
+                    if (minion2.getCanBeAttacked()) {
+
+                        if (minion2.isDivineShield()) {
+                            minion2.setDivineShield(false);
+                            minion.setHealthPower(minion.getHealthPower() - minion2.getAttackPower());
+
+                        } else {
+                            minion.setHealthPower(minion.getHealthPower() - minion2.getAttackPower());
+                            minion2.setHealthPower(minion2.getHealthPower() - minion.getAttackPower());
+                        }
+                        minion.setHasAttackInThisTurn(true);
+                        result = removeDeadCharacters(game);
+                        Mapper.writeOnLogPanel(minion.getName() + " Attack " + minion2.getName());
+
+
+                        minion2.accept(new GetDamageVisitor(), game.getFormerPlayer().getBattleGroundCards(),
+                                null, null, minion, null, null, null, null);
+
+                    } else {
+                        //TODO you first need to destroy Taunt OR you cant attack to this minion
+                    }
+                } else {
+                    //TODO you cant attack with this minion in this turn``````````````````````````````````````````````````````````````````````````````````````
+                }
+            }
+        }
+        return result;
+    }
+
+
+    public static String removeDeadCharacters(Game game) {
+
+        String result = "NotEnd";
+
+        if (game.getWhitePlayer().getCurrentWeapon() != null) {
+            if (game.getWhitePlayer().getCurrentWeapon().getDurability() == 0) {
+                game.getWhitePlayer().setCurrentWeapon(null);
+            }
+        }
+
+        if (game.getBlackPlayer().getCurrentWeapon() != null) {
+            if (game.getBlackPlayer().getCurrentWeapon().getDurability() == 0) {
+                game.getBlackPlayer().setCurrentWeapon(null);
+            }
+        }
+
+        if (game.getWhitePlayer().getHero().getHealthPower() <= 0) {
+            game.getWhitePlayer().getDeck().
+                    setNumberOfUses(game.getWhitePlayer().getDeck().getNumberOfUses() + 1);
+
+            game.getBlackPlayer().getDeck().
+                    setNumberOfUses(game.getBlackPlayer().getDeck().getNumberOfUses() + 1);
+
+            game.getWhitePlayer().getDeck().
+                    setNumberOfWins(game.getWhitePlayer().getDeck().getNumberOfWins() + 1);
+
+
+            result = "Friendly Player wins!";
+//            JOptionPane.showMessageDialog(MyMainFrame.getInstance(),
+//                    "Friendly Player wins!", "End Match", JOptionPane.INFORMATION_MESSAGE);
+        } else if (game.getBlackPlayer().getHero().getHealthPower() <= 0) {
+
+            game.getWhitePlayer().getDeck().
+                    setNumberOfUses(game.getWhitePlayer().getDeck().getNumberOfUses() + 1);
+
+            game.getBlackPlayer().getDeck().
+                    setNumberOfUses(game.getBlackPlayer().getDeck().getNumberOfUses() + 1);
+
+            game.getBlackPlayer().getDeck().
+                    setNumberOfWins(game.getBlackPlayer().getDeck().getNumberOfWins() + 1);
+
+            result = "Enemy Player wins!";
+
+//            JOptionPane.showMessageDialog(MyMainFrame.getInstance(),
+//                    "Enemy Player wins!", "End Match", JOptionPane.INFORMATION_MESSAGE);
+        }
+        game.getWhitePlayer().getBattleGroundCards().removeIf(minion -> minion.getHealthPower() <= 0);
+        game.getBlackPlayer().getBattleGroundCards().removeIf(minion -> minion.getHealthPower() <= 0);
+        setCanBeAttacked(game.getWhitePlayer());
+        setCanBeAttacked(game.getBlackPlayer());
+        return result;
+    }
 
 
     public static void setFriendlyInfoPassiveOfGameState(InGamePlayer player, int numberOfPassive) {
