@@ -21,6 +21,7 @@ import server.Server;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
 
 public class GamePartController {
 
@@ -40,6 +41,32 @@ public class GamePartController {
 //        LogPanel.getInstance().repaint();
 //        LogPanel.getInstance().revalidate();
 //    }
+
+
+    public static ArrayList<String> setThreeWeapon() {
+
+        ArrayList<String> weaponsNames = new ArrayList<>();
+        Random random = new Random();
+        int firstNum = random.nextInt(Weapon.getWeapons().size());
+        int secondNum = random.nextInt(Weapon.getWeapons().size());
+        int thirdNum = random.nextInt(Weapon.getWeapons().size());
+
+        weaponsNames.add(Weapon.getWeapons().get(firstNum).getName());
+        weaponsNames.add(Weapon.getWeapons().get(secondNum).getName());
+        weaponsNames.add(Weapon.getWeapons().get(thirdNum).getName());
+
+        return weaponsNames;
+    }
+
+
+    public static Weapon getSelectedWeapon(Game game) {
+        for (Weapon weapon : Weapon.getWeapons()) {
+            if (weapon.getName().equalsIgnoreCase(game.getSelectedWeaponInDiscoverPage())) {
+                return weapon;
+            }
+        }
+        return null;
+    }
 
 
     public static String playCard(Cards playingCard, Game game) {
@@ -794,7 +821,7 @@ public class GamePartController {
         player.getInfoPassive().accept(new InfoPassiveVisitor(), player,
                 player.getBattleGroundCards(),
                 player.getHandsCards(),
-                player.getDeckCards(),Server.giveGameWithPlayer(player.getPlayer().getUserName()));
+                player.getDeckCards(), Server.giveGameWithPlayer(player.getPlayer().getUserName()));
 
     }
 

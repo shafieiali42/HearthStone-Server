@@ -12,6 +12,10 @@ import Models.Cards.GameCards.WeaponCards.BattleAxe;
 import Models.Cards.GameCards.WeaponCards.Gearblade;
 import controller.Status;
 import controller.controllers.GamePartController;
+import controller.request.ShowPlayPanelRequest;
+import controller.response.Response;
+import controller.response.ShowDiscoverPageResponse;
+import server.Server;
 
 
 import java.util.ArrayList;
@@ -71,7 +75,9 @@ public class ActionVisitor implements Visitor {
         System.out.println("Sprint visit");
         for (int i = 0; i < 4; i++) {
             GamePartController.drawCard(game.getCurrentPlayer());//todo
-            GamePartController.refreshPlayPanel();
+            Response response = new ShowPlayPanelRequest(game.getCurrentPlayer().getPlayer().getUserName(), "").execute();
+            Server.sendResponse(game.getCurrentPlayer().getPlayer().getUserName(), response);
+//            GamePartController.refreshPlayPanel();
         }
     }
 
@@ -135,8 +141,10 @@ public class ActionVisitor implements Visitor {
     public void visit(FriendlySmith friendlySmith, ArrayList<Cards> deckCards, Game game) {
 
         game.getCurrentPlayer().getPlayer().setPlayerStatusInGame(Status.DISCOVER_THREE_WEAPONS);
-        GamePartController.setThreeWeapon();
-        GamePartController.setDiscoverPageContentPane();
+        ArrayList<String> weaponsNames = GamePartController.setThreeWeapon();
+        Server.sendResponse(game.getCurrentPlayer().getPlayer().getUserName(),
+                new ShowDiscoverPageResponse(weaponsNames.get(0),weaponsNames.get(1),weaponsNames.get(2)));
+//        GamePartController.setDiscoverPageContentPane();
     }
 
 
@@ -250,7 +258,6 @@ public class ActionVisitor implements Visitor {
             minion.setHealthPower(minion.getHealthPower() + moonfire.getIncreaseHp());
         }
     }
-
 
 
     @Override

@@ -3,6 +3,7 @@ package Logic.PlayLogic;
 
 import Logic.MyTimer;
 import Models.Cards.CardClasses.Cards;
+import Models.Cards.CardClasses.Weapon;
 import Models.Heroes.Mage;
 import Models.Player.InGamePlayer;
 import Visitors.PowerVisitor.SpVisitor.SpecialPowerVisitor;
@@ -40,6 +41,7 @@ public class Game {
     private Alliance targetAllianceOfHeroPower;
     private Mapper mapper;
 
+    private String selectedWeaponInDiscoverPage;
 
     public Game(InGamePlayer whitePlayer, InGamePlayer blackPlayer) {
         initGameState(whitePlayer, blackPlayer);
@@ -279,5 +281,13 @@ public class Game {
 
     public void setMapper(Mapper mapper) {
         this.mapper = mapper;
+    }
+
+    public String getSelectedWeaponInDiscoverPage() {
+        return selectedWeaponInDiscoverPage;
+    }
+
+    public void setSelectedWeaponInDiscoverPage(String selectedWeaponInDiscoverPage) {
+        this.selectedWeaponInDiscoverPage = selectedWeaponInDiscoverPage;
     }
 }

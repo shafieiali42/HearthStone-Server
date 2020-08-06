@@ -11,6 +11,9 @@ import Models.Cards.GameCards.WeaponCards.Ashbringer;
 import Models.Cards.GameCards.WeaponCards.BattleAxe;
 import Models.Cards.GameCards.WeaponCards.Gearblade;
 import controller.controllers.GamePartController;
+import controller.request.ShowPlayPanelRequest;
+import controller.response.Response;
+import server.Server;
 
 import java.util.ArrayList;
 
@@ -104,7 +107,9 @@ public class EnemySummonVisitor implements Visitor {
         swampKingDred.setHealthPower(swampKingDred.getHealthPower()-playingCard.getAttackPower());
         playingCard.setHealthPower(playingCard.getHealthPower()-swampKingDred.getAttackPower());
         System.out.println("After: "+playingCard.getHealthPower());
-        GamePartController.refreshPlayPanel();
+        Response response=new ShowPlayPanelRequest(game.getCurrentPlayer().getPlayer().getUserName(),"").execute();
+        Server.sendResponse(game.getCurrentPlayer().getPlayer().getUserName(),response);
+//        GamePartController.refreshPlayPanel();
         System.out.println(game.getFormerPlayer().getBattleGroundCards());
         GamePartController.removeDeadCharacters(game);
 

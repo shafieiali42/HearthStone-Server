@@ -59,6 +59,7 @@ public class MousePressRequest extends Request {
 
         } else if (player.getPlayerStatusInGame().equals(Status.DISCOVER_THREE_WEAPONS)) {
             response = new DiscoverPageResponse(cardName);
+            game.setSelectedWeaponInDiscoverPage(cardName);
             GamePartController.getPlyingCardOfGameState(game).accept(new AfterSelectVisitor(),
                     GamePartController.getBattleGround(game),
                     GamePartController.getHandCards(game), GamePartController.getDeckCards(game),

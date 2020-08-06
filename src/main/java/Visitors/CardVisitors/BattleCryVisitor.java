@@ -11,6 +11,9 @@ import Models.Cards.GameCards.WeaponCards.Ashbringer;
 import Models.Cards.GameCards.WeaponCards.BattleAxe;
 import Models.Cards.GameCards.WeaponCards.Gearblade;
 import controller.Status;
+import controller.request.ShowPlayPanelRequest;
+import controller.response.Response;
+import server.Server;
 
 import java.util.ArrayList;
 
@@ -26,7 +29,9 @@ public class BattleCryVisitor implements Visitor {
         if (battleGround.size() < 7) {
             Minion minion = tombWarden.copy();
             battleGround.add(minion);
-            GamePartController.refreshPlayPanel();
+            Response response=new ShowPlayPanelRequest(game.getCurrentPlayer().getPlayer().getUserName(),"").execute();
+            Server.sendResponse(game.getCurrentPlayer().getPlayer().getUserName(),response);
+//            GamePartController.refreshPlayPanel();
         } else {
             System.out.println("Battlecry of TombWarden cant execute because we have 7 cards in battleGround:))");
         }

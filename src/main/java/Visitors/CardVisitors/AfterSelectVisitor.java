@@ -11,7 +11,10 @@ import Models.Cards.GameCards.SpellCards.UnoptionalSpells.*;
 import Models.Cards.GameCards.WeaponCards.Ashbringer;
 import Models.Cards.GameCards.WeaponCards.BattleAxe;
 import Models.Cards.GameCards.WeaponCards.Gearblade;
+import controller.Status;
 import controller.controllers.GamePartController;
+import controller.request.ShowPlayPanelRequest;
+import controller.response.ReStartDiscoverPageSetting;
 import controller.response.Response;
 import controller.response.ShowJOptionPaneResponse;
 import server.Server;
@@ -48,7 +51,9 @@ public class AfterSelectVisitor implements Visitor {
             battleGround.add(minion3);
         }
 
-        GamePartController.refreshPlayPanel();
+        Response response = new ShowPlayPanelRequest(game.getCurrentPlayer().getPlayer().getUserName(), "").execute();
+        Server.sendResponse(game.getCurrentPlayer().getPlayer().getUserName(), response);
+//        GamePartController.refreshPlayPanel();
 
     }
 
@@ -73,8 +78,11 @@ public class AfterSelectVisitor implements Visitor {
 
         if (alliance.equals(Alliance.BLACK)) {
 
-            JOptionPane.showMessageDialog(GamePartController.getMyMainFrame(),
-                    "you cant do it on enemy minions", "Error", JOptionPane.ERROR_MESSAGE);
+            Server.sendResponse(game.getCurrentPlayer().getPlayer().getUserName(),
+                    new ShowJOptionPaneResponse("you cant do it on enemy minions"));
+
+//            JOptionPane.showMessageDialog(GamePartController.getMyMainFrame(),
+//                    "you cant do it on enemy minions", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             target.setAttackPower(target.getAttackPower() + 4);
             target.setHealthPower(target.getHealthPower() + 4);
@@ -124,8 +132,8 @@ public class AfterSelectVisitor implements Visitor {
     public void visit(Polymorph polymorph, ArrayList<Minion> battleGround, Minion target, Alliance alliance, Game game) {
 
         if (alliance.equals(Alliance.WHITE)) {
-            Response response=new ShowJOptionPaneResponse("you cant do it on your friendly minion");
-            Server.sendResponse(game.getCurrentPlayer().getPlayer().getUserName(),response);//todo
+            Response response = new ShowJOptionPaneResponse("you cant do it on your friendly minion");
+            Server.sendResponse(game.getCurrentPlayer().getPlayer().getUserName(), response);//todo
 //            JOptionPane.showMessageDialog(GamePartController.getMyMainFrame(),
 //                    "you cant do it on your friendly minion", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
@@ -139,13 +147,17 @@ public class AfterSelectVisitor implements Visitor {
     @Override
     public void visit(FriendlySmith friendlySmith, ArrayList<Cards> deckCards, Game game) {
 
-        Weapon weapon = (Weapon) (GamePartController.getSelectedWeapon().copy());
+        Weapon weapon = (Weapon) (GamePartController.getSelectedWeapon(game).copy());
         weapon.setAttackPower(weapon.getAttackPower() + 2);
         weapon.setDurability(weapon.getDurability() + 2);
         deckCards.add(3, weapon);
-        GamePartController.setGamePageContentPane();
-        MyMainFrame.getInstance().setContentPane(GamePage.getInstance());
-        GamePartController.reStartDiscoverPageSetting();
+        game.getCurrentPlayer().getPlayer().setPlayerStatusInGame(Status.PLAY_PAGE);
+//        GamePartController.setGamePageContentPane();
+        Server.sendResponse(game.getCurrentPlayer().getPlayer().getUserName(),
+                new ShowPlayPanelRequest(game.getCurrentPlayer().getPlayer().getUserName(), "").execute());//todo
+        Server.sendResponse(game.getCurrentPlayer().getPlayer().getUserName(), new ReStartDiscoverPageSetting());
+//        MyMainFrame.getInstance().setContentPane(GamePage.getInstance());
+//        GamePartController.reStartDiscoverPageSetting();
     }
 
     @Override

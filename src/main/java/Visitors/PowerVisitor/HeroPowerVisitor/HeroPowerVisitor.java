@@ -8,6 +8,9 @@ import Models.HeroPower.*;
 import Models.Heroes.Heroes;
 import Models.Player.InGamePlayer;
 import controller.controllers.GamePartController;
+import controller.request.ShowPlayPanelRequest;
+import controller.response.Response;
+import server.Server;
 
 
 import java.util.ArrayList;
@@ -42,14 +45,18 @@ public class HeroPowerVisitor implements VisitorOfPowers {
             enemyHandsCards.remove(randomIndexForHand);
             friendlyHandCards.add(cardInDeck);
             friendlyHandCards.add(cardsInHands);
-            GamePartController.refreshPlayPanel();
+            Response response=new ShowPlayPanelRequest(game.getCurrentPlayer().getPlayer().getUserName(),"").execute();
+            Server.sendResponse(game.getCurrentPlayer().getPlayer().getUserName(),response);
+//            GamePartController.refreshPlayPanel();
         } else {
             if (enemyDeckCards.size() > 0) {
                 int randomIndex = random.nextInt(enemyDeckCards.size());
                 Cards card = enemyDeckCards.get(randomIndex);
                 enemyDeckCards.remove(randomIndex);
                 friendlyHandCards.add(card);
-                GamePartController.refreshPlayPanel();
+                Response response=new ShowPlayPanelRequest(game.getCurrentPlayer().getPlayer().getUserName(),"").execute();
+                Server.sendResponse(game.getCurrentPlayer().getPlayer().getUserName(),response);
+//                GamePartController.refreshPlayPanel();
             }
         }
 
