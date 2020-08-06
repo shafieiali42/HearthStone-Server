@@ -1,5 +1,6 @@
 package Visitors.PassiveVisitor;
 
+import Logic.PlayLogic.Game;
 import Models.Cards.CardClasses.Cards;
 import Models.Cards.CardClasses.Minion;
 import Models.Cards.GameCards.Passives.*;
@@ -11,13 +12,14 @@ public class InfoPassiveVisitor implements PassiveVisitor {
 
 
     @Override
-    public void visit(FreePower freePower, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> friendlyDeckCards) {
+    public void visit(FreePower freePower, InGamePlayer player, ArrayList<Minion> friendlyBattleGround,
+                      ArrayList<Cards> friendlyHandCards, ArrayList<Cards> friendlyDeckCards, Game game) {
         player.getHero().getHeroPower().setMana(player.getHero().getHeroPower().getMana() - 1);
         player.getHero().getHeroPower().setNumberOfPermitUse(player.getHero().getHeroPower().getNumberOfPermitUse() + 1);
     }
 
     @Override
-    public void visit(OffCards offCards, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> friendlyDeckCards) {
+    public void visit(OffCards offCards, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> friendlyDeckCards, Game game) {
 
         for (Cards card : friendlyDeckCards) {
             if (card.getManaCost() != 0) {
@@ -37,18 +39,18 @@ public class InfoPassiveVisitor implements PassiveVisitor {
 
 
     @Override
-    public void visit(TwiceDraw twiceDraw, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> friendlyDeckCards) {
+    public void visit(TwiceDraw twiceDraw, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> friendlyDeckCards, Game game) {
         player.setNumberOfDrawCard(2);
     }
 
     @Override
-    public void visit(ManaJump manaJump, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> friendlyDeckCards) {
+    public void visit(ManaJump manaJump, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> friendlyDeckCards, Game game) {
         player.setMana(2);
 
     }
 
     @Override
-    public void visit(Nurse nurse, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> friendlyDeckCards) {
+    public void visit(Nurse nurse, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> friendlyDeckCards, Game game) {
 
     }
 

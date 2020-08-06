@@ -1,5 +1,6 @@
 package Models.Player;
 
+import Logic.MyTimer;
 import Models.Cards.CardClasses.*;
 import Models.Deck.Deck;
 import Models.Heroes.Heroes;
@@ -25,7 +26,7 @@ public class InGamePlayer {
     private int questImprovement;
     private Spell questCard;
     private Deck deck;
-
+    private MyTimer myTimer;
 
     public InGamePlayer() {
         this.handsCards = new ArrayList<>();
@@ -227,4 +228,11 @@ public class InGamePlayer {
         this.deck = deck;
     }
 
+    public MyTimer getMyTimer() {
+        return myTimer;
+    }
+
+    public void setMyTimer(MyTimer myTimer) {
+        this.myTimer = myTimer;
+    }
 }

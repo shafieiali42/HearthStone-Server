@@ -1,5 +1,6 @@
 package Models.Cards.CardClasses;
 
+import Logic.PlayLogic.Game;
 import Models.Player.InGamePlayer;
 import Visitors.PassiveVisitor.PassiveVisitable;
 import Visitors.PassiveVisitor.PassiveVisitor;
@@ -42,7 +43,7 @@ public class Passive implements PassiveVisitable {
 
 
     @Override
-    public void accept(PassiveVisitor passiveVisitor, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> friendlyDeckCards) {
+    public void accept(PassiveVisitor passiveVisitor, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> friendlyDeckCards, Game game) {
 
     }
 }

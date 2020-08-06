@@ -1,6 +1,7 @@
 package Models.Cards.GameCards.MinionCards.UnoptionalMinions;
 
 import Logic.PlayLogic.Alliance;
+import Logic.PlayLogic.Game;
 import Models.Cards.CardClasses.Cards;
 import Models.Cards.CardClasses.Minion;
 import Models.Heroes.Heroes;
@@ -51,8 +52,8 @@ public class StormwindKnight extends Minion{
 
     @Override
     public void accept(Visitor visitor, ArrayList<Minion> battleGround, ArrayList<Cards> handsCards,
-                       ArrayList<Cards>deckCards, Minion target, Heroes targetHero, Minion summonedMinion,
-                       Cards playingCard, Alliance alliance){
-        visitor.visit(this);
+                       ArrayList<Cards> deckCards, Minion target, Heroes targetHero, Minion summonedMinion,
+                       Cards playingCard, Alliance alliance, Game game){
+        visitor.visit(this, game);
     }
 }

@@ -1,5 +1,6 @@
 package Visitors.PowerVisitor.SpVisitor;
 
+import Logic.PlayLogic.Game;
 import Models.Cards.CardClasses.Cards;
 import Models.Cards.CardClasses.Minion;
 import Models.Heroes.Heroes;
@@ -12,8 +13,8 @@ public interface SpVisitable {
 
 
     void accept(SpVisitor spVisitor, InGamePlayer player, ArrayList<Minion> friendlyBattleGround,
-                ArrayList<Minion>enemyBattleGround, ArrayList<Cards>friendlyHandCards,
-                ArrayList<Cards>enemyHandsCards, ArrayList<Cards>friendlyDeckCards,
-                ArrayList<Cards>enemyDeckCards, Minion target, Heroes targetHero, Minion summoned);
+                ArrayList<Minion> enemyBattleGround, ArrayList<Cards> friendlyHandCards,
+                ArrayList<Cards> enemyHandsCards, ArrayList<Cards> friendlyDeckCards,
+                ArrayList<Cards> enemyDeckCards, Minion target, Heroes targetHero, Minion summoned, Game game);
 
 }

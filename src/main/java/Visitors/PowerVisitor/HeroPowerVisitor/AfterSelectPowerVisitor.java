@@ -1,11 +1,13 @@
 package Visitors.PowerVisitor.HeroPowerVisitor;
 
 
+import Logic.PlayLogic.Game;
 import Models.Cards.CardClasses.Cards;
 import Models.Cards.CardClasses.Minion;
 import Models.HeroPower.*;
 import Models.Heroes.Heroes;
 import Models.Player.InGamePlayer;
+import controller.controllers.GamePartController;
 
 import java.util.ArrayList;
 
@@ -16,7 +18,7 @@ public class AfterSelectPowerVisitor implements VisitorOfPowers {
     public void visit(MageHeroPower mageHeroPower, InGamePlayer player, ArrayList<Minion> friendlyBattleGround,
                       ArrayList<Minion> enemyBattleGround, ArrayList<Cards> friendlyHandCards,
                       ArrayList<Cards> enemyHandsCards, ArrayList<Cards> friendlyDeckCards,
-                      ArrayList<Cards> enemyDeckCards, Minion target, Heroes targetHero) {
+                      ArrayList<Cards> enemyDeckCards, Minion target, Heroes targetHero, Game game) {
 
 
 
@@ -29,19 +31,23 @@ public class AfterSelectPowerVisitor implements VisitorOfPowers {
             mageHeroPower.setHasAttackInThisTurn(true);
         }
 
-        GamePartController.removeDeadCharacters();
+        GamePartController.removeDeadCharacters(game);
 
 
 
     }
 
     @Override
-    public void visit(RogueHeroPower rogueHeroPower, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Minion> enemyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> enemyHandsCards, ArrayList<Cards> friendlyDeckCards, ArrayList<Cards> enemyDeckCards, Minion target, Heroes targetHero) {
+    public void visit(RogueHeroPower rogueHeroPower, InGamePlayer player,
+                      ArrayList<Minion> friendlyBattleGround, ArrayList<Minion> enemyBattleGround,
+                      ArrayList<Cards> friendlyHandCards, ArrayList<Cards> enemyHandsCards,
+                      ArrayList<Cards> friendlyDeckCards, ArrayList<Cards> enemyDeckCards, Minion target,
+                      Heroes targetHero, Game game) {
 
     }
 
     @Override
-    public void visit(WarlockHeroPower warlockHeroPower, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Minion> enemyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> enemyHandsCards, ArrayList<Cards> friendlyDeckCards, ArrayList<Cards> enemyDeckCards, Minion target, Heroes targetHero) {
+    public void visit(WarlockHeroPower warlockHeroPower, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Minion> enemyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> enemyHandsCards, ArrayList<Cards> friendlyDeckCards, ArrayList<Cards> enemyDeckCards, Minion target, Heroes targetHero, Game game) {
 
     }
 
@@ -53,7 +59,7 @@ public class AfterSelectPowerVisitor implements VisitorOfPowers {
                       ArrayList<Cards> enemyHandsCards,
                       ArrayList<Cards> friendlyDeckCards,
                       ArrayList<Cards> enemyDeckCards,
-                      Minion target, Heroes targetHero, Minion summoned) {
+                      Minion target, Heroes targetHero, Minion summoned, Game game) {
 
 
 
@@ -64,7 +70,7 @@ public class AfterSelectPowerVisitor implements VisitorOfPowers {
     public void visit(PriestHeroPower priestHeroPower, InGamePlayer player, ArrayList<Minion> friendlyBattleGround,
                       ArrayList<Minion> enemyBattleGround, ArrayList<Cards> friendlyHandCards,
                       ArrayList<Cards> enemyHandsCards, ArrayList<Cards> friendlyDeckCards,
-                      ArrayList<Cards> enemyDeckCards, Minion target, Heroes targetHero) {
+                      ArrayList<Cards> enemyDeckCards, Minion target, Heroes targetHero, Game game) {
 
 
             if (target!=null){

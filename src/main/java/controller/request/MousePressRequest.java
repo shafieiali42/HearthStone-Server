@@ -62,7 +62,7 @@ public class MousePressRequest extends Request {
             GamePartController.getPlyingCardOfGameState(game).accept(new AfterSelectVisitor(),
                     GamePartController.getBattleGround(game),
                     GamePartController.getHandCards(game), GamePartController.getDeckCards(game),
-                    new Minion(), null, new Minion(), null, alliance);
+                    new Minion(), null, new Minion(), null, alliance, game);
         }
         return response;
     }

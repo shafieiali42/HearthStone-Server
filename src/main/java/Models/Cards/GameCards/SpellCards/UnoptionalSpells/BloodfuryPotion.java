@@ -1,6 +1,7 @@
 package Models.Cards.GameCards.SpellCards.UnoptionalSpells;
 
 import Logic.PlayLogic.Alliance;
+import Logic.PlayLogic.Game;
 import Models.Cards.CardClasses.Cards;
 import Models.Cards.CardClasses.Minion;
 import Models.Cards.CardClasses.Spell;
@@ -33,8 +34,8 @@ public class BloodfuryPotion extends Spell {
 
     @Override
     public void accept(Visitor visitor, ArrayList<Minion> battleGround, ArrayList<Cards> handsCards,
-                       ArrayList<Cards>deckCards, Minion target, Heroes targetHero, Minion summonedMinion,
-                       Cards playingCard, Alliance alliance){
-        visitor.visit(this,battleGround);
+                       ArrayList<Cards> deckCards, Minion target, Heroes targetHero, Minion summonedMinion,
+                       Cards playingCard, Alliance alliance, Game game){
+        visitor.visit(this,battleGround, game);
     }
 }

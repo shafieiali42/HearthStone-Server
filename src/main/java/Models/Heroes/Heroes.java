@@ -1,5 +1,6 @@
 package Models.Heroes;
 
+import Logic.PlayLogic.Game;
 import Models.Cards.CardClasses.Cards;
 import Models.Cards.CardClasses.Minion;
 import Models.HeroPower.HeroPower;
@@ -131,13 +132,15 @@ public class Heroes implements SpVisitable {
     }
 
 
+
+
+
     @Override
     public void accept(SpVisitor spVisitor, InGamePlayer player, ArrayList<Minion> friendlyBattleGround,
                        ArrayList<Minion> enemyBattleGround, ArrayList<Cards> friendlyHandCards,
                        ArrayList<Cards> enemyHandsCards, ArrayList<Cards> friendlyDeckCards,
-                       ArrayList<Cards> enemyDeckCards, Minion target,
-                       Heroes targetHero, Minion summoned) {
+                       ArrayList<Cards> enemyDeckCards, Minion target, Heroes targetHero,
+                       Minion summoned, Game game) {
+
     }
-
-
 }

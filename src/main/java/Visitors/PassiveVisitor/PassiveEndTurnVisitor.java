@@ -1,5 +1,6 @@
 package Visitors.PassiveVisitor;
 
+import Logic.PlayLogic.Game;
 import Models.Cards.CardClasses.Cards;
 import Models.Cards.CardClasses.Minion;
 import Models.Cards.GameCards.Passives.*;
@@ -10,27 +11,28 @@ import java.util.Random;
 
 public class PassiveEndTurnVisitor implements PassiveVisitor {
     @Override
-    public void visit(FreePower freePower, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> friendlyDeckCards) {
+    public void visit(FreePower freePower, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> friendlyDeckCards, Game game) {
 
     }
 
     @Override
-    public void visit(OffCards offCards, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> friendlyDeckCards) {
+    public void visit(OffCards offCards, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> friendlyDeckCards, Game game) {
 
     }
 
     @Override
-    public void visit(TwiceDraw twiceDraw, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> friendlyDeckCards) {
+    public void visit(TwiceDraw twiceDraw, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> friendlyDeckCards, Game game) {
 
     }
 
     @Override
-    public void visit(ManaJump manaJump, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> friendlyDeckCards) {
+    public void visit(ManaJump manaJump, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> friendlyDeckCards, Game game) {
         player.setMana(Math.min(player.getMana() + 1, 10));
     }
 
     @Override
-    public void visit(Nurse nurse, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> friendlyDeckCards) {
+    public void visit(Nurse nurse, InGamePlayer player, ArrayList<Minion> friendlyBattleGround,
+                      ArrayList<Cards> friendlyHandCards, ArrayList<Cards> friendlyDeckCards, Game game) {
 
         ArrayList<Minion> minions = new ArrayList<>();
         for (Minion minion : friendlyBattleGround) {

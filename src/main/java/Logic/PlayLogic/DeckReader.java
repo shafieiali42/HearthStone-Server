@@ -3,6 +3,7 @@ package Logic.PlayLogic;
 import Models.Cards.CardClasses.Cards;
 
 import Models.Cards.GameCards.SpellCards.UnoptionalSpells.StrengthInNumbers;
+import utility.config.ConfigLoader;
 
 
 import java.io.IOException;

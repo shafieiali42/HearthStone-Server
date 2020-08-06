@@ -1,11 +1,13 @@
 package Visitors.PowerVisitor.HeroPowerVisitor;
 
 
+import Logic.PlayLogic.Game;
 import Models.Cards.CardClasses.Cards;
 import Models.Cards.CardClasses.Minion;
 import Models.HeroPower.*;
 import Models.Heroes.Heroes;
 import Models.Player.InGamePlayer;
+import controller.controllers.GamePartController;
 
 
 import java.util.ArrayList;
@@ -15,7 +17,7 @@ public class HeroPowerVisitor implements VisitorOfPowers {
 
 
     @Override
-    public void visit(MageHeroPower mageHeroPower, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Minion> enemyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> enemyHandsCards, ArrayList<Cards> friendlyDeckCards, ArrayList<Cards> enemyDeckCards, Minion target, Heroes targetHero) {
+    public void visit(MageHeroPower mageHeroPower, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Minion> enemyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> enemyHandsCards, ArrayList<Cards> friendlyDeckCards, ArrayList<Cards> enemyDeckCards, Minion target, Heroes targetHero, Game game) {
         System.out.println("Mage HeroPower Visitor");
     }
 
@@ -25,7 +27,7 @@ public class HeroPowerVisitor implements VisitorOfPowers {
                       ArrayList<Minion> friendlyBattleGround,
                       ArrayList<Minion> enemyBattleGround, ArrayList<Cards> friendlyHandCards,
                       ArrayList<Cards> enemyHandsCards, ArrayList<Cards> friendlyDeckCards,
-                      ArrayList<Cards> enemyDeckCards, Minion target, Heroes targetHero) {
+                      ArrayList<Cards> enemyDeckCards, Minion target, Heroes targetHero, Game game) {
 
 
         System.out.println("Rogue HeroPower Visitor");
@@ -55,14 +57,14 @@ public class HeroPowerVisitor implements VisitorOfPowers {
     }
 
     @Override
-    public void visit(WarlockHeroPower warlockHeroPower, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Minion> enemyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> enemyHandsCards, ArrayList<Cards> friendlyDeckCards, ArrayList<Cards> enemyDeckCards, Minion target, Heroes targetHero) {
+    public void visit(WarlockHeroPower warlockHeroPower, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Minion> enemyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> enemyHandsCards, ArrayList<Cards> friendlyDeckCards, ArrayList<Cards> enemyDeckCards, Minion target, Heroes targetHero, Game game) {
         System.out.println("Warlock HeroPower Visitor");
         player.getHero().setHealthPower(player.getHero().getHealthPower() - 2);
         Random random = new Random();
         int randomNum = random.nextInt(2);
         boolean jobsDone = false;
         if (randomNum % 2 == 0) {
-            Cards card = Mapper.drawOneCard();
+            Cards card = GamePartController.drawOneCard(game);
             if (card != null) {
                 friendlyHandCards.add(card);
                 jobsDone = true;
@@ -83,7 +85,7 @@ public class HeroPowerVisitor implements VisitorOfPowers {
                 jobsDone = true;
             }
             if (!jobsDone) {
-                Cards card = Mapper.drawOneCard();
+                Cards card = GamePartController.drawOneCard(game);
                 if (card != null) {
                     friendlyHandCards.add(card);
                     jobsDone = true;
@@ -100,14 +102,14 @@ public class HeroPowerVisitor implements VisitorOfPowers {
                       ArrayList<Cards> enemyHandsCards,
                       ArrayList<Cards> friendlyDeckCards,
                       ArrayList<Cards> enemyDeckCards,
-                      Minion target, Heroes targetHero, Minion summoned) {
+                      Minion target, Heroes targetHero, Minion summoned, Game game) {
 
 
         System.out.println("Hunter HeroPower Visitor");
     }
 
     @Override
-    public void visit(PriestHeroPower priestHeroPower, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Minion> enemyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> enemyHandsCards, ArrayList<Cards> friendlyDeckCards, ArrayList<Cards> enemyDeckCards, Minion target, Heroes targetHero) {
+    public void visit(PriestHeroPower priestHeroPower, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Minion> enemyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> enemyHandsCards, ArrayList<Cards> friendlyDeckCards, ArrayList<Cards> enemyDeckCards, Minion target, Heroes targetHero, Game game) {
         System.out.println("Priest HeroPower Visitor");
     }
 

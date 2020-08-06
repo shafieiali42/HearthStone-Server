@@ -6,6 +6,7 @@ import Models.Cards.CardClasses.Cards;
 import Models.Heroes.Mage;
 import Models.Player.InGamePlayer;
 import Visitors.PowerVisitor.SpVisitor.SpecialPowerVisitor;
+import controller.controllers.Mapper;
 
 
 public class Game {
@@ -24,7 +25,7 @@ public class Game {
 
     private Cards playingCard;
     private String gameMode;
-    private MyTimer myTimer;
+//    private MyTimer myTimer;
 
     private int attacker;
     private int target;
@@ -37,12 +38,16 @@ public class Game {
 
     private int targetOfHeroPower;
     private Alliance targetAllianceOfHeroPower;
+    private Mapper mapper;
 
 
     public Game(InGamePlayer whitePlayer, InGamePlayer blackPlayer) {
         initGameState(whitePlayer, blackPlayer);
-        myTimer = new MyTimer();
-        myTimer.start();
+        whitePlayer.setMyTimer(new MyTimer(whitePlayer.getPlayer().getUserName()));
+        blackPlayer.setMyTimer(new MyTimer(blackPlayer.getPlayer().getUserName()));
+//        myTimer.start();
+        currentPlayer.getMyTimer().start();
+        mapper=new Mapper();
     }
 
 
@@ -87,11 +92,11 @@ public class Game {
 
         whitePlayer.getHero().accept(new SpecialPowerVisitor(), whitePlayer, whitePlayer.getBattleGroundCards(),
                 blackPlayer.getBattleGroundCards(), whitePlayer.getHandsCards(), blackPlayer.getHandsCards(),
-                whitePlayer.getDeckCards(), blackPlayer.getDeckCards(), null, null, null);
+                whitePlayer.getDeckCards(), blackPlayer.getDeckCards(), null, null, null, this);
 
         blackPlayer.getHero().accept(new SpecialPowerVisitor(), blackPlayer, blackPlayer.getBattleGroundCards(),
                 whitePlayer.getBattleGroundCards(), blackPlayer.getHandsCards(), whitePlayer.getHandsCards(),
-                blackPlayer.getDeckCards(), whitePlayer.getDeckCards(), null, null, null);
+                blackPlayer.getDeckCards(), whitePlayer.getDeckCards(), null, null, null,this );
 
 
     }
@@ -180,13 +185,13 @@ public class Game {
         this.currentAlliance = currentAlliance;
     }
 
-    public MyTimer getMyTimer() {
-        return myTimer;
-    }
-
-    public void setMyTimer(MyTimer myTimer) {
-        this.myTimer = myTimer;
-    }
+//    public MyTimer getMyTimer() {
+//        return myTimer;
+//    }
+//
+//    public void setMyTimer(MyTimer myTimer) {
+//        this.myTimer = myTimer;
+//    }
 
     public int getTargetOfHeroPower() {
         return targetOfHeroPower;
@@ -258,5 +263,21 @@ public class Game {
 
     public static void setGameModes(Object[] gameModes) {
         Game.gameModes = gameModes;
+    }
+
+    public Alliance getFormerAlliance() {
+        return formerAlliance;
+    }
+
+    public void setFormerAlliance(Alliance formerAlliance) {
+        this.formerAlliance = formerAlliance;
+    }
+
+    public Mapper getMapper() {
+        return mapper;
+    }
+
+    public void setMapper(Mapper mapper) {
+        this.mapper = mapper;
     }
 }

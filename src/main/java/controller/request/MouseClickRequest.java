@@ -9,12 +9,9 @@ import Visitors.CardVisitors.AfterSelectVisitor;
 import Visitors.PowerVisitor.HeroPowerVisitor.AfterSelectPowerVisitor;
 import controller.Status;
 import controller.controllers.GamePartController;
-import controller.controllers.Mapper;
 import controller.response.Response;
 import database.DataBase;
 import server.Server;
-
-import javax.swing.*;
 
 public class MouseClickRequest extends Request {
 
@@ -65,7 +62,7 @@ public class MouseClickRequest extends Request {
                         GamePartController.getHandCards(game), GamePartController.getDeckCards(game),
                         GamePartController.getTargetOfSpell(game),
                         GamePartController.getTargetOfSpellWitchIsHero(game),
-                        new Minion(), null, alliance);
+                        new Minion(), null, alliance, game);
 
                 player.setPlayerStatusInGame(Status.PLAY_PAGE);
             }
@@ -94,7 +91,7 @@ public class MouseClickRequest extends Request {
                         game.getCurrentPlayer().getDeckCards(),
                         game.getFormerPlayer().getDeckCards(),
                         GamePartController.getTargetOfHeroPower(game),
-                        GamePartController.getTargetOfHeroPowerWitchIsHero(game), null);
+                        GamePartController.getTargetOfHeroPowerWitchIsHero(game), null, game);
 
                 player.setPlayerStatusInGame(Status.PLAY_PAGE);
             }

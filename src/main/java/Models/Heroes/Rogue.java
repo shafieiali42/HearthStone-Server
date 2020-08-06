@@ -1,5 +1,6 @@
 package Models.Heroes;
 
+import Logic.PlayLogic.Game;
 import Models.Cards.CardClasses.Cards;
 import Models.Cards.CardClasses.Minion;
 import Models.HeroPower.RogueHeroPower;
@@ -46,8 +47,8 @@ public class Rogue extends Heroes {
     }
 
     @Override
-    public void accept(SpVisitor spVisitor, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Minion> enemyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> enemyHandsCards, ArrayList<Cards> friendlyDeckCards, ArrayList<Cards> enemyDeckCards, Minion target, Heroes targetHero, Minion summoned) {
+    public void accept(SpVisitor spVisitor, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Minion> enemyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> enemyHandsCards, ArrayList<Cards> friendlyDeckCards, ArrayList<Cards> enemyDeckCards, Minion target, Heroes targetHero, Minion summoned, Game game) {
         spVisitor.visit(this, player, friendlyBattleGround, enemyBattleGround, friendlyHandCards,
-                enemyHandsCards, friendlyDeckCards, enemyDeckCards, target, targetHero, summoned);
+                enemyHandsCards, friendlyDeckCards, enemyDeckCards, target, targetHero, summoned, game);
     }
 }

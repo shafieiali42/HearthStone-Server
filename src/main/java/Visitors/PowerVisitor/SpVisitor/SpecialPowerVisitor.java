@@ -1,5 +1,6 @@
 package Visitors.PowerVisitor.SpVisitor;
 
+import Logic.PlayLogic.Game;
 import Models.Cards.CardClasses.Cards;
 import Models.Cards.CardClasses.Minion;
 import Models.Cards.CardClasses.Spell;
@@ -12,7 +13,7 @@ public class SpecialPowerVisitor implements SpVisitor {
 
 
     @Override
-    public void visit(Mage mage, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Minion> enemyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> enemyHandsCards, ArrayList<Cards> friendlyDeckCards, ArrayList<Cards> enemyDeckCards, Minion target, Heroes targetHero, Minion summoned) {
+    public void visit(Mage mage, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Minion> enemyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> enemyHandsCards, ArrayList<Cards> friendlyDeckCards, ArrayList<Cards> enemyDeckCards, Minion target, Heroes targetHero, Minion summoned, Game game) {
         for (Cards card:friendlyDeckCards){
             if (card.getType().equalsIgnoreCase("Spell")){
                 card.setManaCost(card.getMoneyCost()-2);
@@ -26,7 +27,7 @@ public class SpecialPowerVisitor implements SpVisitor {
     }
 
     @Override
-    public void visit(Rogue rogue, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Minion> enemyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> enemyHandsCards, ArrayList<Cards> friendlyDeckCards, ArrayList<Cards> enemyDeckCards, Minion target, Heroes targetHero, Minion summoned) {
+    public void visit(Rogue rogue, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Minion> enemyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> enemyHandsCards, ArrayList<Cards> friendlyDeckCards, ArrayList<Cards> enemyDeckCards, Minion target, Heroes targetHero, Minion summoned, Game game) {
 
         for (Cards card:friendlyDeckCards){
             if ( (!card.getClassOfCard().equalsIgnoreCase(player.getHero().getName())) &&
@@ -48,13 +49,13 @@ public class SpecialPowerVisitor implements SpVisitor {
 
 
     @Override
-    public void visit(Warlock warlock, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Minion> enemyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> enemyHandsCards, ArrayList<Cards> friendlyDeckCards, ArrayList<Cards> enemyDeckCards, Minion target, Heroes targetHero, Minion summoned) {
+    public void visit(Warlock warlock, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Minion> enemyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> enemyHandsCards, ArrayList<Cards> friendlyDeckCards, ArrayList<Cards> enemyDeckCards, Minion target, Heroes targetHero, Minion summoned, Game game) {
         player.getHero().setHealthPower(35);
     }
 
 
     @Override
-    public void visit(Hunter hunter, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Minion> enemyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> enemyHandsCards, ArrayList<Cards> friendlyDeckCards, ArrayList<Cards> enemyDeckCards, Minion target, Heroes targetHero, Minion summoned) {
+    public void visit(Hunter hunter, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Minion> enemyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> enemyHandsCards, ArrayList<Cards> friendlyDeckCards, ArrayList<Cards> enemyDeckCards, Minion target, Heroes targetHero, Minion summoned, Game game) {
 
         for (Cards card:friendlyDeckCards){
            if (card.getType().equalsIgnoreCase("Minion")){
@@ -73,7 +74,10 @@ public class SpecialPowerVisitor implements SpVisitor {
     }
 
     @Override
-    public void visit(Priest priest, InGamePlayer player, ArrayList<Minion> friendlyBattleGround, ArrayList<Minion> enemyBattleGround, ArrayList<Cards> friendlyHandCards, ArrayList<Cards> enemyHandsCards, ArrayList<Cards> friendlyDeckCards, ArrayList<Cards> enemyDeckCards, Minion target, Heroes targetHero, Minion summoned) {
+    public void visit(Priest priest, InGamePlayer player, ArrayList<Minion> friendlyBattleGround,
+                      ArrayList<Minion> enemyBattleGround, ArrayList<Cards> friendlyHandCards,
+                      ArrayList<Cards> enemyHandsCards, ArrayList<Cards> friendlyDeckCards,
+                      ArrayList<Cards> enemyDeckCards, Minion target, Heroes targetHero, Minion summoned, Game game) {
         //todo complete this part
 
         for (Cards card:friendlyDeckCards){

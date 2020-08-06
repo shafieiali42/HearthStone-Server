@@ -3,6 +3,7 @@ package Models.Cards.CardClasses;
 
 
 import Logic.PlayLogic.Alliance;
+import Logic.PlayLogic.Game;
 import Models.Heroes.Heroes;
 
 import Visitors.CardVisitors.Visitable;
@@ -174,9 +175,9 @@ public  class Cards implements Comparable<Cards> , Visitable, Cloneable {
 
 
 
-    public void accept(Visitor visitor, ArrayList<Minion>battleGround, ArrayList<Cards> handsCards,
-                       ArrayList<Cards>deckCards, Minion target, Heroes targetHero,
-                       Minion summonedMinion, Cards playingCard, Alliance alliance){}
+    public void accept(Visitor visitor, ArrayList<Minion> battleGround, ArrayList<Cards> handsCards,
+                       ArrayList<Cards> deckCards, Minion target, Heroes targetHero,
+                       Minion summonedMinion, Cards playingCard, Alliance alliance, Game game){}
 
 
 
