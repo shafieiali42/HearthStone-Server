@@ -8,13 +8,23 @@ import Models.Cards.CardClasses.Minion;
 import Models.Heroes.Heroes;
 import Visitors.CardVisitors.Visitor;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 
+@Entity
 public class Sathrovarr extends Minion {
 
 
 
     public Sathrovarr(){
+        super();
+        setName("Sathrovarr");
+        setClassOfCard("Neutral");
+        setMoneyCost(10);
+        setManaCost(9);
+        setRarity("Legendary");
+        setAttackPower(5);
+        setHealthPower(5);
         setActive(true);
         setTaunt(false);
         setCanBeAttacked(true);

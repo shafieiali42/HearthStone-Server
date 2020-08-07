@@ -8,13 +8,23 @@ import Models.Cards.CardClasses.Minion;
 import Models.Heroes.Heroes;
 import Visitors.CardVisitors.Visitor;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 
+@Entity
 public class Dreadscale extends Minion {
 
 
 
     public Dreadscale(){
+        super();
+        setName("Dreadscale");
+        setClassOfCard("Warlock");
+        setMoneyCost(40);
+        setManaCost(3);
+        setRarity("legendary");
+        setAttackPower(4);
+        setHealthPower(2);
         setActive(true);
         setTaunt(false);
         setCanBeAttacked(true);

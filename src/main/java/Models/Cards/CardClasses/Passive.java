@@ -5,11 +5,17 @@ import Models.Player.InGamePlayer;
 import Visitors.PassiveVisitor.PassiveVisitable;
 import Visitors.PassiveVisitor.PassiveVisitor;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.ArrayList;
 
-public class Passive implements PassiveVisitable {
+@Entity
+public abstract class Passive implements PassiveVisitable {
 
+    @Id
     private String name;
+    @Column
     private String description;
     public static final int NUMBER_OF_PASSIVES=5;
     static ArrayList<Passive> passives=new ArrayList<Passive>();

@@ -7,13 +7,24 @@ import Models.Cards.CardClasses.Minion;
 import Models.Heroes.Heroes;
 import Visitors.CardVisitors.Visitor;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 
+@Entity
 public class CosmicAnomaly extends Minion {
 
 
 
     public CosmicAnomaly(){
+        super();
+        setName("CosmicAnomaly");
+        setClassOfCard("Mage");
+        setMoneyCost(10);
+        setManaCost(4);
+        setRarity("common");
+        setAttackPower(4);
+        setHealthPower(3);
+        setDescription("");
         setActive(true);
         setTaunt(false);
         setCanBeAttacked(true);

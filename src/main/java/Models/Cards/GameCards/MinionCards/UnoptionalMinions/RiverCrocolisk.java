@@ -7,13 +7,23 @@ import Models.Cards.CardClasses.Minion;
 import Models.Heroes.Heroes;
 import Visitors.CardVisitors.Visitor;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 
+@Entity
 public class RiverCrocolisk extends Minion{
 
 
 
     public RiverCrocolisk(){
+        super();
+        setName("RiverCrocolisk");
+        setClassOfCard("Neutral");
+        setMoneyCost(10);
+        setManaCost(2);
+        setRarity("common");
+        setAttackPower(2);
+        setHealthPower(3);
         setActive(true);
         setTaunt(false);
         setCanBeAttacked(true);

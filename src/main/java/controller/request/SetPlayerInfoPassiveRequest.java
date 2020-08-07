@@ -1,13 +1,11 @@
 package controller.request;
 
-import Logic.PlayLogic.Game;
 import Models.Player.Player;
 import controller.Status;
 import controller.controllers.GamePartController;
 import controller.response.GoToFirstThreeCardPageResponse;
-import controller.response.GoToPageResponse;
 import controller.response.Response;
-import database.DataBase;
+import database.dssds;
 import server.Server;
 
 
@@ -24,7 +22,7 @@ public class SetPlayerInfoPassiveRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = DataBase.fetchPlayer(userName);
+        Player player = dssds.fetchPlayer(userName);
         Response response = null;
         GamePartController.setFriendlyInfoPassiveOfGameState(Server.giveInGamePlayer(userName), numberOfPassive);
 

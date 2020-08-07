@@ -6,7 +6,7 @@ import controller.Status;
 import controller.controllers.GamePartController;
 import controller.response.Response;
 import controller.response.ShowPlayPanelResponse;
-import database.DataBase;
+import database.dssds;
 import server.Server;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class ShowPlayPanelRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = DataBase.fetchPlayer(userName);
+        Player player = dssds.fetchPlayer(userName);
         Response response = null;
         player.setPlayerStatusInGame(Status.PLAY_PAGE);
         InGamePlayer whitePlayer = Server.giveInGamePlayer(userName);

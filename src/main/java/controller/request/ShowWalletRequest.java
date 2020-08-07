@@ -3,7 +3,7 @@ package controller.request;
 import Models.Player.Player;
 import controller.response.Response;
 import controller.response.ShowWalletResponse;
-import database.DataBase;
+import database.dssds;
 
 public class ShowWalletRequest extends Request {
 
@@ -19,7 +19,7 @@ public class ShowWalletRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = DataBase.fetchPlayer(userName);
+        Player player = dssds.fetchPlayer(userName);
         Response response =new ShowWalletResponse(player.getMoney());
         return response;
     }

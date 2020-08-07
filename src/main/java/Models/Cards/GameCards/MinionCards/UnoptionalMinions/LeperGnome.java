@@ -8,12 +8,22 @@ import Models.Cards.CardClasses.Minion;
 import Models.Heroes.Heroes;
 import Visitors.CardVisitors.Visitor;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 
+@Entity
 public class LeperGnome extends Minion {
 
 
     public LeperGnome(){
+        super();
+        setName("LeperGnome");
+        setClassOfCard("Neutral");
+        setMoneyCost(10);
+        setManaCost(1);
+        setRarity("common");
+        setAttackPower(1);
+        setHealthPower(1);
         setActive(true);
         setTaunt(false);
         setCanBeAttacked(true);

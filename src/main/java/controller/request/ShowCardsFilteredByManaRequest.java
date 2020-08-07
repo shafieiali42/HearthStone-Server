@@ -5,7 +5,7 @@ import Models.Player.Player;
 import controller.Status;
 import controller.response.Response;
 import controller.response.ShowSpecificCardsResponse;
-import database.DataBase;
+import database.dssds;
 
 import java.util.ArrayList;
 
@@ -21,7 +21,7 @@ public class ShowCardsFilteredByManaRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = DataBase.fetchPlayer(userName);
+        Player player = dssds.fetchPlayer(userName);
         Response response = null;
         ArrayList<String> filteredByManaCards = new ArrayList<String>();
         for (Cards card : Cards.getAllCards()) {

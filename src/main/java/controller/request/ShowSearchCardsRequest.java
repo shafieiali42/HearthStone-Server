@@ -5,10 +5,8 @@ import Models.Player.Player;
 import controller.Status;
 import controller.response.Response;
 import controller.response.ShowSpecificCardsResponse;
-import database.DataBase;
+import database.dssds;
 
-import javax.swing.*;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class ShowSearchCardsRequest extends Request {
@@ -24,7 +22,7 @@ public class ShowSearchCardsRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = DataBase.fetchPlayer(userName);
+        Player player = dssds.fetchPlayer(userName);
         Response response = null;
         ArrayList<String> foundCards = new ArrayList<String>();
         for (Cards card : Cards.getAllCards()) {

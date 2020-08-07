@@ -2,7 +2,7 @@ package Logic.PlayLogic;
 
 import Models.Cards.CardClasses.Cards;
 
-import Models.Cards.GameCards.SpellCards.UnoptionalSpells.StrengthInNumbers;
+import Models.Cards.GameCards.SpellCards.Spells.StrengthInNumbers;
 import utility.config.ConfigLoader;
 
 

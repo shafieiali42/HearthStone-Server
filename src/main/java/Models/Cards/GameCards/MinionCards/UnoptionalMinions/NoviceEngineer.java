@@ -7,12 +7,22 @@ import Models.Cards.CardClasses.Minion;
 import Models.Heroes.Heroes;
 import Visitors.CardVisitors.Visitor;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 
+@Entity
 public class NoviceEngineer extends Minion{
 
 
     public NoviceEngineer(){
+        super();
+        setName("NoviceEngineer");
+        setClassOfCard("Neutral");
+        setMoneyCost(10);
+        setManaCost(2);
+        setRarity("common");
+        setAttackPower(1);
+        setHealthPower(1);
         setActive(true);
         setTaunt(false);
         setCanBeAttacked(true);

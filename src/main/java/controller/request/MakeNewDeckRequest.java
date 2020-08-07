@@ -5,7 +5,7 @@ import controller.controllers.CollectionController;
 import controller.Status;
 import controller.response.MakeNewDeckResponse;
 import controller.response.Response;
-import database.DataBase;
+import database.dssds;
 
 public class MakeNewDeckRequest extends Request {
 
@@ -23,7 +23,7 @@ public class MakeNewDeckRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = DataBase.fetchPlayer(userName);
+        Player player = dssds.fetchPlayer(userName);
         player.setPlayerStatusInGame(Status.MAKE_DECK);
         CollectionController.makeNewDeck(player, deckName, heroName);
         Response response = new MakeNewDeckResponse(deckName);

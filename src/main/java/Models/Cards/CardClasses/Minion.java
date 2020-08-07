@@ -2,24 +2,46 @@ package Models.Cards.CardClasses;
 
 
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 import java.util.ArrayList;
 
-public class Minion extends Cards {
+@Entity
+public abstract class Minion extends Cards {
 
     public static final int NUMBER_OF_MINIONS = 16;
     private static ArrayList<Minion> minions = new ArrayList<Minion>();
 
-
-    private int firstAttackPower;
-    private int firstHealthPower;
+    @Column
     private int attackPower;
+    @Column
     private int healthPower;
+
+    @Transient
+    private int firstAttackPower;
+    @Transient
+    private int firstHealthPower;
+    @Transient
     private boolean active = true;
+    @Transient
     private boolean canBeAttacked = true; // if we have taunt and it is not taunt then this field would be false:))
+    @Transient
     private boolean taunt = false;
+    @Transient
     private boolean hasAttackInThisTurn = false;
+    @Transient
     private boolean divineShield=false;
+    @Transient
     private boolean rush=false;
+
+
+
+    public Minion(){
+        super();
+        setType("Minion");
+    }
+
 
 
     public boolean isTaunt() {
@@ -87,69 +109,35 @@ public class Minion extends Cards {
         this.divineShield = divineShield;
     }
 
-    public Minion() {
-        super();
-    }
 
 
-    @Override
-    public Minion  copy() {
-//        System.out.println("Copy of Minion:))");
-        Minion copy = new Minion();
-        copy.setName(this.getName());
-        copy.setManaCost(this.getManaCost());
-        copy.setRarity(this.getRarity());
-        copy.setDescription(this.getDescription());
-        copy.setClassOfCard(this.getClassOfCard());
-        copy.setType(this.getType());
-        copy.setRarity(this.getRarity());
-        copy.setIsPlayed(this.isPlayed());
-        copy.setFirstAttackPower(this.firstAttackPower);
-        copy.setFirstHealthPower(this.healthPower);
-        copy.attackPower = this.attackPower;
-        copy.healthPower = this.healthPower;
-        copy.active = this.active;
-        copy.canBeAttacked = this.canBeAttacked;
-        copy.taunt = this.taunt;
-        copy.hasAttackInThisTurn = this.hasAttackInThisTurn;
-        return copy;
-    }
 
-//
 //    @Override
-//    public  <T extends Cards> T  copy(T t) {
-//        Class cls = t.getClass();
-//        T t1 = null;
-//        try {
-//            Constructor cons = cls.getConstructor();
-//            t1 = (T) cons.newInstance();
-//            Field[] fields = cls.getDeclaredFields();
-//            for (Field field : fields) {
-//                field.setAccessible(true);
-//                field.set(t1, field.get(t));
-//            }
-//        } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
-//            e.printStackTrace();
-//        }
-//        return t1;
+//    public Minion  copy() {
+////        System.out.println("Copy of Minion:))");
+//        Minion copy = new Minion();
+//        copy.setName(this.getName());
+//        copy.setManaCost(this.getManaCost());
+//        copy.setRarity(this.getRarity());
+//        copy.setDescription(this.getDescription());
+//        copy.setClassOfCard(this.getClassOfCard());
+//        copy.setType(this.getType());
+//        copy.setRarity(this.getRarity());
+//        copy.setIsPlayed(this.isPlayed());
+//        copy.setFirstAttackPower(this.firstAttackPower);
+//        copy.setFirstHealthPower(this.healthPower);
+//        copy.attackPower = this.attackPower;
+//        copy.healthPower = this.healthPower;
+//        copy.active = this.active;
+//        copy.canBeAttacked = this.canBeAttacked;
+//        copy.taunt = this.taunt;
+//        copy.hasAttackInThisTurn = this.hasAttackInThisTurn;
+//        return copy;
 //    }
 
-//    public <T> T copy(T t) {
-//        Class cls = t.getClass();
-//        T t1 = null;
-//        try {
-//            Constructor cons = cls.getConstructor();
-//            t1 = (T) cons.newInstance();
-//            Field[] fields = cls.getDeclaredFields();
-//            for (Field field : fields) {
-//                field.setAccessible(true);
-//                field.set(t1, field.get(t));
-//            }
-//        } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
-//            e.printStackTrace();
-//        }
-//        return t1;
-//    }
+
+
+    public abstract Minion copy();
 
 
     //Getter and Setter

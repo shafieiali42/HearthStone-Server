@@ -7,7 +7,7 @@ import Models.Cards.CardClasses.Cards;
 import Models.Cards.CardClasses.Minion;
 import Models.Cards.CardClasses.Weapon;
 import Models.Cards.GameCards.MinionCards.UnoptionalMinions.*;
-import Models.Cards.GameCards.SpellCards.UnoptionalSpells.*;
+import Models.Cards.GameCards.SpellCards.Spells.*;
 import Models.Cards.GameCards.WeaponCards.Ashbringer;
 import Models.Cards.GameCards.WeaponCards.BattleAxe;
 import Models.Cards.GameCards.WeaponCards.Gearblade;
@@ -20,7 +20,6 @@ import controller.response.ShowJOptionPaneResponse;
 import server.Server;
 
 
-import javax.swing.*;
 import java.util.ArrayList;
 
 public class AfterSelectVisitor implements Visitor {

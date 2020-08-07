@@ -4,7 +4,7 @@ import Models.Player.Player;
 import controller.controllers.PlayerController;
 import controller.response.LogOutResponse;
 import controller.response.Response;
-import database.DataBase;
+import database.dssds;
 
 public class LogOutRequest extends Request {
 
@@ -20,7 +20,7 @@ public class LogOutRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = DataBase.fetchPlayer(userName);
+        Player player = dssds.fetchPlayer(userName);
         Response response =new LogOutResponse(PlayerController.logOut(player));
         return response;
     }

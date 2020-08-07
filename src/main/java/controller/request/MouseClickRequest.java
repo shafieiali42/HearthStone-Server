@@ -10,7 +10,7 @@ import Visitors.PowerVisitor.HeroPowerVisitor.AfterSelectPowerVisitor;
 import controller.Status;
 import controller.controllers.GamePartController;
 import controller.response.Response;
-import database.DataBase;
+import database.dssds;
 import server.Server;
 
 public class MouseClickRequest extends Request {
@@ -42,7 +42,7 @@ public class MouseClickRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = DataBase.fetchPlayer(userName);
+        Player player = dssds.fetchPlayer(userName);
         Game game = Server.giveGameWithPlayer(userName);
         Response response = null;
         boolean doubleClick;
@@ -62,7 +62,7 @@ public class MouseClickRequest extends Request {
                         GamePartController.getHandCards(game), GamePartController.getDeckCards(game),
                         GamePartController.getTargetOfSpell(game),
                         GamePartController.getTargetOfSpellWitchIsHero(game),
-                        new Minion(), null, alliance, game);
+                        null, null, alliance, game);
 
                 player.setPlayerStatusInGame(Status.PLAY_PAGE);
             }

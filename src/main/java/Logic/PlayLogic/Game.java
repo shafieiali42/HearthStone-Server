@@ -57,7 +57,7 @@ public class Game {
         if (gameMode.equalsIgnoreCase("OnlineGame")) {//OnlineGame
             this.whitePlayer = whitePlayer;
             this.blackPlayer = blackPlayer;
-            playingCard = new Cards();
+//            playingCard = new Cards();//todo
             currentPlayer = whitePlayer;
             formerPlayer = blackPlayer;
             currentAlliance = Alliance.WHITE;
@@ -73,7 +73,7 @@ public class Game {
             blackPlayer.setDeckCards(deckReader.getDeck("FRIEND"));
             blackPlayer.setHero(new Mage());
             blackPlayer.initHandsCards();
-            playingCard = new Cards();
+//            playingCard = new Cards();//todo
             currentPlayer = whitePlayer;
             formerPlayer = blackPlayer;
             currentAlliance = Alliance.WHITE;
@@ -85,7 +85,7 @@ public class Game {
             blackPlayer.setHero(new Mage());
             blackPlayer.setDeckCards(deckReader.getDeck("ENEMY"));
             blackPlayer.initHandsCards();
-            playingCard = new Cards();
+//            playingCard = new Cards();//todo
             currentPlayer = whitePlayer;
             formerPlayer = blackPlayer;
             currentAlliance = Alliance.WHITE;

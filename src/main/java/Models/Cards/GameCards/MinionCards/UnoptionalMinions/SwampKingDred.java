@@ -7,13 +7,23 @@ import Models.Cards.CardClasses.Minion;
 import Models.Heroes.Heroes;
 import Visitors.CardVisitors.Visitor;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 
+@Entity
 public class SwampKingDred extends Minion {
 
 
 
     public SwampKingDred(){
+        super();
+        setName("SwampKingDred");
+        setClassOfCard("Hunter");
+        setMoneyCost(10);
+        setManaCost(7);
+        setRarity("Legendary");
+        setAttackPower(9);
+        setHealthPower(9);
         setActive(true);
         setTaunt(false);
         setCanBeAttacked(true);

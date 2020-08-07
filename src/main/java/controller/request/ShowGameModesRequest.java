@@ -1,14 +1,11 @@
 package controller.request;
 
 import Logic.PlayLogic.Game;
-import Logic.Status;
 import Models.Player.Player;
 import controller.response.Response;
 import controller.response.ShowGameModesResponse;
 import controller.response.ShowJOptionPaneResponse;
-import database.DataBase;
-
-import javax.swing.*;
+import database.dssds;
 
 public class ShowGameModesRequest extends Request {
 
@@ -22,7 +19,7 @@ public class ShowGameModesRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = DataBase.fetchPlayer(userName);
+        Player player = dssds.fetchPlayer(userName);
         Response response=null;
         if (player.getCurrentDeck() == null) {
             response=new ShowJOptionPaneResponse("First you should select your deck");

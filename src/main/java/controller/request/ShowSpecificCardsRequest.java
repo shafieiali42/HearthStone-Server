@@ -6,7 +6,7 @@ import controller.controllers.Administer;
 import controller.controllers.CollectionController;
 import controller.response.Response;
 import controller.response.ShowSpecificCardsResponse;
-import database.DataBase;
+import database.dssds;
 
 import java.util.ArrayList;
 
@@ -28,7 +28,7 @@ public class ShowSpecificCardsRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = DataBase.fetchPlayer(userName);
+        Player player = dssds.fetchPlayer(userName);
         ArrayList<Cards> cards = new ArrayList<>();
         switch (group) {
             case "Buyable":

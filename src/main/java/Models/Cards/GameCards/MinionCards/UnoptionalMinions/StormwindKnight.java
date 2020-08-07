@@ -7,8 +7,10 @@ import Models.Cards.CardClasses.Minion;
 import Models.Heroes.Heroes;
 import Visitors.CardVisitors.Visitor;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 
+@Entity
 public class StormwindKnight extends Minion{
 
 
@@ -17,6 +19,14 @@ public class StormwindKnight extends Minion{
 
 
     public StormwindKnight(){
+        super();
+        setName("StormwindKnight");
+        setClassOfCard("Neutral");
+        setMoneyCost(30);
+        setManaCost(4);
+        setRarity("epic");
+        setAttackPower(2);
+        setHealthPower(5);
         setActive(true);
         setTaunt(false);
         setCanBeAttacked(true);

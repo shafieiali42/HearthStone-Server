@@ -8,13 +8,22 @@ import Models.Cards.CardClasses.Minion;
 import Models.Heroes.Heroes;
 import Visitors.CardVisitors.Visitor;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 
-
+@Entity
 public class CurioCollector extends Minion {
 
 
     public CurioCollector(){
+        super();
+        setName("CurioCollector");
+        setClassOfCard("Neutral");
+        setMoneyCost(10);
+        setManaCost(5);
+        setRarity("Rare");
+        setAttackPower(4);
+        setHealthPower(4);
         setActive(true);
         setTaunt(false);
         setCanBeAttacked(true);

@@ -1,18 +1,26 @@
 package Models.Cards.CardClasses;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import java.util.ArrayList;
 
-public class Weapon extends Cards {
+@Entity
+public abstract class Weapon extends Cards {
 
     public static final int NUMBER_OF_Weapons =3;
+    @Column
     private int attackPower;
+    @Column
     private int durability;
     private boolean hasAttackInThisTurn = false;
     static ArrayList<Weapon> weapons=new ArrayList<Weapon>();
 
     public Weapon()  {
         super();
+        setType("Weapon");
     }
+
+
 
 
     public int getAttackPower() {

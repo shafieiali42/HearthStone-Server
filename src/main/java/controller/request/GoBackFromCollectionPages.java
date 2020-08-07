@@ -4,7 +4,7 @@ import Models.Player.Player;
 import controller.Status;
 import controller.response.GoToPageResponse;
 import controller.response.Response;
-import database.DataBase;
+import database.dssds;
 
 import javax.swing.*;
 
@@ -21,7 +21,7 @@ public class GoBackFromCollectionPages extends Request {
 
     @Override
     public Response execute() {
-        Player player = DataBase.fetchPlayer(userName);
+        Player player = dssds.fetchPlayer(userName);
         Response response = null;
         if (player.getPlayerStatusInGame().equals(Status.COLLECTIONS_PAGE)) {
             response = new GoToPageResponse("MainMenuPageNormal");

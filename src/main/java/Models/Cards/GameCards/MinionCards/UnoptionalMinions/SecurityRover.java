@@ -7,8 +7,10 @@ import Visitors.CardVisitors.Visitor;
 import Models.Cards.CardClasses.Cards;
 import Models.Cards.CardClasses.Minion;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 
+@Entity
 public class SecurityRover extends Minion {
 
 
@@ -17,6 +19,14 @@ public class SecurityRover extends Minion {
 
 
     public SecurityRover(){
+        super();
+        setName("SecurityRover");
+        setClassOfCard("Neutral");
+        setMoneyCost(10);
+        setManaCost(6);
+        setRarity("Rare");
+        setAttackPower(2);
+        setHealthPower(6);
         setActive(true);
         setTaunt(false);
         setCanBeAttacked(true);

@@ -1,17 +1,19 @@
 package database;
 
-import Models.Player.Player;
+import java.io.Serializable;
+import java.util.List;
 
-public class DataBase {
+public interface DataBase {
 
+    void save(Object o);
 
+    <T> T fetch(Class<T> tClass, Serializable id);
 
-    public static Player fetchPlayer(String userName){
-        return null;
-    }
+    void update(Object o);
 
+    void delete(Object o);
 
-    public static void updatePlayer(Player player){}
+    <E> List<E> fetchAll(Class<E> entity);
 
 
 }

@@ -4,8 +4,7 @@ import Models.Deck.Deck;
 import Models.Player.Player;
 import controller.response.Response;
 import controller.response.ShowDeckButtonsResponse;
-import database.DataBase;
-import utility.constant.Constant;
+import database.dssds;
 
 import java.util.ArrayList;
 
@@ -20,7 +19,7 @@ public class ShowDeckButtonsRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = DataBase.fetchPlayer(userName);
+        Player player = dssds.fetchPlayer(userName);
         Response response = null;
 
         ArrayList<String> listOfAllDeckOfPlayer = null;

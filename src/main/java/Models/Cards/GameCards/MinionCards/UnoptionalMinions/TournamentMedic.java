@@ -7,14 +7,24 @@ import Models.Cards.CardClasses.Minion;
 import Models.Heroes.Heroes;
 import Visitors.CardVisitors.Visitor;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 
+@Entity
 public class TournamentMedic extends Minion {
 
 
 
 
     public TournamentMedic(){
+        super();
+        setName("TournamentMedic");
+        setClassOfCard("Neutral");
+        setMoneyCost(10);
+        setManaCost(4);
+        setRarity("common");
+        setAttackPower(1);
+        setHealthPower(8);
         setActive(true);
         setTaunt(false);
         setCanBeAttacked(true);

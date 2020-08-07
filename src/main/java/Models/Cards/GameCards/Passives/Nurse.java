@@ -7,8 +7,10 @@ import Models.Cards.CardClasses.Passive;
 import Models.Player.InGamePlayer;
 import Visitors.PassiveVisitor.PassiveVisitor;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 
+@Entity
 public class Nurse extends Passive {
 
 

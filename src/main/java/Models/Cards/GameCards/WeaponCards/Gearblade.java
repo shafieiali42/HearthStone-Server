@@ -2,6 +2,9 @@ package Models.Cards.GameCards.WeaponCards;
 
 import Models.Cards.CardClasses.Weapon;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Gearblade extends Weapon {
 
     @Override

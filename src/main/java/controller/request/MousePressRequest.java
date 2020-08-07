@@ -10,7 +10,7 @@ import controller.controllers.GamePartController;
 import controller.response.ChangeFirstThreeCardsResponse;
 import controller.response.DiscoverPageResponse;
 import controller.response.Response;
-import database.DataBase;
+import database.dssds;
 import server.Server;
 
 public class MousePressRequest extends Request {
@@ -44,7 +44,7 @@ public class MousePressRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = DataBase.fetchPlayer(userName);
+        Player player = dssds.fetchPlayer(userName);
         Game game = Server.giveGameWithPlayer(userName);
         Response response = null;
 
@@ -63,7 +63,7 @@ public class MousePressRequest extends Request {
             GamePartController.getPlyingCardOfGameState(game).accept(new AfterSelectVisitor(),
                     GamePartController.getBattleGround(game),
                     GamePartController.getHandCards(game), GamePartController.getDeckCards(game),
-                    new Minion(), null, new Minion(), null, alliance, game);
+                   null, null,null, null, alliance, game);
         }
         return response;
     }

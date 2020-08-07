@@ -5,8 +5,7 @@ import Models.Player.Player;
 import controller.Status;
 import controller.response.Response;
 import controller.response.ShowDeckResponse;
-import database.DataBase;
-import utility.constant.Constant;
+import database.dssds;
 
 public class ShowDeckRequest extends Request {
 
@@ -22,7 +21,7 @@ public class ShowDeckRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = DataBase.fetchPlayer(userName);
+        Player player = dssds.fetchPlayer(userName);
         Response response=null;
         player.setPlayerStatusInGame(Status.CHANGE_DECK);
         for (Deck deck:player.getAllDecksOfPlayer()){

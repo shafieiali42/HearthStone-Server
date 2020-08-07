@@ -297,7 +297,7 @@ public class GamePartController {
             if (game.getCurrentPlayer().getBattleGroundCards().size() > (k - 1)) {
                 for (Minion minion : game.getCurrentPlayer().getBattleGroundCards()) {
                     minion.accept(new SummonVisitor(), game.getCurrentPlayer().getBattleGroundCards(),
-                            game.getCurrentPlayer().getHandsCards(), new ArrayList<Cards>(), new Minion(),
+                            game.getCurrentPlayer().getHandsCards(), new ArrayList<Cards>(), null,
                             null, game.getCurrentPlayer().getBattleGroundCards().get(k - 1),
                             null, null, game);//todo json
                 }
@@ -308,7 +308,7 @@ public class GamePartController {
             result = playCard(playingCard, game);
             playingCard.accept(new BattleCryVisitor(), game.getCurrentPlayer().getBattleGroundCards(),
                     game.getCurrentPlayer().getHandsCards(), new ArrayList<Cards>(), playingCard,
-                    null, new Minion(), null, null, game);//todo json
+                    null, null, null, null, game);//todo
 
 
             if (k != 7) {
@@ -317,7 +317,7 @@ public class GamePartController {
                     for (Minion minion : game.getCurrentPlayer().getBattleGroundCards()) {
                         minion.accept(new SummonVisitor(), game.getCurrentPlayer().getBattleGroundCards(),
                                 game.getCurrentPlayer().getHandsCards(),
-                                new ArrayList<Cards>(), new Minion(), null,
+                                new ArrayList<Cards>(), null, null,
                                 game.getCurrentPlayer().getBattleGroundCards().get(k - 1), null, null, game);
                         //todo json
                     }
@@ -351,21 +351,21 @@ public class GamePartController {
         result = playCard(playingCard, game);
 
         playingCard.accept(new BattleCryVisitor(), game.getCurrentPlayer().getBattleGroundCards(),
-                game.getCurrentPlayer().getHandsCards(), new ArrayList<Cards>(), new Minion(),
-                null, new Minion(), null, null, game);
+                game.getCurrentPlayer().getHandsCards(), new ArrayList<Cards>(), null,
+                null, null, null, null, game);
 
         playingCard.accept(new DrawCardVisitor(), game.getCurrentPlayer().getBattleGroundCards(),
-                game.getCurrentPlayer().getHandsCards(), new ArrayList<Cards>(), new Minion(),
-                null, new Minion(), null, null, game);
+                game.getCurrentPlayer().getHandsCards(), new ArrayList<Cards>(),null,
+                null, null, null, null, game);
 
         playingCard.accept(new ActionVisitor(), game.getCurrentPlayer().getBattleGroundCards(),
                 game.getCurrentPlayer().getHandsCards(),
-                game.getCurrentPlayer().getDeckCards(), new Minion(), null,
-                new Minion(), null, null, game);
+                game.getCurrentPlayer().getDeckCards(), null, null,
+               null, null, null, game);
 
         playingCard.accept(new TargetVisitor(), game.getCurrentPlayer().getBattleGroundCards(),
                 game.getCurrentPlayer().getHandsCards(), game.getCurrentPlayer().getDeckCards(),
-                new Minion(), null, new Minion(), null, null, game);//todo ...............
+                null, null,null, null, null, game);//todo ...............
         //todo json
         return result;
     }
@@ -375,8 +375,8 @@ public class GamePartController {
         game.getCurrentPlayer().setCurrentWeapon((Weapon) playingCard);
         result = playCard(playingCard, game);
         playingCard.accept(new BattleCryVisitor(), game.getCurrentPlayer().getBattleGroundCards(),
-                game.getCurrentPlayer().getHandsCards(), new ArrayList<Cards>(), new Minion(),
-                null, new Minion(), null, null, game);
+                game.getCurrentPlayer().getHandsCards(), new ArrayList<Cards>(), null,
+                null, null, null, null, game);
 
 
         return result;
@@ -639,7 +639,7 @@ public class GamePartController {
                 game.getFormerPlayer().getHandsCards(),
                 game.getCurrentPlayer().getDeckCards(),
                 game.getFormerPlayer().getDeckCards(),
-                new Minion(), null, null, game);//todo json
+              null, null, null, game);//todo json
 
         //for heroPowers witch need target
         game.getCurrentPlayer().getHero().getHeroPower().accept(new TargetVisitorOfPowers(),
@@ -650,7 +650,7 @@ public class GamePartController {
                 game.getFormerPlayer().getHandsCards(),
                 game.getCurrentPlayer().getDeckCards(),
                 game.getFormerPlayer().getDeckCards(),
-                new Minion(), null, null, game);//todo json
+                null, null, null, game);//todo json
 
         return result;
     }
@@ -942,7 +942,7 @@ public class GamePartController {
 
         for (Minion minion : game.getCurrentPlayer().getBattleGroundCards()) {
             minion.accept(new DrawCardVisitor(), game.getCurrentPlayer().getBattleGroundCards(),
-                    game.getCurrentPlayer().getHandsCards(), new ArrayList<Cards>(), minion, null, new Minion(),
+                    game.getCurrentPlayer().getHandsCards(), new ArrayList<Cards>(), minion, null,null,
                     null, null, game);
         }
 
@@ -982,7 +982,7 @@ public class GamePartController {
             Minion minion = itr.next();
             minion.accept(new EndTurnVisitor(), player.getBattleGroundCards(),
                     player.getHandsCards(), new ArrayList<Cards>(), minion, null,
-                    new Minion(), null, null,
+                   null, null, null,
                     Server.giveGameWithPlayer(player.getPlayer().getUserName()));//todo
 
         }

@@ -2,7 +2,15 @@ package Models.Cards.GameCards.WeaponCards;
 
 import Models.Cards.CardClasses.Weapon;
 
+import javax.persistence.Entity;
+
+@Entity
 public class BattleAxe extends Weapon {
+
+    public BattleAxe(){
+        setName("BattleAxe");
+    }
+
 
     @Override
     public BattleAxe copy() {

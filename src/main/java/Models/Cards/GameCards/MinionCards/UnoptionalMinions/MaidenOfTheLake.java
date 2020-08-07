@@ -7,13 +7,23 @@ import Models.Cards.CardClasses.Minion;
 import Models.Heroes.Heroes;
 import Visitors.CardVisitors.Visitor;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 
+@Entity
 public class MaidenOfTheLake extends Minion{
 
 
 
     public MaidenOfTheLake(){
+        super();
+        setName("MaidenOfTheLake");
+        setClassOfCard("Neutral");
+        setMoneyCost(10);
+        setManaCost(4);
+        setRarity("common");
+        setAttackPower(2);
+        setHealthPower(6);
         setActive(true);
         setTaunt(false);
         setCanBeAttacked(true);

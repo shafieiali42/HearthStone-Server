@@ -7,13 +7,16 @@ import Models.Cards.CardClasses.Minion;
 import Models.Heroes.Heroes;
 import Visitors.CardVisitors.Visitor;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 
+@Entity
 public class Dragon extends Minion {
 
 
 
     public Dragon(){
+        super();
         setActive(true);
         setTaunt(false);
         setCanBeAttacked(true);

@@ -8,13 +8,23 @@ import Models.Cards.CardClasses.Minion;
 import Models.Heroes.Heroes;
 import Visitors.CardVisitors.Visitor;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 
+@Entity
 public class CrazedAlchemist extends Minion {
 
 
 
     public CrazedAlchemist(){
+        super();
+        setName("CrazedAlchemist");
+        setClassOfCard("Neutral");
+        setMoneyCost(20);
+        setManaCost(2);
+        setRarity("rare");
+        setAttackPower(2);
+        setHealthPower(2);
         setActive(true);
         setTaunt(false);
         setCanBeAttacked(true);

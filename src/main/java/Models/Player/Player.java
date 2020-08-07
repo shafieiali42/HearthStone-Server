@@ -7,11 +7,14 @@ import com.google.gson.annotations.Expose;
 import controller.Status;
 import utility.Log.LoggerOfProject;
 
+import javax.persistence.Entity;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
+@Entity
 public class Player {
+
 
     @Expose(serialize = true, deserialize = true)
     private String userName;

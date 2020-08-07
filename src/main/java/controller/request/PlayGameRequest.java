@@ -6,7 +6,7 @@ import Models.Player.Player;
 import com.google.gson.Gson;
 import controller.response.PLayGameResponse;
 import controller.response.Response;
-import database.DataBase;
+import database.dssds;
 import server.Server;
 
 import java.io.IOException;
@@ -28,7 +28,7 @@ public class PlayGameRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = DataBase.fetchPlayer(userName);
+        Player player = dssds.fetchPlayer(userName);
         Response response = null;
         ArrayList<Player> thisGameModePlayer = new ArrayList<>();
         for (Player player1 : Server.getPlayQueue().keySet()) {

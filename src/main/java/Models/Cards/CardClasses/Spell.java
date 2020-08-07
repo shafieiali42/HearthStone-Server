@@ -1,17 +1,30 @@
 package Models.Cards.CardClasses;
 
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 import java.util.ArrayList;
+import java.util.List;
 
-public class Spell extends Cards {
+@Entity
+public abstract class Spell extends Cards {
 
     public static final int NUMBER_OF_SPELLS = 18;
     static ArrayList<Spell> spells = new ArrayList<Spell>();
     static ArrayList<Spell> questAndRewardCards = new ArrayList<Spell>();
 
+    @Transient
+    private int manaSpendForQuest = 0;
+    @Transient
+    private int manaNeededForQuest = 0;
+    @Transient
+    private int increaseHp = 0;
+    @Transient
+    private List<SpellAbility> abilities = new ArrayList<>();
 
-    private int manaSpendForQuest=0;
-    private int manaNeededForQuest=0;
-    private int increaseHp=0;
+    public Spell() {
+        super();
+        setType("Spell");
+    }
 
     public int getIncreaseHp() {
         return increaseHp;
@@ -32,17 +45,17 @@ public class Spell extends Cards {
     public int getManaSpendForQuest() {
         return manaSpendForQuest;
     }
+
     public void setManaSpendForQuest(int manaSpendForQuest) {
         this.manaSpendForQuest = manaSpendForQuest;
     }
 
-    private ArrayList<SpellAbility> abilities=new ArrayList<>();
 
-    public ArrayList<SpellAbility> getAbilities() {
+    public List<SpellAbility> getAbilities() {
         return abilities;
     }
 
-    public void setAbilities(ArrayList<SpellAbility> abilities) {
+    public void setAbilities(List<SpellAbility> abilities) {
         this.abilities = abilities;
     }
 
@@ -64,10 +77,6 @@ public class Spell extends Cards {
 
     public static void setSpells(ArrayList<Spell> spells) {
         Spell.spells = spells;
-    }
-
-    public Spell() {
-        super();
     }
 
 

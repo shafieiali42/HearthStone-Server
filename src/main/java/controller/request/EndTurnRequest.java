@@ -3,14 +3,10 @@ package controller.request;
 import Models.Player.InGamePlayer;
 import Models.Player.Player;
 import controller.controllers.GamePartController;
-import controller.controllers.Mapper;
 import controller.response.Response;
 import controller.response.ShowJOptionPaneResponse;
-import controller.response.ShowPlayPanelResponse;
-import database.DataBase;
+import database.dssds;
 import server.Server;
-
-import java.util.ArrayList;
 
 public class EndTurnRequest extends Request {
 
@@ -25,7 +21,7 @@ public class EndTurnRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = DataBase.fetchPlayer(userName);
+        Player player = dssds.fetchPlayer(userName);
         InGamePlayer whitePlayer = Server.giveInGamePlayer(userName);
         Response response = null;
         String message = GamePartController.endTurn(whitePlayer);
