@@ -5,7 +5,6 @@ import Models.Player.Player;
 import controller.controllers.GamePartController;
 import controller.response.Response;
 import controller.response.ShowJOptionPaneResponse;
-import database.dssds;
 import server.Server;
 
 public class EndTurnRequest extends Request {
@@ -21,7 +20,7 @@ public class EndTurnRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = dssds.fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
         InGamePlayer whitePlayer = Server.giveInGamePlayer(userName);
         Response response = null;
         String message = GamePartController.endTurn(whitePlayer);
@@ -31,6 +30,7 @@ public class EndTurnRequest extends Request {
         } else {
             response = new ShowJOptionPaneResponse(message);
         }
+        Server.getDataBaseHandler().save(player);
         return response;
     }
 

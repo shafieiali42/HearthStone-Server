@@ -5,7 +5,7 @@ import Models.Player.Player;
 import controller.Status;
 import controller.response.Response;
 import controller.response.ShowSpecificCardsResponse;
-import database.dssds;
+import server.Server;
 
 import java.util.ArrayList;
 
@@ -21,7 +21,7 @@ public class ShowCardsFilteredByManaRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = dssds.fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
         Response response = null;
         ArrayList<String> filteredByManaCards = new ArrayList<String>();
         for (Cards card : Cards.getAllCards()) {
@@ -37,6 +37,7 @@ public class ShowCardsFilteredByManaRequest extends Request {
             response = new ShowSpecificCardsResponse(filteredByManaCards, "Mana", "cardPanelOfDeckPage");
         }
 //        ControllerOfMainComponents.currentPlayer.getLoggerOfMyPlayer().info("Show cards with mana: " + mana);
+        Server.getDataBaseHandler().save(player);
         return response;
     }
 

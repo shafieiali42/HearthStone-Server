@@ -15,6 +15,16 @@ import java.util.ArrayList;
 public class Naturalize extends Spell {
 
 
+    public Naturalize(){
+        super();
+        setName("Naturalize");
+        setClassOfCard("Neutral");
+        setMoneyCost(10);
+        setManaCost(1);
+        setRarity("common");
+    }
+
+
     @Override
     public Naturalize copy() {
 //        System.out.println("Copy of BookOfSpecters:))");

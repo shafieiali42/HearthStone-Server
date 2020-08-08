@@ -2,11 +2,12 @@ package controller.request;
 
 import Models.Cards.CardClasses.Cards;
 import Models.Player.Player;
+import controller.Status;
 import controller.controllers.Administer;
 import controller.controllers.CollectionController;
 import controller.response.Response;
 import controller.response.ShowSpecificCardsResponse;
-import database.dssds;
+import server.Server;
 
 import java.util.ArrayList;
 
@@ -28,14 +29,16 @@ public class ShowSpecificCardsRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = dssds.fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
         ArrayList<Cards> cards = new ArrayList<>();
         switch (group) {
             case "Buyable":
                 cards = player.getBuyableCards();
+                player.setPlayerStatusInGame(Status.BUY_PAGE);
                 break;
             case "Salable":
                 cards = player.getSalableCards();
+                player.setPlayerStatusInGame(Status.SELL_PAGE);
                 break;
             case "LockCards":
                 cards = player.getLockCards();
@@ -68,6 +71,7 @@ public class ShowSpecificCardsRequest extends Request {
 
         ArrayList<String> names = Administer.giveListOfCardsNames(cards);
         Response response = new ShowSpecificCardsResponse(names,group,panelName);
+        Server.getDataBaseHandler().save(player);
         return response;
     }
 

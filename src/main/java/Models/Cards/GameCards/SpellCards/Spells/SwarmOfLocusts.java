@@ -15,6 +15,17 @@ import java.util.ArrayList;
 public class SwarmOfLocusts extends Spell {
 
 
+    public SwarmOfLocusts(){
+        super();
+        setName("SwarmOfLocusts");
+        setClassOfCard("Neutral");
+        setMoneyCost(10);
+        setManaCost(1);
+        setRarity("Rare");
+    }
+
+
+
     @Override
     public SwarmOfLocusts copy() {
 //        System.out.println("Copy of SwarmOfLocusts:))");

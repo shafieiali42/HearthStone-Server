@@ -5,7 +5,7 @@ import Models.Heroes.*;
 import Models.Player.Player;
 import controller.response.MakeChangeToDeckToChangeResponse;
 import controller.response.Response;
-import database.dssds;
+import server.Server;
 
 import java.util.ArrayList;
 
@@ -26,7 +26,7 @@ public class MakeChangeToDeckToChangeRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = dssds.fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
         Response response = null;
         switch (typeOfRequest) {
             case "SelectMainDeck":
@@ -119,7 +119,7 @@ public class MakeChangeToDeckToChangeRequest extends Request {
                 player.getAllDecksOfPlayer().remove(player.getDeckToChange());
                 break;
         }
-
+        Server.getDataBaseHandler().save(player);
         response=new MakeChangeToDeckToChangeResponse(typeOfRequest,newFiled);
         return response;
     }

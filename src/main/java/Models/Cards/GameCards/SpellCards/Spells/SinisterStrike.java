@@ -15,6 +15,16 @@ import java.util.ArrayList;
 public class SinisterStrike extends Spell {
 
 
+    public SinisterStrike(){
+        super();
+        setName("SinisterStrike");
+        setClassOfCard("Rogue");
+        setMoneyCost(10);
+        setManaCost(1);
+        setRarity("common");
+    }
+
+
     @Override
     public SinisterStrike copy() {
 //        System.out.println("Copy of BookOfSpecters:))");

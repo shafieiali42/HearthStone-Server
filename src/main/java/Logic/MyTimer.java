@@ -7,7 +7,6 @@ import com.google.gson.Gson;
 import controller.controllers.GamePartController;
 import controller.response.Response;
 import controller.response.ShowTimerResponse;
-import database.dssds;
 import server.Server;
 
 import java.io.IOException;
@@ -70,7 +69,7 @@ public class MyTimer extends Thread {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        Player player = dssds.fetchPlayer(name);
+                        Player player = Server.getDataBaseHandler().fetchPlayer(name);
                         InGamePlayer whitePlayer = Server.giveInGamePlayer(name);
                         GamePartController.endTurn(whitePlayer);
 //                        Mapper.endTurn();

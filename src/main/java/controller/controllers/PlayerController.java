@@ -1,10 +1,12 @@
 package controller.controllers;
 
 import Models.Cards.CardClasses.Cards;
+import Models.Heroes.*;
 import Models.Player.ParsePlayerObjectIntoJson;
 import Models.Player.Player;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import server.Server;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -24,38 +26,38 @@ public class PlayerController {
             if (userName.equals(player.getUserName()) && passWord.equals(player.getPassWord())) {
                 validUserNameAndPassword = true;
 //                ControllerOfMainComponents.currentPlayer = player;
-//                switch (ControllerOfMainComponents.currentPlayer.getCurrentHero().getName()){
-//                    case "Mage":
-//                        Mage mage=new Mage();
-//                        ControllerOfMainComponents.currentPlayer.setMage(mage);
-//                        ControllerOfMainComponents.currentPlayer.getAvailableHeroes().add(mage);
-//                        ControllerOfMainComponents.currentPlayer.setCurrentHero(mage);
-//                        break;
-//                    case "Rogue":
-//                        Rogue rogue=new Rogue();
-//                        ControllerOfMainComponents.currentPlayer.setRogue(rogue);
-//                        ControllerOfMainComponents.currentPlayer.getAvailableHeroes().add(rogue);
-//                        ControllerOfMainComponents.currentPlayer.setCurrentHero(rogue);
-//                        break;
-//                    case "Warlock":
-//                        Warlock warlock=new Warlock();
-//                        ControllerOfMainComponents.currentPlayer.setWarlock(warlock);
-//                        ControllerOfMainComponents.currentPlayer.getAvailableHeroes().add(warlock);
-//                        ControllerOfMainComponents.currentPlayer.setCurrentHero(warlock);
-//                        break;
-//                    case "Hunter":
-//                        Hunter hunter=new Hunter();
-//                        ControllerOfMainComponents.currentPlayer.setHunter(hunter);
-//                        ControllerOfMainComponents.currentPlayer.getAvailableHeroes().add(hunter);
-//                        ControllerOfMainComponents.currentPlayer.setCurrentHero(hunter);
-//                        break;
-//                    case "Priest":
-//                        Priest priest=new Priest();
-//                        ControllerOfMainComponents.currentPlayer.setPriest(priest);
-//                        ControllerOfMainComponents.currentPlayer.getAvailableHeroes().add(priest);
-//                        ControllerOfMainComponents.currentPlayer.setCurrentHero(priest);
-//                        break;
-//                }
+                switch (player.getCurrentHero().getName()) {
+                    case "Mage":
+                        Mage mage = new Mage();
+                        player.setMage(mage);
+                        player.getAvailableHeroes().add(mage);
+                        player.setCurrentHero(mage);
+                        break;
+                    case "Rogue":
+                        Rogue rogue = new Rogue();
+                        player.setRogue(rogue);
+                        player.getAvailableHeroes().add(rogue);
+                        player.setCurrentHero(rogue);
+                        break;
+                    case "Warlock":
+                        Warlock warlock = new Warlock();
+                        player.setWarlock(warlock);
+                        player.getAvailableHeroes().add(warlock);
+                        player.setCurrentHero(warlock);
+                        break;
+                    case "Hunter":
+                        Hunter hunter = new Hunter();
+                        player.setHunter(hunter);
+                        player.getAvailableHeroes().add(hunter);
+                        player.setCurrentHero(hunter);
+                        break;
+                    case "Priest":
+                        Priest priest = new Priest();
+                        player.setPriest(priest);
+                        player.getAvailableHeroes().add(priest);
+                        player.setCurrentHero(priest);
+                        break;
+                }
 
                 ArrayList<Cards> cards = new ArrayList<>();
                 for (Cards cards1 : player.getCurrentDeck().getListOfCards()) {
@@ -69,6 +71,7 @@ public class PlayerController {
                 player.getCurrentDeck().setListOfCards(cards);
 
 
+                player.setOnline(true);
                 player.setSignInOrSignup("Signin");
                 player.setSignInOrSignup("Signin");
                 player.setLoggerOfMyPlayer();
@@ -82,16 +85,13 @@ public class PlayerController {
 
 
     public static List<Player> getAllPlayer() {
-        try {
-            Type type = new TypeToken<List<Player>>() {
-            }.getType();
-            List<Player> playerList = null;
-            playerList = new Gson().fromJson(new FileReader("MinionSpellsWeapons/AllPlayers.json"), type);
-            return playerList;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
+        //            Type type = new TypeToken<List<Player>>() {
+//            }.getType();
+//            List<Player> playerList = null;
+//            playerList = new Gson().fromJson(new FileReader("MinionSpellsWeapons/AllPlayers.json"), type);
+//            return playerList;
+        List<Player> players = Server.getDataBaseHandler().fetchAll(Player.class);
+        return players;
     }
 
     public static Player signUp(String userName, String passWord) {
@@ -108,6 +108,7 @@ public class PlayerController {
 //            ControllerOfMainComponents.currentPlayer = player;
             player.setSignInOrSignup("Signup");
             player.setSignInOrSignup("Signup");
+            player.setOnline(true);
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             Calendar cal = Calendar.getInstance();
             player.getLoggerOfMyPlayer().info("USER: " + player.getUserName());
@@ -121,21 +122,19 @@ public class PlayerController {
     }
 
     public static boolean logOut(Player player) {
-        try {
-            ParsePlayerObjectIntoJson.serializePlayer(player);
-            player.getLoggerOfMyPlayer().info("Log_out " + player.getUserName());
-            player.getLoggerOfMyPlayer().getHandlers()[0].close();
-            player = null;
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
+        player.setOnline(false);
+        Server.getDataBaseHandler().save(player);
+//            ParsePlayerObjectIntoJson.serializePlayer(player);
+        player.getLoggerOfMyPlayer().info("Log_out " + player.getUserName());
+        player.getLoggerOfMyPlayer().getHandlers()[0].close();
+        player = null;
+        return true;
     }
 
-    public static boolean deletePlayer(String userName, String password,Player player) {
+    public static boolean deletePlayer(String userName, String password, Player player) {
         if (password.equals(player.getPassWord())) {
             try {
+                player.setOnline(false);
                 File temp = new File("logs/" + "temp.txt");
                 FileReader fileReader = null;
                 fileReader = new FileReader("logs/" + player.getUserName() + ".log");

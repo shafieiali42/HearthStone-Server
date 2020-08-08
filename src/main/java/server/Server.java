@@ -7,6 +7,9 @@ import com.google.gson.Gson;
 import controller.ClientHandler;
 import controller.response.PLayGameResponse;
 import controller.response.Response;
+import database.DataBase;
+import database.DataBaseHandler;
+import database.MyPostrgeSqlDataBase;
 import jdk.net.Sockets;
 
 import java.io.IOException;
@@ -25,6 +28,7 @@ public class Server extends Thread {
     private static HashMap<Player, String> playQueue;
     private static ArrayList<Game> runningGames;
     private static HashMap<String, Socket> sockets;
+    private static DataBaseHandler dataBaseHandler=new DataBaseHandler(new MyPostrgeSqlDataBase());
 
 
     public Server(int serverPort) {
@@ -135,5 +139,13 @@ public class Server extends Thread {
 
     public static void setSockets(HashMap<String, Socket> sockets) {
         Server.sockets = sockets;
+    }
+
+    public static DataBaseHandler getDataBaseHandler() {
+        return dataBaseHandler;
+    }
+
+    public static void setDataBaseHandler(DataBaseHandler dataBaseHandler) {
+        Server.dataBaseHandler = dataBaseHandler;
     }
 }

@@ -1,9 +1,10 @@
 package controller.request;
 
 import Models.Player.Player;
+import controller.Status;
 import controller.response.Response;
 import controller.response.ShowWalletResponse;
-import database.dssds;
+import server.Server;
 
 public class ShowWalletRequest extends Request {
 
@@ -19,8 +20,11 @@ public class ShowWalletRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = dssds.fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
+        player.setPlayerStatusInGame(Status.WALLET_PAGE);
         Response response =new ShowWalletResponse(player.getMoney());
+        player.setPlayerStatusInGame(Status.BUY_PAGE);
+        Server.getDataBaseHandler().save(player);
         return response;
     }
 

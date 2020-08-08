@@ -5,7 +5,7 @@ import controller.Status;
 import controller.response.DoneCreatDeckResponse;
 import controller.response.Response;
 import controller.response.ShowJOptionPaneResponse;
-import database.dssds;
+import server.Server;
 
 public class DoneCreatDeckRequest extends Request {
 
@@ -15,7 +15,7 @@ public class DoneCreatDeckRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = dssds.fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
         Response response=null;
         if (player.getDeckToChange().getListOfCards().size() < 15) {
             response=new ShowJOptionPaneResponse("You must select at least 15 cards.");
@@ -37,6 +37,7 @@ public class DoneCreatDeckRequest extends Request {
 //                Administer.writeLog("Make new Deck");
             }
         }
+        Server.getDataBaseHandler().save(player);
         return response;
     }
 }

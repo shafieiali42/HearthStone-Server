@@ -3,14 +3,12 @@ package controller.request;
 
 import Logic.PlayLogic.Alliance;
 import Logic.PlayLogic.Game;
-import Models.Cards.CardClasses.Minion;
 import Models.Player.Player;
 import Visitors.CardVisitors.AfterSelectVisitor;
 import Visitors.PowerVisitor.HeroPowerVisitor.AfterSelectPowerVisitor;
 import controller.Status;
 import controller.controllers.GamePartController;
 import controller.response.Response;
-import database.dssds;
 import server.Server;
 
 public class MouseClickRequest extends Request {
@@ -42,7 +40,7 @@ public class MouseClickRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = dssds.fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
         Game game = Server.giveGameWithPlayer(userName);
         Response response = null;
         boolean doubleClick;
@@ -170,7 +168,7 @@ public class MouseClickRequest extends Request {
 
 
         }
-
+        Server.getDataBaseHandler().save(player);
         return response;
     }
 

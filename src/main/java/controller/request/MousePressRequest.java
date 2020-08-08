@@ -2,7 +2,6 @@ package controller.request;
 
 import Logic.PlayLogic.Alliance;
 import Logic.PlayLogic.Game;
-import Models.Cards.CardClasses.Minion;
 import Models.Player.Player;
 import Visitors.CardVisitors.AfterSelectVisitor;
 import controller.Status;
@@ -10,7 +9,6 @@ import controller.controllers.GamePartController;
 import controller.response.ChangeFirstThreeCardsResponse;
 import controller.response.DiscoverPageResponse;
 import controller.response.Response;
-import database.dssds;
 import server.Server;
 
 public class MousePressRequest extends Request {
@@ -44,7 +42,7 @@ public class MousePressRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = dssds.fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
         Game game = Server.giveGameWithPlayer(userName);
         Response response = null;
 
@@ -65,6 +63,7 @@ public class MousePressRequest extends Request {
                     GamePartController.getHandCards(game), GamePartController.getDeckCards(game),
                    null, null,null, null, alliance, game);
         }
+        Server.getDataBaseHandler().save(player);
         return response;
     }
 

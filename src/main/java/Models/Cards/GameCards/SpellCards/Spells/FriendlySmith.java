@@ -15,6 +15,16 @@ import java.util.ArrayList;
 public class FriendlySmith extends Spell {
 
 
+    public FriendlySmith(){
+        super();
+        setName("FriendlySmith");
+        setClassOfCard("Rogue");
+        setMoneyCost(20);
+        setManaCost(1);
+        setRarity("rare");
+    }
+
+
     @Override
     public FriendlySmith copy() {
 //        System.out.println("Copy of FriendlySmith:))");

@@ -4,7 +4,7 @@ import Models.Cards.CardClasses.Cards;
 import Models.Player.Player;
 import controller.response.RemoveCardFromDeckToChangeResponse;
 import controller.response.Response;
-import database.dssds;
+import server.Server;
 
 import java.util.Iterator;
 
@@ -22,7 +22,7 @@ public class RemoveCardFromDeckToChangeRequest extends Request {
 
     @Override
     public Response execute() { //todo
-        Player player = dssds.fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
         Iterator<Cards> itr = player.getDeckToChange().getListOfCards().iterator();
         while (itr.hasNext()) {
             Cards card = itr.next();
@@ -43,6 +43,7 @@ public class RemoveCardFromDeckToChangeRequest extends Request {
                 }
             }
         }
+        Server.getDataBaseHandler().save(player);
         Response response = new RemoveCardFromDeckToChangeResponse(userName, player.getDeckToChange().getUsesHashMap());
         return response;
     }

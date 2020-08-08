@@ -5,7 +5,7 @@ import controller.controllers.Administer;
 import controller.response.Response;
 import controller.response.ShowJOptionPaneResponse;
 import controller.response.TransactionResponse;
-import database.dssds;
+import server.Server;
 
 public class TransactionRequest extends Request {
 
@@ -22,7 +22,7 @@ public class TransactionRequest extends Request {
     @Override
     public Response execute() {
         Response response = null;
-        Player player = dssds.fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
         if (cardName == null) {
             response = new ShowJOptionPaneResponse("Please select a card!");
         } else {
@@ -39,6 +39,7 @@ public class TransactionRequest extends Request {
                     break;
             }
         }
+        Server.getDataBaseHandler().save(player);
         return response;
     }
 

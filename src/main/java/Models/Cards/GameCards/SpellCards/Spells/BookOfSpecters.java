@@ -15,6 +15,15 @@ import java.util.ArrayList;
 public class BookOfSpecters extends Spell {
 
 
+    public BookOfSpecters(){
+        super();
+        setName("BookOfSpecters");
+        setClassOfCard("Warlock");
+        setMoneyCost(10);
+        setManaCost(2);
+        setRarity("Epic");
+    }
+
 
     @Override
     public BookOfSpecters copy() {

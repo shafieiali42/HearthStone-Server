@@ -7,8 +7,16 @@ import javax.persistence.Entity;
 @Entity
 public class BattleAxe extends Weapon {
 
+
     public BattleAxe(){
+        super();
         setName("BattleAxe");
+        setClassOfCard("Neutral");
+        setMoneyCost(10);
+        setManaCost(1);
+        setRarity("common");
+        setAttackPower(2);
+        setDurability(2);
     }
 
 

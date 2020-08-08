@@ -10,9 +10,9 @@
 
         <!-- update the database schema on startup -->
 
-                <property name="hbm2ddl.auto">create</property>
+<!--                <property name="hbm2ddl.auto">create</property>-->
 
-<!--                <property name="hbm2ddl.auto">update</property>-->
+                <property name="hbm2ddl.auto">update</property>
 
 
 <!--        <mapping class="Models.Student"/>-->
@@ -27,8 +27,48 @@
         <mapping class="Models.Cards.GameCards.WeaponCards.BattleAxe"/>
         <mapping class="Models.Cards.GameCards.WeaponCards.Gearblade"/>
 
-<!--        <mapping class="Models.Cards.CardClasses.Minion"/>&ndash;&gt;-->
-
+        <mapping class="Models.Cards.GameCards.MinionCards.Minions.CurioCollector"/>
+        <mapping class="Models.Cards.GameCards.MinionCards.Minions.CosmicAnomaly"/>
+        <mapping class="Models.Cards.GameCards.MinionCards.Minions.CrazedAlchemist"/>
+        <mapping class="Models.Cards.GameCards.MinionCards.Minions.Dragon"/>
+        <mapping class="Models.Cards.GameCards.MinionCards.Minions.Dreadscale"/>
+        <mapping class="Models.Cards.GameCards.MinionCards.Minions.HighPriestAmet"/>
+        <mapping class="Models.Cards.GameCards.MinionCards.Minions.LeperGnome"/>
+        <mapping class="Models.Cards.GameCards.MinionCards.Minions.Locusts"/>
+        <mapping class="Models.Cards.GameCards.MinionCards.Minions.MaidenOfTheLake"/>
+        <mapping class="Models.Cards.GameCards.MinionCards.Minions.Mech"/>
+        <mapping class="Models.Cards.GameCards.MinionCards.Minions.NoviceEngineer"/>
+        <mapping class="Models.Cards.GameCards.MinionCards.Minions.RiverCrocolisk"/>
+        <mapping class="Models.Cards.GameCards.MinionCards.Minions.Sathrovarr"/>
+        <mapping class="Models.Cards.GameCards.MinionCards.Minions.SecurityRover"/>
+        <mapping class="Models.Cards.GameCards.MinionCards.Minions.StormwindKnight"/>
+        <mapping class="Models.Cards.GameCards.MinionCards.Minions.SwampKingDred"/>
+        <mapping class="Models.Cards.GameCards.MinionCards.Minions.TombWarden"/>
+        <mapping class="Models.Cards.GameCards.MinionCards.Minions.TournamentMedic"/>
+        <mapping class="Models.Cards.GameCards.MinionCards.Minions.YoungPriestess"/>
+        <mapping class="Models.Cards.GameCards.SpellCards.Spells.BloodfuryPotion"/>
+        <mapping class="Models.Cards.GameCards.SpellCards.Spells.BlessingOfTheAncients"/>
+        <mapping class="Models.Cards.GameCards.SpellCards.Spells.BiologyProject"/>
+        <mapping class="Models.Cards.GameCards.SpellCards.Spells.BookOfSpecters"/>
+        <mapping class="Models.Cards.GameCards.SpellCards.Spells.Caltrops"/>
+        <mapping class="Models.Cards.GameCards.SpellCards.Spells.FriendlySmith"/>
+        <mapping class="Models.Cards.GameCards.SpellCards.Spells.Heal"/>
+        <mapping class="Models.Cards.GameCards.SpellCards.Spells.LearnDarconic"/>
+        <mapping class="Models.Cards.GameCards.SpellCards.Spells.Moonfire"/>
+        <mapping class="Models.Cards.GameCards.SpellCards.Spells.Naturalize"/>
+        <mapping class="Models.Cards.GameCards.SpellCards.Spells.PharaohsBlessing"/>
+        <mapping class="Models.Cards.GameCards.SpellCards.Spells.Polymorph"/>
+        <mapping class="Models.Cards.GameCards.SpellCards.Spells.SinisterStrike"/>
+        <mapping class="Models.Cards.GameCards.SpellCards.Spells.Sprint"/>
+        <mapping class="Models.Cards.GameCards.SpellCards.Spells.Starfire"/>
+        <mapping class="Models.Cards.GameCards.SpellCards.Spells.StrengthInNumbers"/>
+        <mapping class="Models.Cards.GameCards.SpellCards.Spells.SwarmOfLocusts"/>
+        <mapping class="Models.Cards.GameCards.SpellCards.Spells.TreeOfLife"/>
+        <mapping class="Models.Cards.GameCards.Passives.FreePower"/>
+        <mapping class="Models.Cards.GameCards.Passives.ManaJump"/>
+        <mapping class="Models.Cards.GameCards.Passives.Nurse"/>
+        <mapping class="Models.Cards.GameCards.Passives.OffCards"/>
+        <mapping class="Models.Cards.GameCards.Passives.TwiceDraw"/>
 
     </session-factory>
 </hibernate-configuration>

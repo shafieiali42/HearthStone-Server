@@ -1,14 +1,11 @@
 package database;
 
-import Models.Cards.CardClasses.Weapon;
 import Models.Cards.GameCards.MinionCards.MinionFactory;
 import Models.Cards.GameCards.MinionCards.MinionNames;
-import Models.Cards.GameCards.MinionCards.UnoptionalMinions.CosmicAnomaly;
 import Models.Cards.GameCards.Passives.PassiveFactory;
 import Models.Cards.GameCards.Passives.PassiveNames;
 import Models.Cards.GameCards.SpellCards.SpellFactory;
 import Models.Cards.GameCards.SpellCards.SpellNames;
-import Models.Cards.GameCards.WeaponCards.BattleAxe;
 import Models.Cards.GameCards.WeaponCards.WeaponFactory;
 import Models.Cards.GameCards.WeaponCards.WeaponNames;
 
@@ -50,12 +47,10 @@ public class SaveAllCards {
     }
 
     public static void saveCards() {
-//       saveMinions();
-//       saveSpells();
-//       saveWeapons();
-//       savePassive();
-//        dataBaseHandler.save(new Student("4556",454));
-dataBaseHandler.save(new CosmicAnomaly());
+       saveMinions();
+       saveSpells();
+       saveWeapons();
+       savePassive();
     }
 
 

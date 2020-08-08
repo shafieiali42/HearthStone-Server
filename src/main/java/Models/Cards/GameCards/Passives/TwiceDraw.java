@@ -13,6 +13,10 @@ import java.util.ArrayList;
 @Entity
 public class TwiceDraw extends Passive {
 
+    public TwiceDraw() {
+        setName("TwiceDraw");
+    }
+
 
     @Override
     public void accept(PassiveVisitor passiveVisitor, InGamePlayer player, ArrayList<Minion> friendlyBattleGround,

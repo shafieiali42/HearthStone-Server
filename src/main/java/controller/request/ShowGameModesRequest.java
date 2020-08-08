@@ -5,7 +5,7 @@ import Models.Player.Player;
 import controller.response.Response;
 import controller.response.ShowGameModesResponse;
 import controller.response.ShowJOptionPaneResponse;
-import database.dssds;
+import server.Server;
 
 public class ShowGameModesRequest extends Request {
 
@@ -19,13 +19,14 @@ public class ShowGameModesRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = dssds.fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
         Response response=null;
         if (player.getCurrentDeck() == null) {
             response=new ShowJOptionPaneResponse("First you should select your deck");
         } else {
             response = new ShowGameModesResponse(userName, Game.getGameModes());
         }
+        Server.getDataBaseHandler().save(player);
         return response;
     }
 

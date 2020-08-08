@@ -1,7 +1,7 @@
 package Models.Cards.GameCards.MinionCards;
 
 import Models.Cards.CardClasses.Minion;
-import Models.Cards.GameCards.MinionCards.UnoptionalMinions.*;
+import Models.Cards.GameCards.MinionCards.Minions.*;
 
 public class MinionFactory {
 

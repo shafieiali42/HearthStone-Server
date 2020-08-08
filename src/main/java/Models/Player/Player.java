@@ -56,6 +56,8 @@ public class Player {
     private Status playerStatusInGame;
     @Expose(serialize = true, deserialize = true)
     private Deck deckToChange;
+    @Expose(serialize = true, deserialize = true)
+    private boolean online;
 
     public Player(String userName, String passWord)  {
         this.userName = userName;
@@ -238,5 +240,13 @@ public class Player {
 
     public void setDeckToChange(Deck deckToChange) {
         this.deckToChange = deckToChange;
+    }
+
+    public boolean isOnline() {
+        return online;
+    }
+
+    public void setOnline(boolean online) {
+        this.online = online;
     }
 }

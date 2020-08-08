@@ -7,6 +7,20 @@ import javax.persistence.Entity;
 @Entity
 public class Gearblade extends Weapon {
 
+
+    public Gearblade(){
+        super();
+        setName("Gearblade");
+        setClassOfCard("Neutral");
+        setMoneyCost(10);
+        setManaCost(2);
+        setRarity("");
+        setAttackPower(2);
+        setDurability(3);
+    }
+
+
+
     @Override
     public Gearblade copy() {
 //        System.out.println("Copy of Gearblade:))");

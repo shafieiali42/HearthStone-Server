@@ -5,7 +5,7 @@ import Models.Player.Player;
 import controller.controllers.Administer;
 import controller.response.Response;
 import controller.response.ShowDeckNumberResponse;
-import database.dssds;
+import server.Server;
 
 public class ShowDeckNumberRequest extends Request {
 
@@ -20,7 +20,7 @@ public class ShowDeckNumberRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = dssds.fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
         Administer.sortDecksOfPlayer(player);
         Deck deck = player.getAllDecksOfPlayer().get(number - 1);
         String winsPerPlay;
@@ -34,6 +34,8 @@ public class ShowDeckNumberRequest extends Request {
         Response response = new ShowDeckNumberResponse(deck.getName(), deck.getHeroName(),
                 deck.getNumberOfWins() + "",deck.getNumberOfUses() + "",
                 deck.getMostUsedCard().getName(), deck.getManaAvg() + "", winsPerPlay + "");
+
+        Server.getDataBaseHandler().save(player);
         return response;
     }
 

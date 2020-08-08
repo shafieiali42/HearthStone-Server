@@ -13,6 +13,9 @@ import java.util.ArrayList;
 @Entity
 public class OffCards extends Passive {
 
+    public OffCards() {
+        setName("OffCards");
+    }
 
     @Override
     public void accept(PassiveVisitor passiveVisitor, InGamePlayer player, ArrayList<Minion> friendlyBattleGround,

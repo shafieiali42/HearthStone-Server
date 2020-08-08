@@ -7,7 +7,6 @@ import com.google.gson.Gson;
 import controller.Status;
 import controller.controllers.GamePartController;
 import controller.response.*;
-import database.dssds;
 import server.Server;
 
 import java.io.IOException;
@@ -32,7 +31,7 @@ public class MouseReleasedRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = dssds.fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
         Game game = Server.giveGameWithPlayer(userName);
         InGamePlayer whitePlayer=Server.giveInGamePlayer(userName);
         Response response = null;
@@ -113,6 +112,7 @@ public class MouseReleasedRequest extends Request {
                 response = new ShowJOptionPaneResponse("It's illegal to have more than 7 cards in the battleGround.");
             }
         }
+        Server.getDataBaseHandler().save(player);
         return response;
     }
 

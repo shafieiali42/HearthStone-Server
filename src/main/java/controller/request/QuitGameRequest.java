@@ -4,7 +4,6 @@ import Logic.PlayLogic.Game;
 import Models.Player.Player;
 import controller.response.QuitGameResponse;
 import controller.response.Response;
-import database.dssds;
 import server.Server;
 
 public class QuitGameRequest extends Request {
@@ -19,11 +18,12 @@ public class QuitGameRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = dssds.fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
         Response response=null;
         Game game = Server.giveGameWithPlayer(userName);
         Server.getRunningGames().remove(game);
         response=new QuitGameResponse();
+        Server.getDataBaseHandler().save(player);
         return response;
     }
 

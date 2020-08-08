@@ -14,6 +14,14 @@ import java.util.ArrayList;
 @Entity
 public class BloodfuryPotion extends Spell {
 
+    public BloodfuryPotion(){
+        super();
+        setName("BloodfuryPotion");
+        setClassOfCard("Warlock");
+        setMoneyCost(20);
+        setManaCost(3);
+        setRarity("rare");
+    }
 
 
     @Override

@@ -6,7 +6,6 @@ import controller.Status;
 import controller.controllers.GamePartController;
 import controller.response.Response;
 import controller.response.ShowPlayPanelResponse;
-import database.dssds;
 import server.Server;
 
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ public class OkButtonOnFirstThreeCardsPageRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = dssds.fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
         Response response = null;
         player.setPlayerStatusInGame(Status.PLAY_PAGE);
         InGamePlayer whitePlayer = Server.giveInGamePlayer(userName);
@@ -41,6 +40,7 @@ public class OkButtonOnFirstThreeCardsPageRequest extends Request {
                     blackBattleGroundCards, whitePlayer.getHero().getName(), blackPlayer.getHero().getName(),
                     whitePlayer.getCurrentWeapon().getName(), blackPlayer.getCurrentWeapon().getName(),"StartGame");
         }
+        Server.getDataBaseHandler().save(player);
         return response;
     }
 

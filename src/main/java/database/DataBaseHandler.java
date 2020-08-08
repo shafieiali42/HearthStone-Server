@@ -1,5 +1,7 @@
 package database;
 
+import Models.Player.Player;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -31,6 +33,15 @@ public class DataBaseHandler {
         return dataBase.fetchAll(entity);
     }
 
+    public Player fetchPlayer(String userName) {
+        List<Player> players = fetchAll(Player.class);
+        for (Player player : players) {
+            if (player.getUserName().equalsIgnoreCase(userName)) {
+                return player;
+            }
+        }
+        return null;
+    }
 
 
 }

@@ -8,6 +8,18 @@ import javax.persistence.Entity;
 public class Heal extends Spell {
 
 
+    public Heal(){
+        super();
+        setName("Heal");
+        setClassOfCard("Priest");
+        setMoneyCost(10);
+        setManaCost(2);
+        setRarity("Epic");
+    }
+
+
+
+
     @Override
     public Heal copy() {
 //        System.out.println("Copy of BookOfSpecters:))");

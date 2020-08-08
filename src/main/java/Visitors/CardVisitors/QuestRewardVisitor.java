@@ -4,7 +4,7 @@ import Logic.PlayLogic.Alliance;
 import Logic.PlayLogic.Game;
 import Models.Cards.CardClasses.Cards;
 import Models.Cards.CardClasses.Minion;
-import Models.Cards.GameCards.MinionCards.UnoptionalMinions.*;
+import Models.Cards.GameCards.MinionCards.Minions.*;
 import Models.Cards.GameCards.SpellCards.Spells.*;
 import Models.Cards.GameCards.WeaponCards.Ashbringer;
 import Models.Cards.GameCards.WeaponCards.BattleAxe;
@@ -143,7 +143,13 @@ public class QuestRewardVisitor implements Visitor {
                         strengthInNumbers.setManaSpendForQuest(strengthInNumbers.getManaSpendForQuest() + playingCard.getManaCost());
                     }
                     if (strengthInNumbers.getManaSpendForQuest() >= 10) {
-                        Minion minion = (Minion) strengthInNumbers.getReward();
+                        Minion minion=null;
+                        if (strengthInNumbers.getReward()!=null){
+                             minion = (Minion) strengthInNumbers.getReward();
+                        }else {
+                             minion=(Minion)deckCards.get(0);
+                        }
+
                         battleGround.add(minion.copy());
                         deckCards.remove(minion);
                     }

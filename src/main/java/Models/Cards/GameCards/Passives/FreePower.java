@@ -13,6 +13,10 @@ import java.util.ArrayList;
 @Entity
 public class FreePower extends Passive {
 
+    public FreePower() {
+        setName("FreePower");
+    }
+
     @Override
     public void accept(PassiveVisitor passiveVisitor, InGamePlayer player, ArrayList<Minion> friendlyBattleGround,
                        ArrayList<Cards> friendlyHandCards, ArrayList<Cards> friendlyDeckCards, Game game) {

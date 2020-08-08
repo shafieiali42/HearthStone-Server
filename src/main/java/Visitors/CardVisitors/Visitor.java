@@ -4,7 +4,7 @@ import Logic.PlayLogic.Alliance;
 import Logic.PlayLogic.Game;
 import Models.Cards.CardClasses.Cards;
 import Models.Cards.CardClasses.Minion;
-import Models.Cards.GameCards.MinionCards.UnoptionalMinions.*;
+import Models.Cards.GameCards.MinionCards.Minions.*;
 import Models.Cards.GameCards.SpellCards.Spells.*;
 import Models.Cards.GameCards.WeaponCards.Ashbringer;
 import Models.Cards.GameCards.WeaponCards.BattleAxe;

@@ -4,7 +4,7 @@ import Models.Player.Player;
 import controller.controllers.PlayerController;
 import controller.response.DeletePlayerResponse;
 import controller.response.Response;
-import database.dssds;
+import server.Server;
 
 public class DeletePlayerRequest extends Request {
 
@@ -20,8 +20,9 @@ public class DeletePlayerRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player= dssds.fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
         Response response=new DeletePlayerResponse(PlayerController.deletePlayer(userName,password,player));
+//        Server.getDataBaseHandler().save(player);
         return response;
     }
 

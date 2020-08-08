@@ -17,35 +17,41 @@ public abstract class Passive implements PassiveVisitable {
     private String name;
     @Column
     private String description;
-    public static final int NUMBER_OF_PASSIVES=5;
-    static ArrayList<Passive> passives=new ArrayList<Passive>();
+    public static final int NUMBER_OF_PASSIVES = 5;
+    static ArrayList<Passive> passives = new ArrayList<Passive>();
 
+    public Passive() {
 
+    }
 
     public static ArrayList<Passive> getPassives() {
         return passives;
     }
+
     public static void setPassives(ArrayList<Passive> passives) {
         Passive.passives = passives;
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
 
     @Override
-    public String toString(){
-        return "["+"Name: "+this.getName()+" Description: "+this.description+" ]";
+    public String toString() {
+        return "[" + "Name: " + this.getName() + " Description: " + this.description + " ]";
     }
-
 
 
     @Override

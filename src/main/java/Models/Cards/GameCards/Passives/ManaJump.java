@@ -14,7 +14,13 @@ import java.util.ArrayList;
 @Entity
 public class ManaJump extends Passive {
 
-    @Override
+    public ManaJump() {
+        setName("ManaJump");
+    }
+
+
+
+        @Override
     public void accept(PassiveVisitor passiveVisitor, InGamePlayer player, ArrayList<Minion> friendlyBattleGround,
                        ArrayList<Cards> friendlyHandCards, ArrayList<Cards> friendlyDeckCards, Game game) {
 

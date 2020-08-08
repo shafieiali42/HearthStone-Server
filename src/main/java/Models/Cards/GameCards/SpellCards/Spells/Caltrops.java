@@ -15,6 +15,17 @@ import java.util.ArrayList;
 public class Caltrops extends Spell {
 
 
+
+    public Caltrops(){
+        super();
+        setName("Caltrops");
+        setClassOfCard("Hunter");
+        setMoneyCost(10);
+        setManaCost(0);
+        setRarity("Epic");
+    }
+
+
     @Override
     public Caltrops copy() {
 //        System.out.println("Copy of BookOfSpecters:))");

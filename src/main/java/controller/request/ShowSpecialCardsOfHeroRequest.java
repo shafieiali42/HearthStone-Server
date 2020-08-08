@@ -6,7 +6,7 @@ import controller.controllers.Administer;
 import controller.controllers.CollectionController;
 import controller.response.Response;
 import controller.response.ShowSpecificCardsResponse;
-import database.dssds;
+import server.Server;
 
 import java.util.ArrayList;
 
@@ -23,13 +23,14 @@ public class ShowSpecialCardsOfHeroRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = dssds.fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
         ArrayList<Cards> cards;
         cards = CollectionController.getCardsWithSpecificGroup(player.getDeckToChange().getHero().getName());
         ArrayList<String> names = Administer.giveListOfCardsNames(cards);
         Response response = new ShowSpecificCardsResponse(names,
                 "SpecialCardsInCollections", "cardPanelOfDeckPage");
 
+        Server.getDataBaseHandler().save(player);
         return response;
     }
 

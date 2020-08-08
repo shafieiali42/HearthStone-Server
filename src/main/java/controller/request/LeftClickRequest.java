@@ -4,7 +4,7 @@ import Models.Player.Player;
 import controller.controllers.Administer;
 import controller.Status;
 import controller.response.*;
-import database.dssds;
+import server.Server;
 
 public class LeftClickRequest extends Request {
 
@@ -23,7 +23,7 @@ public class LeftClickRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = dssds.fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
         Response response = null;
         switch (player.getPlayerStatusInGame()) {
 
@@ -48,6 +48,7 @@ public class LeftClickRequest extends Request {
 
 
         }
+        Server.getDataBaseHandler().save(player);
         return response;
     }
 

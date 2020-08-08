@@ -15,6 +15,15 @@ import java.util.ArrayList;
 public class TreeOfLife extends Spell {
 
 
+    public TreeOfLife(){
+        super();
+        setName("TreeOfLife");
+        setClassOfCard("Neutral");
+        setMoneyCost(10);
+        setManaCost(9);
+        setRarity("common");
+    }
+
     @Override
     public TreeOfLife copy() {
 //        System.out.println("Copy of BookOfSpecters:))");

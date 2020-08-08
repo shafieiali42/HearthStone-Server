@@ -7,6 +7,19 @@ import javax.persistence.Entity;
 @Entity
 public class Ashbringer extends Weapon {
 
+
+    public Ashbringer(){
+        super();
+        setName("Ashbringer");
+        setClassOfCard("Neutral");
+        setMoneyCost(10);
+        setManaCost(5);
+        setRarity("");
+        setAttackPower(5);
+        setDurability(3);
+    }
+
+
     @Override
     public Ashbringer copy() {
 //        System.out.println("Copy of Dreadscale:))");

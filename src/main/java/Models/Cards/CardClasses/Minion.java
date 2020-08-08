@@ -13,6 +13,10 @@ public abstract class Minion extends Cards {
     public static final int NUMBER_OF_MINIONS = 16;
     private static ArrayList<Minion> minions = new ArrayList<Minion>();
 
+    public static void setMinions(ArrayList<Minion> minions) {
+        Minion.minions = minions;
+    }
+
     @Column
     private int attackPower;
     @Column

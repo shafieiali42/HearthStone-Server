@@ -15,8 +15,13 @@ import java.util.ArrayList;
 public class LearnDarconic extends Spell {
 
 
-
     public LearnDarconic() {
+        setType("Spell_QuestAndReward");
+        setName("LearnDarconic");
+        setClassOfCard("Priest");
+        setMoneyCost(10);
+        setManaCost(1);
+        setRarity("common");
         setManaNeededForQuest(8);
     }
 
@@ -38,21 +43,14 @@ public class LearnDarconic extends Spell {
     }
 
 
-
-
-
-
-
-
     @Override
     public void accept(Visitor visitor, ArrayList<Minion> battleGround,
                        ArrayList<Cards> handsCards, ArrayList<Cards> deckCards,
                        Minion target, Heroes targetHero, Minion summonedMinion, Cards playingCard, Alliance alliance, Game game) {
 
-        visitor.visit(this,battleGround,playingCard, game);
+        visitor.visit(this, battleGround, playingCard, game);
 
     }
-
 
 
 }

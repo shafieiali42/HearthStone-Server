@@ -6,6 +6,10 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.service.ServiceRegistry;
 
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.io.Serializable;
 import java.util.List;
 
@@ -36,7 +40,7 @@ public class MyPostrgeSqlDataBase implements DataBase {
     public void save(Object o) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        session.save(o);
+        session.saveOrUpdate(o);
         session.getTransaction().commit();
         session.close();
     }
@@ -70,6 +74,14 @@ public class MyPostrgeSqlDataBase implements DataBase {
 
     @Override
     public <E> List<E> fetchAll(Class<E> entity) {
-        return null;
+        Session session = sessionFactory.openSession();
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<E> criteriaQuery = criteriaBuilder.createQuery(entity);
+        Root<E> eRoot = criteriaQuery.from(entity);
+        criteriaQuery.select(eRoot);
+        TypedQuery<E> typedQuery = session.createQuery(criteriaQuery);
+        List<E> list = typedQuery.getResultList();
+        session.close();
+        return list;
     }
 }

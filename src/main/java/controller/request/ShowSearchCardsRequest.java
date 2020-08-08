@@ -5,7 +5,7 @@ import Models.Player.Player;
 import controller.Status;
 import controller.response.Response;
 import controller.response.ShowSpecificCardsResponse;
-import database.dssds;
+import server.Server;
 
 import java.util.ArrayList;
 
@@ -22,7 +22,7 @@ public class ShowSearchCardsRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = dssds.fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
         Response response = null;
         ArrayList<String> foundCards = new ArrayList<String>();
         for (Cards card : Cards.getAllCards()) {
@@ -39,6 +39,7 @@ public class ShowSearchCardsRequest extends Request {
                     "cardPanelOfDeckPage");
 
         }
+        Server.getDataBaseHandler().save(player);
         return response;
     }
 

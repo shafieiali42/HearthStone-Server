@@ -16,7 +16,12 @@ public class Sprint extends Spell {
 
 
     public Sprint(){
-
+        super();
+        setName("Sprint");
+        setClassOfCard("Neutral");
+        setMoneyCost(10);
+        setManaCost(4);
+        setRarity("common");
     }
 
 

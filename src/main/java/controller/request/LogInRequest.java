@@ -4,6 +4,7 @@ import Models.Player.Player;
 import controller.controllers.PlayerController;
 import controller.response.LogInResponse;
 import controller.response.Response;
+import server.Server;
 
 public class LogInRequest extends Request {
 
@@ -31,6 +32,7 @@ public class LogInRequest extends Request {
             }else {
                 response =new LogInResponse(true,player.getUserName());
             }
+            Server.getDataBaseHandler().save(player);
         } else if (mode.equalsIgnoreCase("SignUp")) {
             Player player=PlayerController.signUp(userName,password);
             if (player==null){
@@ -38,6 +40,7 @@ public class LogInRequest extends Request {
             }else {
                 response =new LogInResponse(true,player.getUserName());
             }
+            Server.getDataBaseHandler().save(player);
         }
         return response;
     }

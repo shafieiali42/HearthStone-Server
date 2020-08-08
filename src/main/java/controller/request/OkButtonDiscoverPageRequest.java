@@ -4,7 +4,7 @@ import Models.Player.Player;
 import controller.Status;
 import controller.response.GoToPageResponse;
 import controller.response.Response;
-import database.dssds;
+import server.Server;
 
 public class OkButtonDiscoverPageRequest extends Request {
 
@@ -16,10 +16,11 @@ public class OkButtonDiscoverPageRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = dssds.fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
         Response response = null;
         player.setPlayerStatusInGame(Status.PLAY_PAGE);
         response = new GoToPageResponse("GamePage");
+        Server.getDataBaseHandler().save(player);
         return response;
     }
 

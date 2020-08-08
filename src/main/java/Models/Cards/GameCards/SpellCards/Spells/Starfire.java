@@ -15,6 +15,16 @@ import java.util.ArrayList;
 public class Starfire extends Spell {
 
 
+    public Starfire(){
+        super();
+        setName("Starfire");
+        setClassOfCard("Neutral");
+        setMoneyCost(30);
+        setManaCost(6);
+        setRarity("epic");
+    }
+
+
     @Override
     public Starfire copy() {
 //        System.out.println("Copy of BookOfSpecters:))");

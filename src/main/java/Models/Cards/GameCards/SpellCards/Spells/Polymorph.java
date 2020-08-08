@@ -16,6 +16,16 @@ import java.util.ArrayList;
 public class Polymorph extends Spell {
 
 
+    public Polymorph(){
+        super();
+        setName("Polymorph");
+        setClassOfCard("Mage");
+        setMoneyCost(10);
+        setManaCost(1);
+        setRarity("common");
+    }
+
+
     @Override
     public Polymorph copy() {
 //        System.out.println("Copy of Polymorph:))");

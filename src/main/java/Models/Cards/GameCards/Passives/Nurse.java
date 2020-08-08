@@ -14,6 +14,10 @@ import java.util.ArrayList;
 public class Nurse extends Passive {
 
 
+    public Nurse() {
+        setName("Nurse");
+    }
+
     @Override
     public void accept(PassiveVisitor passiveVisitor, InGamePlayer player, ArrayList<Minion> friendlyBattleGround,
                        ArrayList<Cards> friendlyHandCards, ArrayList<Cards> friendlyDeckCards, Game game) {

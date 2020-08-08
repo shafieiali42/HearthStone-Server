@@ -4,7 +4,7 @@ import Models.Player.Player;
 import controller.Status;
 import controller.response.GoToPageResponse;
 import controller.response.Response;
-import database.dssds;
+import server.Server;
 
 import javax.swing.*;
 
@@ -21,7 +21,7 @@ public class GoBackFromCollectionPages extends Request {
 
     @Override
     public Response execute() {
-        Player player = dssds.fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
         Response response = null;
         if (player.getPlayerStatusInGame().equals(Status.COLLECTIONS_PAGE)) {
             response = new GoToPageResponse("MainMenuPageNormal");
@@ -40,6 +40,7 @@ public class GoBackFromCollectionPages extends Request {
 //                ClientMain.getMyMainFrame().setContentPane(new MainMenuPage());
             }
         }
+        Server.getDataBaseHandler().save(player);
         return response;
     }
 

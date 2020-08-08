@@ -9,12 +9,14 @@ import Models.Heroes.Heroes;
 import Visitors.CardVisitors.Visitor;
 
 import javax.persistence.Entity;
+import javax.persistence.Transient;
 import java.util.ArrayList;
 
 @Entity
 public class StrengthInNumbers extends Spell {
 
 
+    @Transient
     private Cards reward;
 
     public Cards getReward() {
@@ -26,6 +28,12 @@ public class StrengthInNumbers extends Spell {
     }
 
     public StrengthInNumbers() {
+        setType("Spell_QuestAndReward");
+        setName("StrengthInNumbers");
+        setClassOfCard("Neutral");
+        setMoneyCost(10);
+        setManaCost(1);
+        setRarity("common");
         setManaNeededForQuest(10);
     }
 

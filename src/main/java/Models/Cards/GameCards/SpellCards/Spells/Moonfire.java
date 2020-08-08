@@ -14,6 +14,14 @@ import java.util.ArrayList;
 @Entity
 public class Moonfire extends Spell {
 
+    public Moonfire(){
+        super();
+        setName("Moonfire");
+        setClassOfCard("Neutral");
+        setMoneyCost(20);
+        setManaCost(0);
+        setRarity("rare");
+    }
 
     @Override
     public Moonfire copy() {

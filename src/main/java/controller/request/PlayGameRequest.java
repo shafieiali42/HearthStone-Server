@@ -4,9 +4,10 @@ import Logic.PlayLogic.Game;
 import Models.Player.InGamePlayer;
 import Models.Player.Player;
 import com.google.gson.Gson;
+import controller.Status;
+import controller.response.GoToPageResponse;
 import controller.response.PLayGameResponse;
 import controller.response.Response;
-import database.dssds;
 import server.Server;
 
 import java.io.IOException;
@@ -28,9 +29,20 @@ public class PlayGameRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = dssds.fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
         Response response = null;
         ArrayList<Player> thisGameModePlayer = new ArrayList<>();
+
+        if (player.getCurrentDeck()==null){
+            player.setPlayerStatusInGame(Status.COLLECTION_PAGE_FROM_PLAY);
+            response =new GoToPageResponse("CollectionPage");
+            Server.getDataBaseHandler().save(player);
+            return response;
+        }
+
+        player.setPlayerStatusInGame(Status.PLAY_PAGE); //todoooo
+
+
         for (Player player1 : Server.getPlayQueue().keySet()) {
             if (Server.getPlayQueue().get(player1).equalsIgnoreCase(gameMode)) {
                 thisGameModePlayer.add(player1);
@@ -69,6 +81,7 @@ public class PlayGameRequest extends Request {
         } else {
             response = new PLayGameResponse(false, userName, null, null,null);
         }
+        Server.getDataBaseHandler().save(player);
         return response;
     }
 
