@@ -15,7 +15,7 @@ public class ShowSearchCardsRequest extends Request {
     private String searchTextField;
 
 
-    public ShowSearchCardsRequest(String userName, String searchTextField) {
+    public ShowSearchCardsRequest(String sendersToken,String userName, String searchTextField) {
         this.userName = userName;
         this.searchTextField = searchTextField;
     }
@@ -31,11 +31,11 @@ public class ShowSearchCardsRequest extends Request {
             }
         }
         if (player.getPlayerStatusInGame().equals(Status.COLLECTIONS_PAGE)) {
-            response = new ShowSpecificCardsResponse(foundCards, "Search",
+            response = new ShowSpecificCardsResponse(foundCards,"Search",
                     "cardPanelOfCollectionPage");
         } else if (player.getPlayerStatusInGame().equals(Status.CHANGE_DECK) ||
                 player.getPlayerStatusInGame().equals(Status.MAKE_DECK)) {
-            response = new ShowSpecificCardsResponse(foundCards, "Search",
+            response = new ShowSpecificCardsResponse(foundCards,"Search",
                     "cardPanelOfDeckPage");
 
         }

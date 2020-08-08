@@ -9,6 +9,7 @@ public class ChangeVolumeRequest extends Request {
     private String userName;
 
     public ChangeVolumeRequest(String sendersToken, String status, String userName) {
+        setUserName(userName);
         setRequestType("ChangeVolumeRequest");
         setRequestSendersToken(sendersToken);
         this.status = status;

@@ -143,7 +143,7 @@ public class ActionVisitor implements Visitor {
         game.getCurrentPlayer().getPlayer().setPlayerStatusInGame(Status.DISCOVER_THREE_WEAPONS);
         ArrayList<String> weaponsNames = GamePartController.setThreeWeapon();
         Server.sendResponse(game.getCurrentPlayer().getPlayer().getUserName(),
-                new ShowDiscoverPageResponse(weaponsNames.get(0),weaponsNames.get(1),weaponsNames.get(2)));
+                new ShowDiscoverPageResponse(game.getCurrentPlayer().getPlayer().getUserName(),weaponsNames.get(1),weaponsNames.get(2)));
 //        GamePartController.setDiscoverPageContentPane();
     }
 

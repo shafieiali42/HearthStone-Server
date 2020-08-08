@@ -12,7 +12,7 @@ public class ShowDeckButtonsRequest extends Request {
 
     private String userName;
 
-    public ShowDeckButtonsRequest(String userName) {
+    public ShowDeckButtonsRequest(String sendersToken,String userName) {
         this.userName = userName;
     }
 

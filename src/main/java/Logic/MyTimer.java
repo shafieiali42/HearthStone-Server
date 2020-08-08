@@ -40,7 +40,7 @@ public class MyTimer extends Thread {
 //                    System.out.println(secondPassed);
                     if (secondPassed >= 40 && secondPassed < 60) {
                         try {
-                            Response responseForOtherPlayer = new ShowTimerResponse(false, secondPassed);
+                            Response responseForOtherPlayer = new ShowTimerResponse(false,secondPassed);
                             String message = new Gson().toJson(responseForOtherPlayer);
                             PrintWriter printer;
                             printer = new PrintWriter(Server.giveSocketWithUserName(name).getOutputStream());
@@ -58,7 +58,7 @@ public class MyTimer extends Thread {
 
                     if (secondPassed == 60) {
                         try {
-                            Response responseForOtherPlayer = new ShowTimerResponse(true, secondPassed);
+                            Response responseForOtherPlayer = new ShowTimerResponse(true,secondPassed);
                             String message = new Gson().toJson(responseForOtherPlayer);
                             PrintWriter printer;
                             printer = new PrintWriter(Server.giveSocketWithUserName(name).getOutputStream());

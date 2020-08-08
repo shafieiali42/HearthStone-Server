@@ -11,7 +11,7 @@ public class SetAllLittleCardsPanelsRequest extends Request {
 
     private String userName;
 
-    public SetAllLittleCardsPanelsRequest(String userName) {
+    public SetAllLittleCardsPanelsRequest(String sendersToken,String userName) {
         this.userName = userName;
     }
 

@@ -31,7 +31,7 @@ public class ShowPlayPanelRequest extends Request {
         if (!Server.giveGameWithPlayer(userName).getGameMode().equalsIgnoreCase("OfflineGame")) {
             ArrayList<String> whiteHandsCards = GamePartController.giveNameOfCardsList(whitePlayer.getHandsCards());
             ArrayList<String> whiteBattleGroundCards = GamePartController.giveNameOfCardsList(whitePlayer.getBattleGroundCards());
-            response = new ShowPlayPanelResponse(userName, whiteHandsCards, null, whiteBattleGroundCards,
+            response = new ShowPlayPanelResponse(userName,whiteHandsCards, null, whiteBattleGroundCards,
                     null, whitePlayer.getHero().getName(), blackPlayer.getHero().getName(),
                     whitePlayer.getCurrentWeapon().getName(), blackPlayer.getCurrentWeapon().getName(), state);
         } else {
@@ -39,7 +39,7 @@ public class ShowPlayPanelRequest extends Request {
             ArrayList<String> whiteBattleGroundCards = GamePartController.giveNameOfCardsList(whitePlayer.getBattleGroundCards());
             ArrayList<String> blackHandsCards = GamePartController.giveNameOfCardsList(blackPlayer.getHandsCards());
             ArrayList<String> blackBattleGroundCards = GamePartController.giveNameOfCardsList(blackPlayer.getBattleGroundCards());
-            response = new ShowPlayPanelResponse(userName, whiteHandsCards, blackHandsCards, whiteBattleGroundCards,
+            response = new ShowPlayPanelResponse(userName,whiteHandsCards, blackHandsCards, whiteBattleGroundCards,
                     blackBattleGroundCards, whitePlayer.getHero().getName(), blackPlayer.getHero().getName(),
                     whitePlayer.getCurrentWeapon().getName(), blackPlayer.getCurrentWeapon().getName(), state);
         }

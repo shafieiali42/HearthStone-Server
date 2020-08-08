@@ -13,7 +13,10 @@ public class EndTurnRequest extends Request {
     private String userName;
 
 
-    public EndTurnRequest(String userName) {
+    public EndTurnRequest(String sendersToken,String userName) {
+        setUserName(userName);
+        setRequestType("DoneCreatDeckRequest");
+        setRequestSendersToken(sendersToken);
         this.userName = userName;
     }
 

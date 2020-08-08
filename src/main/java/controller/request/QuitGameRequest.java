@@ -12,7 +12,7 @@ public class QuitGameRequest extends Request {
     private String userName;
 
 
-    public QuitGameRequest(String userName) {
+    public QuitGameRequest(String sendersToken,String userName) {
         this.userName = userName;
     }
 

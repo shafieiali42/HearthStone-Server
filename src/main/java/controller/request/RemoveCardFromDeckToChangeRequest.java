@@ -15,7 +15,7 @@ public class RemoveCardFromDeckToChangeRequest extends Request {
     private String cardName;
 
 
-    public RemoveCardFromDeckToChangeRequest(String userName, String cardName) {
+    public RemoveCardFromDeckToChangeRequest(String sendersToken,String userName, String cardName) {
         this.userName = userName;
         this.cardName = cardName;
     }
@@ -44,7 +44,7 @@ public class RemoveCardFromDeckToChangeRequest extends Request {
             }
         }
         Server.getDataBaseHandler().save(player);
-        Response response = new RemoveCardFromDeckToChangeResponse(userName, player.getDeckToChange().getUsesHashMap());
+        Response response = new RemoveCardFromDeckToChangeResponse(userName,player.getDeckToChange().getUsesHashMap());
         return response;
     }
 

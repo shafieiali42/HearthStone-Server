@@ -15,7 +15,7 @@ public class MakeNewDeckRequest extends Request {
     private String heroName;
 
 
-    public MakeNewDeckRequest(String userName, String deckName, String heroName) {
+    public MakeNewDeckRequest(String sendersToken,String userName, String deckName, String heroName) {
         this.userName = userName;
         this.deckName = deckName;
         this.heroName = heroName;

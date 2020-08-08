@@ -14,7 +14,7 @@ public class ShowCardsFilteredByManaRequest extends Request {
     private String userName;
     private int mana;
 
-    public ShowCardsFilteredByManaRequest(String userName, int mana) {
+    public ShowCardsFilteredByManaRequest(String sendersToken,String userName, int mana) {
         this.userName = userName;
         this.mana = mana;
     }
@@ -30,11 +30,11 @@ public class ShowCardsFilteredByManaRequest extends Request {
             }
         }
         if (player.getPlayerStatusInGame().equals(Status.COLLECTIONS_PAGE)) {
-            response = new ShowSpecificCardsResponse(filteredByManaCards, "Mana", "cardPanelOfCollectionPage");
+            response = new ShowSpecificCardsResponse(filteredByManaCards,"Mana", "cardPanelOfCollectionPage");
 
         } else if (player.getPlayerStatusInGame().equals(Status.MAKE_DECK) ||
                 player.getPlayerStatusInGame().equals(Status.CHANGE_DECK)) {
-            response = new ShowSpecificCardsResponse(filteredByManaCards, "Mana", "cardPanelOfDeckPage");
+            response = new ShowSpecificCardsResponse(filteredByManaCards,"Mana", "cardPanelOfDeckPage");
         }
 //        ControllerOfMainComponents.currentPlayer.getLoggerOfMyPlayer().info("Show cards with mana: " + mana);
         Server.getDataBaseHandler().save(player);

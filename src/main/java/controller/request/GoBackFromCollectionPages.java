@@ -14,7 +14,7 @@ public class GoBackFromCollectionPages extends Request {
     private String userName;
 
 
-    public GoBackFromCollectionPages(String userName) {
+    public GoBackFromCollectionPages(String sendersToken,String userName) {
         this.userName = userName;
     }
 

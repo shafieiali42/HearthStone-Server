@@ -10,7 +10,7 @@ public class OkButtonDiscoverPageRequest extends Request {
 
     private String userName;
 
-    public OkButtonDiscoverPageRequest(String userName) {
+    public OkButtonDiscoverPageRequest(String sendersToken,String userName) {
         this.userName = userName;
     }
 

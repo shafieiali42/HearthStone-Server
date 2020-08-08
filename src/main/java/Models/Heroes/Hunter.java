@@ -9,11 +9,14 @@ import Models.Player.InGamePlayer;
 import Visitors.PowerVisitor.SpVisitor.SpVisitor;
 
 
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 import java.util.ArrayList;
 
+@Entity
 public class Hunter extends Heroes {
 
-
+    @Transient
     private static final ArrayList<Cards> specialCardsOfHunter = new ArrayList<Cards>();
 
 

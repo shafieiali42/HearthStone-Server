@@ -7,7 +7,7 @@ import com.google.gson.annotations.Expose;
 import controller.Status;
 import utility.Log.LoggerOfProject;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Logger;
@@ -16,48 +16,57 @@ import java.util.logging.Logger;
 public class Player {
 
 
-    @Expose(serialize = true, deserialize = true)
+   @Id
     private String userName;
-    @Expose(serialize = true, deserialize = true)
+   @Column
     private String passWord;
-    @Expose(serialize = true, deserialize = true)
+    @Column
     private String SignInOrSignup;
-    @Expose(serialize = true, deserialize = true)
+    @Column
     private int money;
-    @Expose(serialize = true, deserialize = true)
+    @Column
     private  Mage mage;
-    @Expose(serialize = true, deserialize = true)
+    @Column
     private  Rogue rogue;
-    @Expose(serialize = true, deserialize = true)
+    @Column
     private   Warlock warlock;
-    @Expose(serialize = true, deserialize = true)
+    @Column
     private  Hunter hunter;
-    @Expose(serialize = true, deserialize = true)
+    @Column
     private  Priest priest;
-    @Expose(serialize = true, deserialize = true)
+    @Column
     private Heroes currentHero;
-    @Expose(serialize = true, deserialize = true)
+    @Column
     private ArrayList<Heroes> availableHeroes = new ArrayList<Heroes>();
-    @Expose(serialize = false, deserialize = false)
-    private transient Logger loggerOfMyPlayer;
-    @Expose(serialize = true, deserialize = true)
+    @Column
     private ArrayList<Cards> allCardsOfPlayer = new ArrayList<Cards>();
-    @Expose(serialize = true, deserialize = true)
+    @Column
     private ArrayList<Cards> SalableCards = new ArrayList<Cards>();
-    @Expose(serialize = true, deserialize = true)
+    @Column
     private ArrayList<Cards> BuyableCards = new ArrayList<Cards>();
-    @Expose(serialize = true, deserialize = true)
+    @Column
     private ArrayList<Cards> lockCards = new ArrayList<Cards>();
-    @Expose(serialize = true, deserialize = true)
+    @Column
     private ArrayList<Deck> allDecksOfPlayer = new ArrayList<Deck>();
-    @Expose(serialize = true, deserialize = true)
+    @Column
     private Deck currentDeck;
-    @Expose(serialize = true, deserialize = true)
+    @Enumerated(EnumType.STRING)
+    @Column
     private Status playerStatusInGame;
-    @Expose(serialize = true, deserialize = true)
+    @Column
     private Deck deckToChange;
-    @Expose(serialize = true, deserialize = true)
+    @Column
     private boolean online;
+    @Transient
+    private transient Logger loggerOfMyPlayer;
+
+
+
+
+
+
+
+
 
     public Player(String userName, String passWord)  {
         this.userName = userName;

@@ -10,6 +10,7 @@ public class ChangeBackOfCardRequest extends Request {
     private String mode;
 
     public ChangeBackOfCardRequest(String sendersToken, String userName, String mode) {
+        setUserName(userName);
         setRequestType("ChangeVolumeRequest");
         setRequestSendersToken(sendersToken);
         this.userName = userName;

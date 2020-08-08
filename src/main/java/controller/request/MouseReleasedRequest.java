@@ -21,7 +21,8 @@ public class MouseReleasedRequest extends Request {
     private String xCoordinateOfReleased;
     private String yCoordinateOfReleased;
 
-    public MouseReleasedRequest(String userName, String cardName, String xCoordinateOfReleased, String yCoordinateOfReleased) {
+    public MouseReleasedRequest(String sendersToken,String userName, String cardName,
+                                String xCoordinateOfReleased, String yCoordinateOfReleased) {
         this.userName = userName;
         this.cardName = cardName;
         this.xCoordinateOfReleased = xCoordinateOfReleased;

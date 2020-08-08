@@ -10,7 +10,7 @@ public class ShowSpecificCardsResponse extends Response {
     private String panelName;
 
 
-    public ShowSpecificCardsResponse(ArrayList<String> names,String group,String panelName) {
+    public ShowSpecificCardsResponse(ArrayList<String> names, String group, String panelName) {
         this.names = names;
         this.group=group;
         this.panelName=panelName;

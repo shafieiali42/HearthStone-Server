@@ -13,7 +13,7 @@ public class ShowDeckNumberRequest extends Request {
     private String userName;
     private int number;
 
-    public ShowDeckNumberRequest(String userName, int number) {
+    public ShowDeckNumberRequest(String sendersToken,String userName, int number) {
         this.userName = userName;
         this.number = number;
     }
@@ -31,7 +31,7 @@ public class ShowDeckNumberRequest extends Request {
         }
         deck.defineManaAvg();
         deck.defineMostUsedCard();
-        Response response = new ShowDeckNumberResponse(deck.getName(), deck.getHeroName(),
+        Response response = new ShowDeckNumberResponse(deck.getName(),deck.getHeroName(),
                 deck.getNumberOfWins() + "",deck.getNumberOfUses() + "",
                 deck.getMostUsedCard().getName(), deck.getManaAvg() + "", winsPerPlay + "");
 

@@ -12,6 +12,7 @@ public class DeletePlayerRequest extends Request {
     String password;
 
     public DeletePlayerRequest(String sendersToken,String userName, String password) {
+        setUserName(userName);
         setRequestType("LogInRequest");
         setRequestSendersToken(sendersToken);
         this.userName = userName;

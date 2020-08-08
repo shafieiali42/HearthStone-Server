@@ -13,7 +13,8 @@ public class PLayGameResponse extends Response {
     private ArrayList<String> passiveNames;
 
 
-    public PLayGameResponse(boolean successful, String userName, String friendlyHeroName, String enemyHeroName,
+    public PLayGameResponse(boolean successful,
+                            String userName, String friendlyHeroName, String enemyHeroName,
                             ArrayList<String> passiveNames) {
         this.successful = successful;
         this.userName = userName;

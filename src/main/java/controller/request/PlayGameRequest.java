@@ -21,7 +21,7 @@ public class PlayGameRequest extends Request {
     private String gameMode;
 
 
-    public PlayGameRequest(String userName, String gameMode) {
+    public PlayGameRequest(String sendersToken,String userName, String gameMode) {
         this.userName = userName;
         this.gameMode = gameMode;
     }
@@ -60,13 +60,13 @@ public class PlayGameRequest extends Request {
             Server.getPlayQueue().remove(thisGameModePlayer.get(0));
             Server.getPlayQueue().remove(thisGameModePlayer.get(1));
 
-            response = new PLayGameResponse(true, userName, player.getCurrentHero().getName(),
+            response = new PLayGameResponse(true,userName, player.getCurrentHero().getName(),
                     whitePlayer.getHero().getName(),blackPlayer.givePassiveToChooseNames());
 
 
             try {
 
-                Response responseForOtherPlayer = new PLayGameResponse(true, whitePlayer.getPlayer().getUserName(),
+                Response responseForOtherPlayer = new PLayGameResponse(true,whitePlayer.getPlayer().getUserName(),
                         whitePlayer.getHero().getName(),blackPlayer.getHero().getName(),whitePlayer.givePassiveToChooseNames());
                 String message = new Gson().toJson(responseForOtherPlayer);
                 PrintWriter printer;
@@ -79,7 +79,7 @@ public class PlayGameRequest extends Request {
                 e.printStackTrace();
             }
         } else {
-            response = new PLayGameResponse(false, userName, null, null,null);
+            response = new PLayGameResponse(false,userName, null, null,null);
         }
         Server.getDataBaseHandler().save(player);
         return response;

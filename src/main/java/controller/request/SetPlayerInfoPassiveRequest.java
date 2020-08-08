@@ -15,7 +15,7 @@ public class SetPlayerInfoPassiveRequest extends Request {
     private String userName;
     private int numberOfPassive;
 
-    public SetPlayerInfoPassiveRequest(String userName, int numberOfPassive) {
+    public SetPlayerInfoPassiveRequest(String sendersToken,String userName, int numberOfPassive) {
         this.userName = userName;
         this.numberOfPassive = numberOfPassive;
     }

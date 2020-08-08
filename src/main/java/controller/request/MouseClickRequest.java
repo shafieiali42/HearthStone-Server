@@ -24,7 +24,7 @@ public class MouseClickRequest extends Request {
     private String typeOfClick;
 
 
-    public MouseClickRequest(String userName, String cardName, String typeOfCard, boolean clicked,
+    public MouseClickRequest(String sendersToken,String userName, String cardName, String typeOfCard, boolean clicked,
                              int xCoordinateOfCard, int yCoordinateOfCard, Alliance alliance, String typeOfClick) {
 
         this.userName = userName;

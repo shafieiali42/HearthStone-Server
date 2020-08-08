@@ -13,7 +13,7 @@ public class TransactionRequest extends Request {
     private String userName;
     private String cardName;
 
-    public TransactionRequest(String userName, String cardName) {
+    public TransactionRequest(String sendersToken,String userName, String cardName) {
         this.userName = userName;
         this.cardName = cardName;
     }
@@ -34,7 +34,7 @@ public class TransactionRequest extends Request {
                     if (!Administer.isShopStateCardInMyDecks(player, cardName)) {
                         response = new TransactionResponse(Administer.sellShopStateCard(player, cardName), "Sell");
                     } else {
-                        response = new TransactionResponse(false, "sell");
+                        response = new TransactionResponse(false,"sell");
                     }
                     break;
             }

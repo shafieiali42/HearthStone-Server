@@ -7,11 +7,14 @@ import Models.HeroPower.WarlockHeroPower;
 import Models.Player.InGamePlayer;
 import Visitors.PowerVisitor.SpVisitor.SpVisitor;
 
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 import java.util.ArrayList;
 
+@Entity
 public class Warlock extends Heroes {
 
-
+    @Transient
     private static final ArrayList<Cards> specialCardsOfWarlock = new ArrayList<Cards>();
 
 

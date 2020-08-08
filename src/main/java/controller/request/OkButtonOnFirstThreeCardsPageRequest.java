@@ -14,7 +14,7 @@ public class OkButtonOnFirstThreeCardsPageRequest extends Request {
 
     private String userName;
 
-    public OkButtonOnFirstThreeCardsPageRequest(String userName) {
+    public OkButtonOnFirstThreeCardsPageRequest(String sendersToken,String userName) {
         this.userName = userName;
     }
 
@@ -28,7 +28,7 @@ public class OkButtonOnFirstThreeCardsPageRequest extends Request {
         if (!Server.giveGameWithPlayer(userName).getGameMode().equalsIgnoreCase("OfflineGame")) {
             ArrayList<String> whiteHandsCards = GamePartController.giveNameOfCardsList(whitePlayer.getHandsCards());
             ArrayList<String> whiteBattleGroundCards = GamePartController.giveNameOfCardsList(whitePlayer.getBattleGroundCards());
-            response = new ShowPlayPanelResponse(userName, whiteHandsCards, null, whiteBattleGroundCards,
+            response = new ShowPlayPanelResponse(userName,whiteHandsCards, null, whiteBattleGroundCards,
                     null, whitePlayer.getHero().getName(), blackPlayer.getHero().getName(),
                     whitePlayer.getCurrentWeapon().getName(), blackPlayer.getCurrentWeapon().getName(),"StartGame");
         }else {
@@ -36,7 +36,7 @@ public class OkButtonOnFirstThreeCardsPageRequest extends Request {
             ArrayList<String> whiteBattleGroundCards = GamePartController.giveNameOfCardsList(whitePlayer.getBattleGroundCards());
             ArrayList<String> blackHandsCards = GamePartController.giveNameOfCardsList(blackPlayer.getHandsCards());
             ArrayList<String> blackBattleGroundCards = GamePartController.giveNameOfCardsList(blackPlayer.getBattleGroundCards());
-            response = new ShowPlayPanelResponse(userName, whiteHandsCards, blackHandsCards, whiteBattleGroundCards,
+            response = new ShowPlayPanelResponse(userName,whiteHandsCards, blackHandsCards, whiteBattleGroundCards,
                     blackBattleGroundCards, whitePlayer.getHero().getName(), blackPlayer.getHero().getName(),
                     whitePlayer.getCurrentWeapon().getName(), blackPlayer.getCurrentWeapon().getName(),"StartGame");
         }

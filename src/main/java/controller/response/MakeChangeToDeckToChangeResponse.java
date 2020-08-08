@@ -11,7 +11,7 @@ public class MakeChangeToDeckToChangeResponse extends Response {
     private String newField;
 
 
-    public MakeChangeToDeckToChangeResponse(String typeOfRequest,String newField) {
+    public MakeChangeToDeckToChangeResponse(String typeOfRequest, String newField) {
         this.typeOfRequest = typeOfRequest;
         this.newField=newField;
     }

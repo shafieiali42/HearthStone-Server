@@ -16,7 +16,7 @@ public class ShowSpecialCardsOfHeroRequest extends Request {
     private String userName;
 
 
-    public ShowSpecialCardsOfHeroRequest(String userName) {
+    public ShowSpecialCardsOfHeroRequest(String sendersToken,String userName) {
         this.userName = userName;
     }
 

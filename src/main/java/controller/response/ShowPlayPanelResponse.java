@@ -22,7 +22,7 @@ public class ShowPlayPanelResponse extends Response {
                                  ArrayList<String> nameOfWhiteBattleGroundCards,
                                  ArrayList<String> nameOfBlackBattleGroundCards,
                                  String whitePlayerHeroName, String blackPlayerHeroName,
-                                 String whitePlayerWeaponName, String blackPlayerWeaponName,String state) {
+                                 String whitePlayerWeaponName, String blackPlayerWeaponName, String state) {
 
 
         this.userName = userName;

@@ -9,25 +9,36 @@ import Visitors.PowerVisitor.SpVisitor.SpVisitable;
 import Visitors.PowerVisitor.SpVisitor.SpVisitor;
 
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.util.ArrayList;
 
-public class Heroes implements SpVisitable {
+@Entity
+public abstract class Heroes implements SpVisitable {
 
     public Heroes() {
 
     }
 
-
+    @Id
     private String name;
+    @Column
     private int healthPower;
+    @Column
     private int attackPower;
+    @Column
     private int firstHealthPower;
+    @Column
     private String description;
-    private ArrayList<Cards> DeckOfHero = new ArrayList<Cards>();
+    @Column
     private boolean isLock;
-    private int shield;
-    private boolean canBeAttacked = true;
+    @Transient
     private HeroPower heroPower;
+    //    private int shield;
+    @Transient
+    private boolean canBeAttacked = true;
 
 
     //getter and setters
@@ -89,28 +100,12 @@ public class Heroes implements SpVisitable {
         this.attackPower = attackPower;
     }
 
-    public int getShield() {
-        return shield;
-    }
-
-    public void setShield(int shield) {
-        this.shield = shield;
-    }
-
     public boolean getIsLock() {
         return isLock;
     }
 
     public void setIsLock(boolean lock) {
         isLock = lock;
-    }
-
-    public ArrayList<Cards> getDeckOfHero() {
-        return DeckOfHero;
-    }
-
-    public void setDeckOfHero(ArrayList<Cards> deckOfHero) {
-        DeckOfHero = deckOfHero;
     }
 
     public String getName() {

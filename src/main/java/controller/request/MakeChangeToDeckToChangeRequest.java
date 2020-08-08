@@ -17,7 +17,7 @@ public class MakeChangeToDeckToChangeRequest extends Request {
     private String newFiled;
 
 
-    public MakeChangeToDeckToChangeRequest(String userName, String typeOfRequest, String newFiled) {
+    public MakeChangeToDeckToChangeRequest(String sendersToken,String userName, String typeOfRequest, String newFiled) {
         this.userName = userName;
         this.typeOfRequest = typeOfRequest;
         this.newFiled = newFiled;

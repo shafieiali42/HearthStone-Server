@@ -4,23 +4,49 @@ package Models.Deck;
 
 import Models.Cards.CardClasses.Cards;
 import Models.Heroes.Heroes;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
+@Entity
 public class Deck implements Comparable<Deck> {
 
-    private String name;
-    private String heroName;
-    private Heroes hero;
-    private int numberOfWins;
-    private int numberOfUses;
+    @Transient
     private static final int MAX_CAPACITY_OF_DECK = 30;
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column
+    private String name;
+    @Column
+    private String heroName;
+    @Column
+    private Heroes hero;
+    @Column
+    private int numberOfWins;
+    @Column
+    private int numberOfUses;
+    @Column
     private ArrayList<Cards> listOfCards;
+    @Column
     private Cards mostUsedCard;
+    @Column
     private int manaAvg;
 
+    @Column
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @ElementCollection
+    @JoinTable
+    @MapKeyColumn
     private HashMap<String, Integer> usesHashMap =new HashMap<String, Integer>();
 
     public void initUsesHashMapFromArrayList(){

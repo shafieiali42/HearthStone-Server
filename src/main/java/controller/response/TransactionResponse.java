@@ -7,7 +7,7 @@ public class TransactionResponse extends Response {
     private String transactionType;
 
 
-    public TransactionResponse(boolean successful,String transactionType) {
+    public TransactionResponse(boolean successful, String transactionType) {
         this.successful = successful;
         this.transactionType=transactionType;
     }

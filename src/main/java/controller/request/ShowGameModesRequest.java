@@ -13,7 +13,7 @@ public class ShowGameModesRequest extends Request {
     private String userName;
 
 
-    public ShowGameModesRequest(String userName) {
+    public ShowGameModesRequest(String sendersToken,String userName) {
         this.userName = userName;
     }
 
@@ -24,7 +24,7 @@ public class ShowGameModesRequest extends Request {
         if (player.getCurrentDeck() == null) {
             response=new ShowJOptionPaneResponse("First you should select your deck");
         } else {
-            response = new ShowGameModesResponse(userName, Game.getGameModes());
+            response = new ShowGameModesResponse(userName,Game.getGameModes());
         }
         Server.getDataBaseHandler().save(player);
         return response;

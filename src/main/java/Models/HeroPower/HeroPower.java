@@ -10,13 +10,17 @@ import Visitors.PowerVisitor.HeroPowerVisitor.HeroPowerVisitable;
 import Visitors.PowerVisitor.HeroPowerVisitor.VisitorOfPowers;
 
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 
 public class HeroPower implements HeroPowerVisitable {
 
 
-    private int mana;
+
     private String name;
+
+    private int mana;
+
     private boolean needsTarget;
     private boolean hasAttackInThisTurn = false;
     private int numberOfPermitUse = 1;

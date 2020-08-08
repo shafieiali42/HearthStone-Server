@@ -14,7 +14,7 @@ public class ShowDeckRequest extends Request {
     private String nameOfDeckToShow;
 
 
-    public ShowDeckRequest(String userName, String nameOfDeckToShow) {
+    public ShowDeckRequest(String sendersToken,String userName, String nameOfDeckToShow) {
         this.userName = userName;
         this.nameOfDeckToShow = nameOfDeckToShow;
     }

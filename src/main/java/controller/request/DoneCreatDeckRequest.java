@@ -12,6 +12,12 @@ public class DoneCreatDeckRequest extends Request {
 
     private String userName;
 
+    public DoneCreatDeckRequest(String sendersToken,String userName) {
+        setUserName(userName);
+        setRequestType("DoneCreatDeckRequest");
+        setRequestSendersToken(sendersToken);
+        this.userName = userName;
+    }
 
     @Override
     public Response execute() {

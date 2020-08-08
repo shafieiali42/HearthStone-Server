@@ -14,7 +14,7 @@ public class LeftClickRequest extends Request {
     private boolean isLock;
 
 
-    public LeftClickRequest(String userName, String cardName, boolean isLock) {
+    public LeftClickRequest(String sendersToken,String userName, String cardName, boolean isLock) {
         this.userName = userName;
         this.cardName = cardName;
         this.isLock = isLock;

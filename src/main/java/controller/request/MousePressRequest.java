@@ -25,9 +25,11 @@ public class MousePressRequest extends Request {
     private Alliance alliance;
 
 
-    public MousePressRequest(String userName, String cardName, String firstCardNameOfThreeCards, String secondCardNameOfThreeCards, String thirdCardNameOfThreeCards,
+    public MousePressRequest(String sendersToken,String userName, String cardName, String firstCardNameOfThreeCards,
+                             String secondCardNameOfThreeCards, String thirdCardNameOfThreeCards,
                              boolean firstCardCanChangeInThreeCards, boolean secondCardCanChangeInThreeCards,
                              boolean thirdCardCanChangeInThreeCards, Alliance alliance) {
+
 
         this.userName = userName;
         this.cardName = cardName;
