@@ -16,14 +16,15 @@ import java.util.Objects;
 public class MouseReleasedRequest extends Request {
 
 
-    private String userName;
+
     private String cardName;
     private String xCoordinateOfReleased;
     private String yCoordinateOfReleased;
 
     public MouseReleasedRequest(String sendersToken,String userName, String cardName,
                                 String xCoordinateOfReleased, String yCoordinateOfReleased) {
-        this.userName = userName;
+        setUserName(userName);
+        setRequestType("MouseReleasedRequest");
         this.cardName = cardName;
         this.xCoordinateOfReleased = xCoordinateOfReleased;
         this.yCoordinateOfReleased = yCoordinateOfReleased;
@@ -32,12 +33,12 @@ public class MouseReleasedRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
-        Game game = Server.giveGameWithPlayer(userName);
-        InGamePlayer whitePlayer=Server.giveInGamePlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(getUserName());
+        Game game = Server.giveGameWithPlayer(getUserName());
+        InGamePlayer whitePlayer=Server.giveInGamePlayer(getUserName());
         Response response = null;
         String message = null;
-        Response secondResponse = new ShowPlayPanelRequest(userName,"").execute();
+        Response secondResponse = new ShowPlayPanelRequest(getUserName(),"").execute();
         String responseMessage = new Gson().toJson(secondResponse);
         PrintWriter printer = null;
         try {
@@ -115,16 +116,6 @@ public class MouseReleasedRequest extends Request {
         }
         Server.getDataBaseHandler().save(player);
         return response;
-    }
-
-    @Override
-    public String getUserName() {
-        return userName;
-    }
-
-    @Override
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getCardName() {

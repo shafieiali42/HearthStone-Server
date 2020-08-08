@@ -8,6 +8,7 @@ public class MakeNewDeckResponse extends Response {
 
 
     public MakeNewDeckResponse(String deckName) {
+        setResponseType("MakeNewDeckResponse");
         this.deckName = deckName;
 //        this.heroName = heroName;
     }

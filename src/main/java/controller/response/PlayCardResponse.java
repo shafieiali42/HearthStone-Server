@@ -6,6 +6,7 @@ public class PlayCardResponse extends Response {
     private String message;
 
     public PlayCardResponse(String message) {
+        setResponseType("PlayCardResponse");
         this.message = message;
     }
 

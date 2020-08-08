@@ -12,13 +12,14 @@ import java.util.ArrayList;
 public class MakeChangeToDeckToChangeRequest extends Request {
 
 
-    private String userName;
     private String typeOfRequest;
     private String newFiled;
 
 
     public MakeChangeToDeckToChangeRequest(String sendersToken,String userName, String typeOfRequest, String newFiled) {
-        this.userName = userName;
+        setUserName(userName);
+        setRequestType("MakeChangeToDeckToChangeRequest");
+        setRequestSendersToken(sendersToken);
         this.typeOfRequest = typeOfRequest;
         this.newFiled = newFiled;
     }
@@ -26,7 +27,7 @@ public class MakeChangeToDeckToChangeRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(getUserName());
         Response response = null;
         switch (typeOfRequest) {
             case "SelectMainDeck":
@@ -124,14 +125,6 @@ public class MakeChangeToDeckToChangeRequest extends Request {
         return response;
     }
 
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
     public String getTypeOfRequest() {
         return typeOfRequest;

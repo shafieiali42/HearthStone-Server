@@ -9,9 +9,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.*;
 
 @Entity
 public class Deck implements Comparable<Deck> {
@@ -35,7 +33,7 @@ public class Deck implements Comparable<Deck> {
     @Column
     private int numberOfUses;
     @Column
-    private ArrayList<Cards> listOfCards;
+    private List<Cards> listOfCards;
     @Column
     private Cards mostUsedCard;
     @Column
@@ -47,7 +45,7 @@ public class Deck implements Comparable<Deck> {
     @ElementCollection
     @JoinTable
     @MapKeyColumn
-    private HashMap<String, Integer> usesHashMap =new HashMap<String, Integer>();
+    private Map<String, Integer> usesHashMap =new HashMap<String, Integer>();
 
     public void initUsesHashMapFromArrayList(){
         usesHashMap.clear();

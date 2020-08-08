@@ -14,7 +14,7 @@ import server.Server;
 public class MouseClickRequest extends Request {
 
 
-    private String userName;
+
     private String cardName;
     private String typeOfCard;
     private boolean clicked;
@@ -24,10 +24,11 @@ public class MouseClickRequest extends Request {
     private String typeOfClick;
 
 
-    public MouseClickRequest(String sendersToken,String userName, String cardName, String typeOfCard, boolean clicked,
+    public MouseClickRequest(String userName, String cardName, String typeOfCard, boolean clicked,
                              int xCoordinateOfCard, int yCoordinateOfCard, Alliance alliance, String typeOfClick) {
 
-        this.userName = userName;
+        setUserName(userName);
+        setRequestType("MouseClickRequest");
         this.cardName = cardName;
         this.typeOfCard = typeOfCard;
         this.clicked = clicked;
@@ -40,8 +41,8 @@ public class MouseClickRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
-        Game game = Server.giveGameWithPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(getUserName());
+        Game game = Server.giveGameWithPlayer(getUserName());
         Response response = null;
         boolean doubleClick;
         int hp;
@@ -172,15 +173,6 @@ public class MouseClickRequest extends Request {
         return response;
     }
 
-    @Override
-    public String getUserName() {
-        return userName;
-    }
-
-    @Override
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
     public String getCardName() {
         return cardName;

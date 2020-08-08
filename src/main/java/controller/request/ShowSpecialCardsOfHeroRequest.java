@@ -13,17 +13,17 @@ import java.util.ArrayList;
 public class ShowSpecialCardsOfHeroRequest extends Request {
 
 
-    private String userName;
 
 
-    public ShowSpecialCardsOfHeroRequest(String sendersToken,String userName) {
-        this.userName = userName;
+
+    public ShowSpecialCardsOfHeroRequest(String userName) {
+        setUserName(userName);
     }
 
 
     @Override
     public Response execute() {
-        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(getUserName());
         ArrayList<Cards> cards;
         cards = CollectionController.getCardsWithSpecificGroup(player.getDeckToChange().getHero().getName());
         ArrayList<String> names = Administer.giveListOfCardsNames(cards);
@@ -34,12 +34,4 @@ public class ShowSpecialCardsOfHeroRequest extends Request {
         return response;
     }
 
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 }

@@ -7,6 +7,7 @@ public class ChangeBackOfCardsResponse extends Response {
     private String mode;
 
     public ChangeBackOfCardsResponse(String mode) {
+        setResponseType("ChangeBackOfCardsResponse");
         this.mode = mode;
     }
 

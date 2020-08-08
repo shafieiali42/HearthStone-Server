@@ -10,6 +10,7 @@ public class ShowDeckResponse extends Response {
 
 
     public ShowDeckResponse(HashMap<String, Integer> usesHashMap) {
+        setResponseType("ShowDeckResponse");
         this.usesHashMap = usesHashMap;
     }
 

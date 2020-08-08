@@ -8,21 +8,21 @@ import server.Server;
 
 public class DeletePlayerRequest extends Request {
 
-    String userName;
+
     String password;
 
     public DeletePlayerRequest(String sendersToken,String userName, String password) {
         setUserName(userName);
-        setRequestType("LogInRequest");
+        setRequestType("DeletePlayerRequest");
         setRequestSendersToken(sendersToken);
-        this.userName = userName;
+
         this.password = password;
     }
 
     @Override
     public Response execute() {
-        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
-        Response response=new DeletePlayerResponse(PlayerController.deletePlayer(userName,password,player));
+        Player player = Server.getDataBaseHandler().fetchPlayer(getUserName());
+        Response response=new DeletePlayerResponse(PlayerController.deletePlayer(getUserName(),password,player));
 //        Server.getDataBaseHandler().save(player);
         return response;
     }
@@ -30,13 +30,6 @@ public class DeletePlayerRequest extends Request {
     //getter and setters
     //********************
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
     public String getPassword() {
         return password;

@@ -16,6 +16,7 @@ public class PLayGameResponse extends Response {
     public PLayGameResponse(boolean successful,
                             String userName, String friendlyHeroName, String enemyHeroName,
                             ArrayList<String> passiveNames) {
+        setResponseType("PLayGameResponse");
         this.successful = successful;
         this.userName = userName;
         this.friendlyHeroName = friendlyHeroName;

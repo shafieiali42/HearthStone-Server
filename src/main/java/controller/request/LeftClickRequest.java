@@ -9,13 +9,16 @@ import server.Server;
 public class LeftClickRequest extends Request {
 
 
-    private String userName;
+
     private String cardName;
     private boolean isLock;
 
 
     public LeftClickRequest(String sendersToken,String userName, String cardName, boolean isLock) {
-        this.userName = userName;
+        setUserName(userName);
+        setRequestType("LeftClickRequest");
+        setRequestSendersToken(sendersToken);
+
         this.cardName = cardName;
         this.isLock = isLock;
     }
@@ -23,7 +26,7 @@ public class LeftClickRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(getUserName());
         Response response = null;
         switch (player.getPlayerStatusInGame()) {
 
@@ -51,16 +54,6 @@ public class LeftClickRequest extends Request {
         Server.getDataBaseHandler().save(player);
         return response;
     }
-
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
 
     public String getCardName() {
         return cardName;

@@ -10,6 +10,7 @@ public class SetAllLittleCardsPanelsResponse extends Response {
     private HashMap<String, Integer> allCardsNameMana;
 
     public SetAllLittleCardsPanelsResponse(HashMap<String, Integer> allCardsNameMana) {
+        setResponseType("SetAllLittleCardsPanelsResponse");
         this.allCardsNameMana = allCardsNameMana;
     }
 

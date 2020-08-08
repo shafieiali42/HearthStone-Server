@@ -9,18 +9,18 @@ import server.Server;
 public class ShowWalletRequest extends Request {
 
 
-    private String userName;
+
 
 
     public ShowWalletRequest(String sendersToken, String userName) {
         setRequestType("ShowWalletRequest");
+        setUserName(userName);
         setRequestSendersToken(sendersToken);
-        this.userName = userName;
     }
 
     @Override
     public Response execute() {
-        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(getUserName());
         player.setPlayerStatusInGame(Status.WALLET_PAGE);
         Response response =new ShowWalletResponse(player.getMoney());
         player.setPlayerStatusInGame(Status.BUY_PAGE);
@@ -29,11 +29,4 @@ public class ShowWalletRequest extends Request {
     }
 
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 }

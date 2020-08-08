@@ -7,6 +7,7 @@ public class ChangeVolumeResponse extends Response {
 
 
     public ChangeVolumeResponse(String mode) {
+        setResponseType("ChangeVolumeResponse");
         this.mode = mode;
     }
 

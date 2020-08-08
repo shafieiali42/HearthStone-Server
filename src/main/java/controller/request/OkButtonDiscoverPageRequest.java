@@ -8,15 +8,17 @@ import server.Server;
 
 public class OkButtonDiscoverPageRequest extends Request {
 
-    private String userName;
 
-    public OkButtonDiscoverPageRequest(String sendersToken,String userName) {
-        this.userName = userName;
+
+    public OkButtonDiscoverPageRequest(String sendersToken, String userName) {
+        setUserName(userName);
+        setRequestType("OkButtonDiscoverPageRequest");
+
     }
 
     @Override
     public Response execute() {
-        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(getUserName());
         Response response = null;
         player.setPlayerStatusInGame(Status.PLAY_PAGE);
         response = new GoToPageResponse("GamePage");
@@ -24,14 +26,4 @@ public class OkButtonDiscoverPageRequest extends Request {
         return response;
     }
 
-
-    @Override
-    public String getUserName() {
-        return userName;
-    }
-
-    @Override
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 }

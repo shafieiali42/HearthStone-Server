@@ -2,13 +2,13 @@ package controller.request;
 
 import controller.response.Response;
 
-public abstract class Request {
+public  class Request {
 
     private String requestSendersToken;
     private String requestType;
     private String userName;
 
-    public abstract Response execute();
+    public  Response execute(){return null;}
 
 
     //getter and setters

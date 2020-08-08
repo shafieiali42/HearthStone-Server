@@ -9,10 +9,10 @@ import java.util.HashMap;
 public class SetAllLittleCardsPanelsRequest extends Request {
 
 
-    private String userName;
+
 
     public SetAllLittleCardsPanelsRequest(String sendersToken,String userName) {
-        this.userName = userName;
+        setUserName(userName);
     }
 
     @Override
@@ -25,12 +25,4 @@ public class SetAllLittleCardsPanelsRequest extends Request {
         return response;
     }
 
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 }

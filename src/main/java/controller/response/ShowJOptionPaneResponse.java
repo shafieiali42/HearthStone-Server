@@ -8,6 +8,7 @@ public class ShowJOptionPaneResponse extends Response {
 
 
     public ShowJOptionPaneResponse(String message) {
+        setResponseType("ShowJOptionPaneResponse");
         this.message = message;
     }
 

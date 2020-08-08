@@ -11,17 +11,17 @@ import java.util.ArrayList;
 
 public class ShowCardsFilteredByManaRequest extends Request {
 
-    private String userName;
+
     private int mana;
 
-    public ShowCardsFilteredByManaRequest(String sendersToken,String userName, int mana) {
-        this.userName = userName;
+    public ShowCardsFilteredByManaRequest(String userName, int mana) {
+        setUserName(userName);
         this.mana = mana;
     }
 
     @Override
     public Response execute() {
-        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(getUserName());
         Response response = null;
         ArrayList<String> filteredByManaCards = new ArrayList<String>();
         for (Cards card : Cards.getAllCards()) {
@@ -50,11 +50,4 @@ public class ShowCardsFilteredByManaRequest extends Request {
         this.mana = mana;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 }

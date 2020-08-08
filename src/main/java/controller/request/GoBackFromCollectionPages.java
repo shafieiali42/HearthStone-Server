@@ -11,17 +11,19 @@ import javax.swing.*;
 public class GoBackFromCollectionPages extends Request {
 
 
-    private String userName;
 
 
-    public GoBackFromCollectionPages(String sendersToken,String userName) {
-        this.userName = userName;
+
+    public GoBackFromCollectionPages(String userName) {
+        setUserName(userName);
+        setRequestType("GoBackFromCollectionPages");
+
     }
 
 
     @Override
     public Response execute() {
-        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(getUserName());
         Response response = null;
         if (player.getPlayerStatusInGame().equals(Status.COLLECTIONS_PAGE)) {
             response = new GoToPageResponse("MainMenuPageNormal");
@@ -45,11 +47,4 @@ public class GoBackFromCollectionPages extends Request {
     }
 
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 }

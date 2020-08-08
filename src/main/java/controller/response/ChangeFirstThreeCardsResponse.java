@@ -10,6 +10,7 @@ public class ChangeFirstThreeCardsResponse extends Response {
 
 
     public ChangeFirstThreeCardsResponse(int changedCardIndex, ArrayList<String> firstThreeCardsName) {
+        setResponseType("ChangeFirstThreeCardsResponse");
         this.changedCardIndex = changedCardIndex;
         this.firstThreeCardsName = firstThreeCardsName;
     }

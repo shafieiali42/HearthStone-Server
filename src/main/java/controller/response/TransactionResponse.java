@@ -8,6 +8,7 @@ public class TransactionResponse extends Response {
 
 
     public TransactionResponse(boolean successful, String transactionType) {
+        setResponseType("TransactionResponse");
         this.successful = successful;
         this.transactionType=transactionType;
     }

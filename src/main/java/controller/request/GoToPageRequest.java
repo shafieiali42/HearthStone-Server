@@ -10,21 +10,22 @@ public class GoToPageRequest extends Request {
 
 
     private String pageName;
-    private String userName;
+
 
 
     public GoToPageRequest(String sendersToken,String userName, String pageName) {
+        setUserName(userName);
         setRequestType("GoToPageRequest");
         setRequestSendersToken(sendersToken);
         this.pageName = pageName;
-        this.userName=userName;
+
     }
 
 
 
     @Override
     public Response execute() {
-        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(getUserName());
 
         if (player.getPlayerStatusInGame().equals(Status.BUY_PAGE_FROM_COLLECTION)) {
             pageName="CollectionPage";
@@ -55,11 +56,5 @@ public class GoToPageRequest extends Request {
         this.pageName = pageName;
     }
 
-    public String getUserName() {
-        return userName;
-    }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 }

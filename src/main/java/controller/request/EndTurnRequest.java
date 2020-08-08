@@ -10,25 +10,25 @@ import server.Server;
 public class EndTurnRequest extends Request {
 
 
-    private String userName;
+
 
 
     public EndTurnRequest(String sendersToken,String userName) {
         setUserName(userName);
-        setRequestType("DoneCreatDeckRequest");
+        setRequestType("EndTurnRequest");
         setRequestSendersToken(sendersToken);
-        this.userName = userName;
+
     }
 
 
     @Override
     public Response execute() {
-        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
-        InGamePlayer whitePlayer = Server.giveInGamePlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(getUserName());
+        InGamePlayer whitePlayer = Server.giveInGamePlayer(getUserName());
         Response response = null;
         String message = GamePartController.endTurn(whitePlayer);
         if (message.equalsIgnoreCase("Successful")) {
-            Request request = new ShowPlayPanelRequest(userName, "EndTurn");
+            Request request = new ShowPlayPanelRequest(getUserName(), "EndTurn");
             response = request.execute();
         } else {
             response = new ShowJOptionPaneResponse(message);
@@ -37,13 +37,5 @@ public class EndTurnRequest extends Request {
         return response;
     }
 
-    @Override
-    public String getUserName() {
-        return userName;
-    }
 
-    @Override
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 }

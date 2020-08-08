@@ -11,18 +11,18 @@ import java.util.Iterator;
 public class RemoveCardFromDeckToChangeRequest extends Request {
 
 
-    private String userName;
+
     private String cardName;
 
 
-    public RemoveCardFromDeckToChangeRequest(String sendersToken,String userName, String cardName) {
-        this.userName = userName;
+    public RemoveCardFromDeckToChangeRequest(String userName, String cardName) {
+        setUserName(userName);
         this.cardName = cardName;
     }
 
     @Override
     public Response execute() { //todo
-        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(getUserName());
         Iterator<Cards> itr = player.getDeckToChange().getListOfCards().iterator();
         while (itr.hasNext()) {
             Cards card = itr.next();
@@ -44,18 +44,10 @@ public class RemoveCardFromDeckToChangeRequest extends Request {
             }
         }
         Server.getDataBaseHandler().save(player);
-        Response response = new RemoveCardFromDeckToChangeResponse(userName,player.getDeckToChange().getUsesHashMap());
+        Response response = new RemoveCardFromDeckToChangeResponse(getUserName(),player.getDeckToChange().getUsesHashMap());
         return response;
     }
 
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
     public String getCardName() {
         return cardName;

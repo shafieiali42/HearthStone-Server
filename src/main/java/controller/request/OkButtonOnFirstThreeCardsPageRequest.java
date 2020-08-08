@@ -12,23 +12,24 @@ import java.util.ArrayList;
 
 public class OkButtonOnFirstThreeCardsPageRequest extends Request {
 
-    private String userName;
 
-    public OkButtonOnFirstThreeCardsPageRequest(String sendersToken,String userName) {
-        this.userName = userName;
+
+    public OkButtonOnFirstThreeCardsPageRequest(String userName) {
+
+        setUserName(userName);
     }
 
     @Override
     public Response execute() {
-        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(getUserName());
         Response response = null;
         player.setPlayerStatusInGame(Status.PLAY_PAGE);
-        InGamePlayer whitePlayer = Server.giveInGamePlayer(userName);
-        InGamePlayer blackPlayer = Server.giveAnotherPlayer(userName);
-        if (!Server.giveGameWithPlayer(userName).getGameMode().equalsIgnoreCase("OfflineGame")) {
+        InGamePlayer whitePlayer = Server.giveInGamePlayer(getUserName());
+        InGamePlayer blackPlayer = Server.giveAnotherPlayer(getUserName());
+        if (!Server.giveGameWithPlayer(getUserName()).getGameMode().equalsIgnoreCase("OfflineGame")) {
             ArrayList<String> whiteHandsCards = GamePartController.giveNameOfCardsList(whitePlayer.getHandsCards());
             ArrayList<String> whiteBattleGroundCards = GamePartController.giveNameOfCardsList(whitePlayer.getBattleGroundCards());
-            response = new ShowPlayPanelResponse(userName,whiteHandsCards, null, whiteBattleGroundCards,
+            response = new ShowPlayPanelResponse(getUserName(),whiteHandsCards, null, whiteBattleGroundCards,
                     null, whitePlayer.getHero().getName(), blackPlayer.getHero().getName(),
                     whitePlayer.getCurrentWeapon().getName(), blackPlayer.getCurrentWeapon().getName(),"StartGame");
         }else {
@@ -36,7 +37,7 @@ public class OkButtonOnFirstThreeCardsPageRequest extends Request {
             ArrayList<String> whiteBattleGroundCards = GamePartController.giveNameOfCardsList(whitePlayer.getBattleGroundCards());
             ArrayList<String> blackHandsCards = GamePartController.giveNameOfCardsList(blackPlayer.getHandsCards());
             ArrayList<String> blackBattleGroundCards = GamePartController.giveNameOfCardsList(blackPlayer.getBattleGroundCards());
-            response = new ShowPlayPanelResponse(userName,whiteHandsCards, blackHandsCards, whiteBattleGroundCards,
+            response = new ShowPlayPanelResponse(getUserName(),whiteHandsCards, blackHandsCards, whiteBattleGroundCards,
                     blackBattleGroundCards, whitePlayer.getHero().getName(), blackPlayer.getHero().getName(),
                     whitePlayer.getCurrentWeapon().getName(), blackPlayer.getCurrentWeapon().getName(),"StartGame");
         }
@@ -44,13 +45,4 @@ public class OkButtonOnFirstThreeCardsPageRequest extends Request {
         return response;
     }
 
-    @Override
-    public String getUserName() {
-        return userName;
-    }
-
-    @Override
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 }

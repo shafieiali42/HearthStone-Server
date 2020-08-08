@@ -15,6 +15,7 @@ public class ShowDeckNumberResponse extends Response {
     public ShowDeckNumberResponse(String deckName, String heroName, String wins, String use,
                                   String mostUsedCardName, String manaAvg, String winsPerPlay) {
 
+        setResponseType("ShowDeckNumberResponse");
         this.deckName = deckName;
         this.heroName = heroName;
         this.wins = wins;

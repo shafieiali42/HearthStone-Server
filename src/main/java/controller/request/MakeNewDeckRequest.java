@@ -10,20 +10,20 @@ import server.Server;
 public class MakeNewDeckRequest extends Request {
 
 
-    private String userName;
     private String deckName;
     private String heroName;
 
 
-    public MakeNewDeckRequest(String sendersToken,String userName, String deckName, String heroName) {
-        this.userName = userName;
+    public MakeNewDeckRequest(String userName, String deckName, String heroName) {
+        setUserName(userName);
+        setRequestType("MakeNewDeckRequest");
         this.deckName = deckName;
         this.heroName = heroName;
     }
 
     @Override
     public Response execute() {
-        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(getUserName());
         player.setPlayerStatusInGame(Status.MAKE_DECK);
         CollectionController.makeNewDeck(player, deckName, heroName);
         Server.getDataBaseHandler().save(player);
@@ -38,14 +38,6 @@ public class MakeNewDeckRequest extends Request {
 
     public String getHeroName() {
         return heroName;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public void setDeckName(String deckName) {

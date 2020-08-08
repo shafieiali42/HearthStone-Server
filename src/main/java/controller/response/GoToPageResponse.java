@@ -7,6 +7,7 @@ public class GoToPageResponse extends Response {
     private String pageName;
 
     public GoToPageResponse(String pageName) {
+        setResponseType("GoToPageResponse");
         this.pageName = pageName;
     }
 

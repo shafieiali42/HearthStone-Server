@@ -11,6 +11,7 @@ public class ShowGameModesResponse extends Response {
     private Object[] possibilities;
 
     public ShowGameModesResponse(String userName, Object[] possibilities) {
+        setResponseType("ShowGameModesResponse");
         this.userName = userName;
         this.possibilities = possibilities;
     }

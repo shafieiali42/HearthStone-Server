@@ -7,6 +7,7 @@ public class DoneCreatDeckResponse extends Response {
 
 
     public DoneCreatDeckResponse(String state) {
+        setResponseType("DoneCreatDeckResponse");
         this.state = state;
     }
 

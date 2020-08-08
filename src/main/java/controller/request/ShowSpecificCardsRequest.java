@@ -15,21 +15,20 @@ public class ShowSpecificCardsRequest extends Request {
 
 
     private String group;
-    private String userName;
     private String panelName;
 
 
     public ShowSpecificCardsRequest(String sendersToken, String userName, String group,String panelName) {
         setRequestType("ShowSpecificCardsRequest");
+        setUserName(userName);
         setRequestSendersToken(sendersToken);
         this.group = group;
-        this.userName = userName;
         this.panelName=panelName;
     }
 
     @Override
     public Response execute() {
-        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(getUserName());
         ArrayList<Cards> cards = new ArrayList<>();
         switch (group) {
             case "Buyable":
@@ -82,14 +81,6 @@ public class ShowSpecificCardsRequest extends Request {
 
     public void setGroup(String group) {
         this.group = group;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getPanelName() {

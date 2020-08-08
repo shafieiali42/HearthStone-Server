@@ -10,13 +10,21 @@
 
         <!-- update the database schema on startup -->
 
-<!--                <property name="hbm2ddl.auto">create</property>-->
+                <property name="hbm2ddl.auto">create</property>
 
-                <property name="hbm2ddl.auto">update</property>
+<!--                <property name="hbm2ddl.auto">update</property>-->
 
 
 <!--        <mapping class="Models.Student"/>-->
 <!--        <mapping class="Models.Student"/>&ndash;&gt;-->
+        <mapping class="Models.Player.Player"/>
+        <mapping class="Models.Deck.Deck"/>
+        <mapping class="Models.Heroes.Heroes"/>
+        <mapping class="Models.Heroes.Hunter"/>
+        <mapping class="Models.Heroes.Mage"/>
+        <mapping class="Models.Heroes.Priest"/>
+        <mapping class="Models.Heroes.Rogue"/>
+        <mapping class="Models.Heroes.Warlock"/>
         <mapping class="Models.Cards.CardClasses.Cards"/>
         <mapping class="Models.Cards.CardClasses.Minion"/>
         <mapping class="Models.Cards.CardClasses.Spell"/>

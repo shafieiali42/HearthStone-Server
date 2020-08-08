@@ -7,6 +7,7 @@ public class ShowDiscoverPageResponse extends Response {
     private String thirdCard;
 
     public ShowDiscoverPageResponse(String firstCard, String secondCard, String thirdCard) {
+        setResponseType("ShowDiscoverPageResponse");
         this.firstCard = firstCard;
         this.secondCard = secondCard;
         this.thirdCard = thirdCard;

@@ -6,6 +6,7 @@ public class DiscoverPageResponse extends Response {
     private String cardName;
 
     public DiscoverPageResponse(String cardName) {
+        setResponseType("DiscoverPageResponse");
         this.cardName = cardName;
     }
 

@@ -31,9 +31,9 @@ public class Server extends Thread {
     private static DataBaseHandler dataBaseHandler=new DataBaseHandler(new MyPostrgeSqlDataBase());
 
 
-    public Server(int serverPort) {
+    public Server() {
         try {
-            this.serverPort = serverPort;
+            this.serverPort = 8000;
             serverSocket = new ServerSocket(serverPort);
             sockets = new HashMap<>();
         } catch (IOException e) {

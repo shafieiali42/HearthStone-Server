@@ -9,31 +9,21 @@ import server.Server;
 public class LogOutRequest extends Request {
 
 
-    private String userName;
+
 
 
     public LogOutRequest(String sendersToken, String userName) {
+        setUserName(userName);
         setRequestType("LogOutRequest");
         setRequestSendersToken(sendersToken);
-        this.userName = userName;
     }
 
     @Override
     public Response execute() {
-        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(getUserName());
         Response response =new LogOutResponse(PlayerController.logOut(player));
         Server.getDataBaseHandler().save(player);
         return response;
     }
-
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
 
 }

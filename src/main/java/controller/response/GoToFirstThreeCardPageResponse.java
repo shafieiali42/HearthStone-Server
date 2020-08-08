@@ -8,6 +8,7 @@ public class GoToFirstThreeCardPageResponse extends Response {
     private ArrayList<String> firstThreeCardsName;
 
     public GoToFirstThreeCardPageResponse(ArrayList<String> firstThreeCardsName) {
+        setResponseType("GoToFirstThreeCardPageResponse");
         this.firstThreeCardsName = firstThreeCardsName;
     }
 

@@ -17,19 +17,19 @@ import java.util.ArrayList;
 
 public class PlayGameRequest extends Request {
 
-    private String userName;
+
     private String gameMode;
 
 
-    public PlayGameRequest(String sendersToken,String userName, String gameMode) {
-        this.userName = userName;
+    public PlayGameRequest(String userName, String gameMode) {
+        setUserName(userName);
         this.gameMode = gameMode;
     }
 
 
     @Override
     public Response execute() {
-        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(getUserName());
         Response response = null;
         ArrayList<Player> thisGameModePlayer = new ArrayList<>();
 
@@ -60,7 +60,7 @@ public class PlayGameRequest extends Request {
             Server.getPlayQueue().remove(thisGameModePlayer.get(0));
             Server.getPlayQueue().remove(thisGameModePlayer.get(1));
 
-            response = new PLayGameResponse(true,userName, player.getCurrentHero().getName(),
+            response = new PLayGameResponse(true,getUserName(), player.getCurrentHero().getName(),
                     whitePlayer.getHero().getName(),blackPlayer.givePassiveToChooseNames());
 
 
@@ -79,19 +79,10 @@ public class PlayGameRequest extends Request {
                 e.printStackTrace();
             }
         } else {
-            response = new PLayGameResponse(false,userName, null, null,null);
+            response = new PLayGameResponse(false,getUserName(), null, null,null);
         }
         Server.getDataBaseHandler().save(player);
         return response;
-    }
-
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getGameMode() {

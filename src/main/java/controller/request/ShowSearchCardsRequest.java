@@ -11,18 +11,18 @@ import java.util.ArrayList;
 
 public class ShowSearchCardsRequest extends Request {
 
-    private String userName;
+
     private String searchTextField;
 
 
-    public ShowSearchCardsRequest(String sendersToken,String userName, String searchTextField) {
-        this.userName = userName;
+    public ShowSearchCardsRequest(String userName, String searchTextField) {
+        setUserName(userName);
         this.searchTextField = searchTextField;
     }
 
     @Override
     public Response execute() {
-        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(getUserName());
         Response response = null;
         ArrayList<String> foundCards = new ArrayList<String>();
         for (Cards card : Cards.getAllCards()) {
@@ -52,11 +52,4 @@ public class ShowSearchCardsRequest extends Request {
         this.searchTextField = searchTextField;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 }

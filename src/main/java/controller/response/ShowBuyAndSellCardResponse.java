@@ -6,6 +6,7 @@ public class ShowBuyAndSellCardResponse extends Response {
     private String cardName;
 
     public ShowBuyAndSellCardResponse(String cardName) {
+        setResponseType("ShowBuyAndSellCardResponse");
         this.cardName = cardName;
     }
 

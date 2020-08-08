@@ -10,17 +10,17 @@ import server.Server;
 public class ShowDeckNumberRequest extends Request {
 
 
-    private String userName;
+
     private int number;
 
-    public ShowDeckNumberRequest(String sendersToken,String userName, int number) {
-        this.userName = userName;
+    public ShowDeckNumberRequest(String userName, int number) {
+        setUserName(userName);
         this.number = number;
     }
 
     @Override
     public Response execute() {
-        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(getUserName());
         Administer.sortDecksOfPlayer(player);
         Deck deck = player.getAllDecksOfPlayer().get(number - 1);
         String winsPerPlay;
@@ -37,15 +37,6 @@ public class ShowDeckNumberRequest extends Request {
 
         Server.getDataBaseHandler().save(player);
         return response;
-    }
-
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public int getNumber() {

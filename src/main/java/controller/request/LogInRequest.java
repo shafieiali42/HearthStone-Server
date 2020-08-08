@@ -9,15 +9,14 @@ import server.Server;
 public class LogInRequest extends Request {
 
 
-    private String userName;
     private String password;
     private String mode;
 
 
     public LogInRequest(String sendersToken, String userName, String password, String mode) {
+        setUserName(userName);
         setRequestType("LogInRequest");
         setRequestSendersToken(sendersToken);
-        this.userName = userName;
         this.password = password;
         this.mode = mode;
     }
@@ -26,7 +25,7 @@ public class LogInRequest extends Request {
     public Response execute() {
         Response response = null;
         if (mode.equalsIgnoreCase("SignIn")) {
-            Player player=PlayerController.signIn(userName,password);
+            Player player=PlayerController.signIn(getUserName(),password);
             if (player==null){
                 response=new LogInResponse(false,"Invalid userName with this password");
             }else {
@@ -34,7 +33,7 @@ public class LogInRequest extends Request {
             }
             Server.getDataBaseHandler().save(player);
         } else if (mode.equalsIgnoreCase("SignUp")) {
-            Player player=PlayerController.signUp(userName,password);
+            Player player=PlayerController.signUp(getUserName(),password);
             if (player==null){
                 response=new LogInResponse(false,"There is an user with this userName");
             }else {
@@ -45,14 +44,6 @@ public class LogInRequest extends Request {
         return response;
     }
 
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
     public String getPassword() {
         return password;

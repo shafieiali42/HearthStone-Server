@@ -7,6 +7,7 @@ import Models.Heroes.Mage;
 import Models.Heroes.Rogue;
 import Models.Heroes.Warlock;
 import database.LoadCardsFromDataBase;
+import server.Server;
 
 public class ServerMain {
     public static void main(String[] args) {
@@ -22,6 +23,7 @@ public class ServerMain {
         Warlock.initSpecialCardsOfWarlock();
         Rogue.initSpecialCardsOfRogue();
 
+        new Server().start();
 
     }
 }

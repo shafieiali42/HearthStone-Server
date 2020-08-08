@@ -10,18 +10,18 @@ import server.Server;
 public class ShowDeckRequest extends Request {
 
 
-    private String userName;
+
     private String nameOfDeckToShow;
 
 
-    public ShowDeckRequest(String sendersToken,String userName, String nameOfDeckToShow) {
-        this.userName = userName;
+    public ShowDeckRequest(String userName, String nameOfDeckToShow) {
+        setUserName(userName);
         this.nameOfDeckToShow = nameOfDeckToShow;
     }
 
     @Override
     public Response execute() {
-        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(getUserName());
         Response response=null;
         player.setPlayerStatusInGame(Status.CHANGE_DECK);
         for (Deck deck:player.getAllDecksOfPlayer()){
@@ -32,15 +32,6 @@ public class ShowDeckRequest extends Request {
         response=new ShowDeckResponse(player.getDeckToChange().getUsesHashMap());
         Server.getDataBaseHandler().save(player);
         return response;
-    }
-
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getNameOfDeckToShow() {

@@ -14,7 +14,6 @@ import server.Server;
 public class MousePressRequest extends Request {
 
 
-    private String userName;
     private String cardName;
     private String firstCardNameOfThreeCards;
     private String secondCardNameOfThreeCards;
@@ -25,13 +24,13 @@ public class MousePressRequest extends Request {
     private Alliance alliance;
 
 
-    public MousePressRequest(String sendersToken,String userName, String cardName, String firstCardNameOfThreeCards,
+    public MousePressRequest(String userName, String cardName, String firstCardNameOfThreeCards,
                              String secondCardNameOfThreeCards, String thirdCardNameOfThreeCards,
                              boolean firstCardCanChangeInThreeCards, boolean secondCardCanChangeInThreeCards,
                              boolean thirdCardCanChangeInThreeCards, Alliance alliance) {
 
-
-        this.userName = userName;
+        setUserName(userName);
+        setRequestType("MousePressRequest");
         this.cardName = cardName;
         this.firstCardNameOfThreeCards = firstCardNameOfThreeCards;
         this.secondCardNameOfThreeCards = secondCardNameOfThreeCards;
@@ -44,18 +43,18 @@ public class MousePressRequest extends Request {
 
     @Override
     public Response execute() {
-        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
-        Game game = Server.giveGameWithPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(getUserName());
+        Game game = Server.giveGameWithPlayer(getUserName());
         Response response = null;
 
         if (player.getPlayerStatusInGame().equals(Status.FIRST_THREE_CARDS_PAGE)) {
             int changedCardIndex;
             changedCardIndex = GamePartController.ChangeThisCardFromHands(cardName, firstCardNameOfThreeCards, secondCardNameOfThreeCards,
                     thirdCardNameOfThreeCards, firstCardCanChangeInThreeCards,
-                    secondCardCanChangeInThreeCards, thirdCardCanChangeInThreeCards, Server.giveInGamePlayer(userName));
+                    secondCardCanChangeInThreeCards, thirdCardCanChangeInThreeCards, Server.giveInGamePlayer(getUserName()));
 
             response = new ChangeFirstThreeCardsResponse(changedCardIndex,
-                    GamePartController.setNameOfFirstFriendlyThreeCards(Server.giveInGamePlayer(userName)));
+                    GamePartController.setNameOfFirstFriendlyThreeCards(Server.giveInGamePlayer(getUserName())));
 
         } else if (player.getPlayerStatusInGame().equals(Status.DISCOVER_THREE_WEAPONS)) {
             response = new DiscoverPageResponse(cardName);
@@ -63,22 +62,12 @@ public class MousePressRequest extends Request {
             GamePartController.getPlyingCardOfGameState(game).accept(new AfterSelectVisitor(),
                     GamePartController.getBattleGround(game),
                     GamePartController.getHandCards(game), GamePartController.getDeckCards(game),
-                   null, null,null, null, alliance, game);
+                    null, null, null, null, alliance, game);
         }
         Server.getDataBaseHandler().save(player);
         return response;
     }
 
-
-    @Override
-    public String getUserName() {
-        return userName;
-    }
-
-    @Override
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
     public String getCardName() {
         return cardName;

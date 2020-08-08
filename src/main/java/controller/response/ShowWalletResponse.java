@@ -6,6 +6,7 @@ public class ShowWalletResponse extends Response {
     private int money;
 
     public ShowWalletResponse(int money) {
+        setResponseType("ShowWalletResponse");
         this.money = money;
     }
 

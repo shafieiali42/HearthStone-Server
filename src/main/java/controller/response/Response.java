@@ -2,7 +2,7 @@ package controller.response;
 
 import java.net.Socket;
 
-public abstract class Response {
+public  class Response {
 
 
 

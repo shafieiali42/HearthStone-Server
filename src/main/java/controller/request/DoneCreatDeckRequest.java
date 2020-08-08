@@ -10,18 +10,17 @@ import server.Server;
 public class DoneCreatDeckRequest extends Request {
 
 
-    private String userName;
 
     public DoneCreatDeckRequest(String sendersToken,String userName) {
         setUserName(userName);
         setRequestType("DoneCreatDeckRequest");
         setRequestSendersToken(sendersToken);
-        this.userName = userName;
+
     }
 
     @Override
     public Response execute() {
-        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(getUserName());
         Response response=null;
         if (player.getDeckToChange().getListOfCards().size() < 15) {
             response=new ShowJOptionPaneResponse("You must select at least 15 cards.");

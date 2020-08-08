@@ -10,16 +10,16 @@ import java.util.ArrayList;
 
 public class ShowDeckButtonsRequest extends Request {
 
-    private String userName;
 
-    public ShowDeckButtonsRequest(String sendersToken,String userName) {
-        this.userName = userName;
+
+    public ShowDeckButtonsRequest(String userName) {
+        setUserName(userName);
     }
 
 
     @Override
     public Response execute() {
-        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(getUserName());
         Response response = null;
 
         ArrayList<String> listOfAllDeckOfPlayer = null;
@@ -31,12 +31,4 @@ public class ShowDeckButtonsRequest extends Request {
         return response;
     }
 
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 }

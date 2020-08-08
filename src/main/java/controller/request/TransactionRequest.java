@@ -10,11 +10,11 @@ import server.Server;
 public class TransactionRequest extends Request {
 
 
-    private String userName;
+
     private String cardName;
 
-    public TransactionRequest(String sendersToken,String userName, String cardName) {
-        this.userName = userName;
+    public TransactionRequest(String userName, String cardName) {
+        setUserName(userName);
         this.cardName = cardName;
     }
 
@@ -22,7 +22,7 @@ public class TransactionRequest extends Request {
     @Override
     public Response execute() {
         Response response = null;
-        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(getUserName());
         if (cardName == null) {
             response = new ShowJOptionPaneResponse("Please select a card!");
         } else {
@@ -43,17 +43,6 @@ public class TransactionRequest extends Request {
         return response;
     }
 
-
-
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
     public String getCardName() {
         return cardName;
     }
@@ -61,6 +50,4 @@ public class TransactionRequest extends Request {
     public void setCardName(String cardName) {
         this.cardName = cardName;
     }
-
-
 }

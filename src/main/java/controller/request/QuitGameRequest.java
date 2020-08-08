@@ -9,31 +9,22 @@ import server.Server;
 public class QuitGameRequest extends Request {
 
 
-    private String userName;
 
 
-    public QuitGameRequest(String sendersToken,String userName) {
-        this.userName = userName;
+
+    public QuitGameRequest(String userName) {
+        setUserName(userName);
     }
 
     @Override
     public Response execute() {
-        Player player = Server.getDataBaseHandler().fetchPlayer(userName);
+        Player player = Server.getDataBaseHandler().fetchPlayer(getUserName());
         Response response=null;
-        Game game = Server.giveGameWithPlayer(userName);
+        Game game = Server.giveGameWithPlayer(getUserName());
         Server.getRunningGames().remove(game);
         response=new QuitGameResponse();
         Server.getDataBaseHandler().save(player);
         return response;
     }
 
-    @Override
-    public String getUserName() {
-        return userName;
-    }
-
-    @Override
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 }

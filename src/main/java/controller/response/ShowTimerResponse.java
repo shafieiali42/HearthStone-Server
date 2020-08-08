@@ -9,6 +9,7 @@ public class ShowTimerResponse extends Response {
     private int secondPassed;
 
     public ShowTimerResponse(boolean finished, int secondPassed) {
+        setResponseType("ShowTimerResponse");
         this.finished = finished;
         this.secondPassed = secondPassed;
     }

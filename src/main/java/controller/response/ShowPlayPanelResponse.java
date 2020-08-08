@@ -24,7 +24,7 @@ public class ShowPlayPanelResponse extends Response {
                                  String whitePlayerHeroName, String blackPlayerHeroName,
                                  String whitePlayerWeaponName, String blackPlayerWeaponName, String state) {
 
-
+        setResponseType("ShowPlayPanelResponse");
         this.userName = userName;
         this.nameOfWhiteHandsCards = nameOfWhiteHandsCards;
         this.nameOfBlackHandsCards = nameOfBlackHandsCards;

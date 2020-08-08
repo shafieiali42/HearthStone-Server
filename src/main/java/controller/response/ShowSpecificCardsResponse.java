@@ -11,6 +11,7 @@ public class ShowSpecificCardsResponse extends Response {
 
 
     public ShowSpecificCardsResponse(ArrayList<String> names, String group, String panelName) {
+        setResponseType("ShowSpecificCardsResponse");
         this.names = names;
         this.group=group;
         this.panelName=panelName;
