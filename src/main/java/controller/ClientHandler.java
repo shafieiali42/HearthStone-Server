@@ -46,6 +46,7 @@ public class ClientHandler extends Thread {
             while (true) {
                 while (scanner.hasNextLine()) {
                     String text = scanner.nextLine();
+                    System.out.println(text);
                     switch (counter % 3) {
                         case 0:
                             authToken = text;
@@ -55,6 +56,7 @@ public class ClientHandler extends Thread {
                             break;
                         case 2:
                             message = text;
+                            System.out.println("TOken: "+authToken);
                             Request request = JsonDeSerializerForRequest.deSerializeRequest(authToken, requestName, message);
                             if (authToken.equals("null")) {
                                 if (request.getRequestType().equalsIgnoreCase("LogInRequest")) {
@@ -66,6 +68,7 @@ public class ClientHandler extends Thread {
                                 }
                             } else {
                                 if (request.getRequestSendersToken().equalsIgnoreCase(this.authToken)) {
+                                    System.out.println("before execute");
                                     requests.add(request);
                                     executeRequests();
                                 }
@@ -85,14 +88,17 @@ public class ClientHandler extends Thread {
         printer.println(responseName);
         printer.println(message);
         printer.flush();
+        System.out.println("Sentttt");
     }
 
 
     public void executeRequests() {
+
         Iterator<Request> itr = requests.iterator();
         while (itr.hasNext()) {
             Request request = itr.next();
             Response response = request.execute();
+            System.out.println("type: "+response.getResponseType());
             response.setResponseReceiversToken(request.getRequestSendersToken());
             String message = new Gson().toJson(response);
             sendToThisClient(response.getResponseReceiversToken(), response.getResponseType(), message);

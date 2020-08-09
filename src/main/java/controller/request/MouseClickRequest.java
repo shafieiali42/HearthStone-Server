@@ -7,12 +7,16 @@ import Models.Player.Player;
 import Visitors.CardVisitors.AfterSelectVisitor;
 import Visitors.PowerVisitor.HeroPowerVisitor.AfterSelectPowerVisitor;
 import controller.Status;
+import controller.controllers.Administer;
 import controller.controllers.GamePartController;
-import controller.response.Response;
+import controller.response.*;
 import server.Server;
 
-public class MouseClickRequest extends Request {
+import java.util.HashMap;
 
+import static controller.Status.COLLECTIONS_PAGE;
+
+public class MouseClickRequest extends Request {
 
 
     private String cardName;
@@ -22,10 +26,11 @@ public class MouseClickRequest extends Request {
     private int yCoordinateOfCard;
     private Alliance alliance;
     private String typeOfClick;
+    private boolean isLock;
 
 
     public MouseClickRequest(String userName, String cardName, String typeOfCard, boolean clicked,
-                             int xCoordinateOfCard, int yCoordinateOfCard, Alliance alliance, String typeOfClick) {
+                             int xCoordinateOfCard, int yCoordinateOfCard, Alliance alliance, String typeOfClick,boolean isLock) {
 
         setUserName(userName);
         setRequestType("MouseClickRequest");
@@ -36,13 +41,15 @@ public class MouseClickRequest extends Request {
         this.yCoordinateOfCard = yCoordinateOfCard;
         this.alliance = alliance;
         this.typeOfClick = typeOfClick;
+        this.isLock=isLock;
     }
 
 
     @Override
     public Response execute() {
+
         Player player = Server.getDataBaseHandler().fetchPlayer(getUserName());
-        Game game = Server.giveGameWithPlayer(getUserName());
+
         Response response = null;
         boolean doubleClick;
         int hp;
@@ -50,11 +57,36 @@ public class MouseClickRequest extends Request {
         int numberOfCardInBattleGround;
 
 
+        if (player.getPlayerStatusInGame().equals(Status.BUY_PAGE) ||
+                player.getPlayerStatusInGame().equals(Status.SELL_PAGE)) {
+
+            response = new ShowBuyAndSellCardResponse(cardName);
+        }
+
+        if (player.getPlayerStatusInGame().equals(Status.COLLECTIONS_PAGE)) {
+            if (this.isLock) {
+                player.setPlayerStatusInGame(Status.BUY_PAGE_FROM_COLLECTION);
+                response = new GoToPageResponse("ShopPage");
+            } else {
+                response = new ShowJOptionPaneResponse("You can't Buy this card:((");
+            }
+        }
+
+
+        if (player.getPlayerStatusInGame().equals(Status.MAKE_DECK) ||
+                player.getPlayerStatusInGame().equals(Status.CHANGE_DECK)) {
+                Administer.addGivenCardToCollectionDeck(player, cardName, isLock);//todo
+                response = new AddCardToDeckResponse(player.getUserName(), player.getDeckToChange().getUsesHashMap());
+        }
+
+
+
+
         if (player.getPlayerStatusInGame().equals(Status.CHOOSE_TARGET_FOR_SPELL)) {
             if (typeOfClick.equalsIgnoreCase("Left")) {
 
-
-                GamePartController.setTargetOfSpell(GamePartController.getNumber(xCoordinateOfCard), alliance,game);
+                Game game = Server.giveGameWithPlayer(getUserName());
+                GamePartController.setTargetOfSpell(GamePartController.getNumber(xCoordinateOfCard), alliance, game);
 
                 GamePartController.getPlyingCardOfGameState(game).accept(new AfterSelectVisitor(),
                         GamePartController.getBattleGround(game),
@@ -70,14 +102,14 @@ public class MouseClickRequest extends Request {
 
         if (player.getPlayerStatusInGame().equals(Status.CHOOSE_TARGET_FOR_HERO_POWERS)) {
             if (typeOfClick.equalsIgnoreCase("Left")) {
-
+                Game game = Server.giveGameWithPlayer(getUserName());
                 int number = 0;
 
                 if (this.typeOfCard.equalsIgnoreCase("hero")) {
                     number = -2;
                     numberOfCardInBattleGround = -2;
                 } else {
-                    number =GamePartController.getNumber(xCoordinateOfCard);
+                    number = GamePartController.getNumber(xCoordinateOfCard);
                 }
 
                 GamePartController.setTargetForHeroPower(number, alliance, game);
@@ -101,6 +133,7 @@ public class MouseClickRequest extends Request {
                 alliance = GamePartController.getAlliance(yCoordinateOfCard);
                 int number = 0;
                 numberOfCardInBattleGround = 0;
+                Game game = Server.giveGameWithPlayer(getUserName());
                 if (this.typeOfCard.equalsIgnoreCase("heroPower")) {
                     GamePartController.playHeroPower(game);
                     number = -3;
@@ -117,8 +150,8 @@ public class MouseClickRequest extends Request {
                                     GamePartController.getTarget(game), GamePartController.getAllianceOfAttacker(game),
                                     GamePartController.getAllianceOfTarget(game), game);
 
-                            hp = GamePartController.giveMinionHpWithName(numberOfCardInBattleGround, alliance,game);
-                            attackPower = GamePartController.giveMinionAttackWithName(numberOfCardInBattleGround, alliance,game);
+                            hp = GamePartController.giveMinionHpWithName(numberOfCardInBattleGround, alliance, game);
+                            attackPower = GamePartController.giveMinionAttackWithName(numberOfCardInBattleGround, alliance, game);
                             clicked = false;
                             doubleClick = false;
                             GamePartController.setAttacker(-5, game);
@@ -140,8 +173,8 @@ public class MouseClickRequest extends Request {
                                     GamePartController.getTarget(game), GamePartController.getAllianceOfAttacker(game),
                                     GamePartController.getAllianceOfTarget(game), game);
 
-                            hp = GamePartController.giveMinionHpWithName(numberOfCardInBattleGround, alliance,game);
-                            attackPower = GamePartController.giveMinionAttackWithName(numberOfCardInBattleGround, alliance,game);
+                            hp = GamePartController.giveMinionHpWithName(numberOfCardInBattleGround, alliance, game);
+                            attackPower = GamePartController.giveMinionAttackWithName(numberOfCardInBattleGround, alliance, game);
                             clicked = false;
                             doubleClick = false;
                             GamePartController.setAttacker(-5, game);
@@ -161,6 +194,7 @@ public class MouseClickRequest extends Request {
             } else if (typeOfClick.equalsIgnoreCase("Right")) {
                 clicked = false;
                 doubleClick = false;
+                Game game = Server.giveGameWithPlayer(getUserName());
                 GamePartController.setAttacker(-5, game);
                 GamePartController.setTarget(-5, game);
                 GamePartController.setAllianceAttacker(null, game);
@@ -220,5 +254,13 @@ public class MouseClickRequest extends Request {
 
     public void setAlliance(Alliance alliance) {
         this.alliance = alliance;
+    }
+
+    public boolean isLock() {
+        return isLock;
+    }
+
+    public void setLock(boolean lock) {
+        isLock = lock;
     }
 }

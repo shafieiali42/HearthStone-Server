@@ -6,6 +6,7 @@ import controller.response.RemoveCardFromDeckToChangeResponse;
 import controller.response.Response;
 import server.Server;
 
+import java.util.HashMap;
 import java.util.Iterator;
 
 public class RemoveCardFromDeckToChangeRequest extends Request {
@@ -44,7 +45,7 @@ public class RemoveCardFromDeckToChangeRequest extends Request {
             }
         }
         Server.getDataBaseHandler().save(player);
-        Response response = new RemoveCardFromDeckToChangeResponse(getUserName(),player.getDeckToChange().getUsesHashMap());
+        Response response = new RemoveCardFromDeckToChangeResponse(getUserName(), (HashMap<String, Integer>) player.getDeckToChange().getUsesHashMap());
         return response;
     }
 

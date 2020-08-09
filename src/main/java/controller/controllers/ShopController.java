@@ -66,7 +66,7 @@ public class ShopController {
                 card = cardInBuyableCards.copy();
                 if (player.getMoney() >= cardInBuyableCards.getMoneyCost())
                     player.setMoney(player.getMoney() - cardInBuyableCards.getMoneyCost());
-                player.getLoggerOfMyPlayer().info("Buy: " + cardName);
+//                player.getLoggerOfMyPlayer().info("Buy: " + cardName);
                 canBuyThisCard = true;
             }
         }
@@ -76,7 +76,7 @@ public class ShopController {
 
         if (canBuyThisCard) {
             player.getAllCardsOfPlayer().add(card);
-            player.getLoggerOfMyPlayer().info("Buy " + card.getName());
+//            player.getLoggerOfMyPlayer().info("Buy " + card.getName());
             setBuyableCardsOfPlayer(player);
 
         }
@@ -93,12 +93,12 @@ public class ShopController {
                 card = cardInSalableCards.copy();
                 player.setMoney(player.getMoney() + card.getMoneyCost());
 
-                player.getLoggerOfMyPlayer().info("Sell: " + card.getName());
+//                player.getLoggerOfMyPlayer().info("Sell: " + card.getName());
                 canSellThisCard = true;
                 player.getAllCardsOfPlayer().removeIf(card1 -> cardName.equalsIgnoreCase(card1.getName()));
             }
         }
-        player.getLoggerOfMyPlayer().info("Sell " + card.getName());
+//        player.getLoggerOfMyPlayer().info("Sell " + card.getName());
         setSellableCardsOfPlayer(player);
         return canSellThisCard;
     }

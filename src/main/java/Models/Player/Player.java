@@ -5,85 +5,110 @@ import Models.Deck.Deck;
 import Models.Heroes.*;
 import com.google.gson.annotations.Expose;
 import controller.Status;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import utility.Log.LoggerOfProject;
 
 import javax.persistence.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 @Entity
-public class Player {
+public class Player implements Comparable<Player> {
 
 
-   @Id
+    @Id
     private String userName;
-   @Column
+    @Column
     private String passWord;
     @Column
     private String SignInOrSignup;
     @Column
     private int money;
-    @Column
-    private  Mage mage;
-    @Column
-    private  Rogue rogue;
-    @Column
-    private   Warlock warlock;
-    @Column
-    private  Hunter hunter;
-    @Column
-    private  Priest priest;
-    @Column
+    @ManyToOne
+    private Mage mage;
+    @ManyToOne
+    private Rogue rogue;
+    @ManyToOne
+    private Warlock warlock;
+    @ManyToOne
+    private Hunter hunter;
+    @ManyToOne
+    private Priest priest;
+    @ManyToOne
     private Heroes currentHero;
     @Column
-    private ArrayList<Heroes> availableHeroes = new ArrayList<Heroes>();
+    @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "availableHeroes")
+    private List<Heroes> availableHeroes = new ArrayList<Heroes>();
     @Column
-    private ArrayList<Cards> allCardsOfPlayer = new ArrayList<Cards>();
+    @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "allCardsOfPlayer")
+    private List<Cards> allCardsOfPlayer = new ArrayList<Cards>();
     @Column
-    private ArrayList<Cards> SalableCards = new ArrayList<Cards>();
+    @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "SalableCards")
+    private List<Cards> SalableCards = new ArrayList<Cards>();
     @Column
-    private ArrayList<Cards> BuyableCards = new ArrayList<Cards>();
+    @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "BuyableCards")
+    private List<Cards> BuyableCards = new ArrayList<Cards>();
     @Column
-    private ArrayList<Cards> lockCards = new ArrayList<Cards>();
+    @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "lockCards")
+    private List<Cards> lockCards = new ArrayList<Cards>();
     @Column
-    private ArrayList<Deck> allDecksOfPlayer = new ArrayList<Deck>();
-    @Column
+    @OneToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @JoinTable(name = "allDecksOfPlayer")
+    private List<Deck> allDecksOfPlayer = new ArrayList<>();
+    @OneToOne
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private Deck currentDeck;
     @Enumerated(EnumType.STRING)
     @Column
     private Status playerStatusInGame;
-    @Column
+    @OneToOne
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private Deck deckToChange;
     @Column
     private boolean online;
-    @Transient
-    private transient Logger loggerOfMyPlayer;
+    @Column
+    private int numOfCups;
+//    @Transient
+//    private transient Logger loggerOfMyPlayer;
 
 
 
 
+    public Player(){}
 
 
-
-
-
-    public Player(String userName, String passWord)  {
+    public Player(String userName, String passWord) {
         this.userName = userName;
         this.passWord = passWord;
-        this.mage=new Mage();
-        this.rogue=new Rogue();
-        this.warlock=new Warlock();
-        this.hunter=new Hunter();
-        this.priest=new Priest();
-        this.currentHero=this.mage;
+        this.mage = new Mage();
+        this.rogue = new Rogue();
+        this.warlock = new Warlock();
+        this.hunter = new Hunter();
+        this.priest = new Priest();
+        this.currentHero = this.mage;
         this.availableHeroes.add(mage);
         this.availableHeroes.add(rogue);
         this.availableHeroes.add(warlock);
         this.availableHeroes.add(hunter);
         this.availableHeroes.add(priest);
         this.defineFirstCardsForPlayer();
-        setLoggerOfMyPlayer();
+//        setLoggerOfMyPlayer();
         this.money = 500;
         currentDeck = new Deck();
     }
@@ -112,7 +137,7 @@ public class Player {
     //**********************
 
 
-    public ArrayList<Cards> getSalableCards() {
+    public List<Cards> getSalableCards() {
         return SalableCards;
     }
 
@@ -136,31 +161,31 @@ public class Player {
         return money;
     }
 
-    public ArrayList<Cards> getBuyableCards() {
+    public List<Cards> getBuyableCards() {
         return BuyableCards;
     }
 
-    public ArrayList<Deck> getAllDecksOfPlayer() {
+    public List<Deck> getAllDecksOfPlayer() {
         return allDecksOfPlayer;
     }
 
-    public ArrayList<Cards> getLockCards() {
+    public List<Cards> getLockCards() {
         return lockCards;
     }
 
-    public ArrayList<Cards> getAllCardsOfPlayer() {
+    public List<Cards> getAllCardsOfPlayer() {
         return allCardsOfPlayer;
     }
 
-    public Logger getLoggerOfMyPlayer() {
-        return loggerOfMyPlayer;
-    }
+//    public Logger getLoggerOfMyPlayer() {
+//        return loggerOfMyPlayer;
+//    }
 
     public Heroes getCurrentHero() {
         return currentHero;
     }
 
-    public ArrayList<Heroes> getAvailableHeroes() {
+    public List<Heroes> getAvailableHeroes() {
         return availableHeroes;
     }
 
@@ -171,6 +196,7 @@ public class Player {
     public void setAvailableHeroes(ArrayList<Heroes> availableHeroes) {
         this.availableHeroes = availableHeroes;
     }
+
     public void setSignInOrSignup(String signInOrSignup) {
         this.SignInOrSignup = signInOrSignup;
     }
@@ -179,9 +205,9 @@ public class Player {
         this.passWord = passWord;
     }
 
-    public void setLoggerOfMyPlayer()  {
-        this.loggerOfMyPlayer = LoggerOfProject.getMyLogger("logs/" + this.getUserName() + ".log");
-    }
+//    public void setLoggerOfMyPlayer() {
+//        this.loggerOfMyPlayer = LoggerOfProject.getMyLogger("logs/" + this.getUserName() + ".log");
+//    }
 
     public void setMoney(int money) {
         this.money = money;
@@ -257,5 +283,25 @@ public class Player {
 
     public void setOnline(boolean online) {
         this.online = online;
+    }
+
+    public int getNumOfCups() {
+        return numOfCups;
+    }
+
+    public void setNumOfCups(int numOfCups) {
+        this.numOfCups = numOfCups;
+    }
+
+    @Override
+    public int compareTo(Player o) {
+        if (this.numOfCups>o.numOfCups){
+            return 1;
+        }else if(this.numOfCups<o.numOfCups){
+            return -1;
+        }else {
+          return (this.userName.compareTo(o.userName));
+        }
+
     }
 }

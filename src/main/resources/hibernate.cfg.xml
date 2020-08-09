@@ -10,9 +10,9 @@
 
         <!-- update the database schema on startup -->
 
-                <property name="hbm2ddl.auto">create</property>
+<!--                <property name="hbm2ddl.auto">create</property>-->
 
-<!--                <property name="hbm2ddl.auto">update</property>-->
+                <property name="hbm2ddl.auto">update</property>
 
 
 <!--        <mapping class="Models.Student"/>-->

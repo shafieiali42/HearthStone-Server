@@ -1,7 +1,6 @@
 package Models.Deck;
 
 
-
 import Models.Cards.CardClasses.Cards;
 import Models.Heroes.Heroes;
 import org.hibernate.annotations.Cascade;
@@ -26,18 +25,24 @@ public class Deck implements Comparable<Deck> {
     private String name;
     @Column
     private String heroName;
-    @Column
+    @ManyToOne
     private Heroes hero;
     @Column
     private int numberOfWins;
     @Column
     private int numberOfUses;
     @Column
+    @ManyToMany
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "Deck_Cards")
     private List<Cards> listOfCards;
-    @Column
+    @ManyToOne
     private Cards mostUsedCard;
     @Column
     private int manaAvg;
+    @Column
+    private int cups;
 
     @Column
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -45,27 +50,25 @@ public class Deck implements Comparable<Deck> {
     @ElementCollection
     @JoinTable
     @MapKeyColumn
-    private Map<String, Integer> usesHashMap =new HashMap<String, Integer>();
+    private Map<String, Integer> usesHashMap = new HashMap<String, Integer>();
 
-    public void initUsesHashMapFromArrayList(){
+    public void initUsesHashMapFromArrayList() {
         usesHashMap.clear();
-        for (Cards card:listOfCards){
-            boolean isInHashMap=false;
-            for (String key:usesHashMap.keySet()){
-                if (key.equals(card.getName())){
-                    isInHashMap=true;
-                    usesHashMap.put(key,usesHashMap.get(key)+1);
+        for (Cards card : listOfCards) {
+            boolean isInHashMap = false;
+            for (String key : usesHashMap.keySet()) {
+                if (key.equals(card.getName())) {
+                    isInHashMap = true;
+                    usesHashMap.put(key, usesHashMap.get(key) + 1);
                     break;
                 }
             }
-            if (!isInHashMap){
-                usesHashMap.put(card.getName(),1);
+            if (!isInHashMap) {
+                usesHashMap.put(card.getName(), 1);
             }
 
         }
     }
-
-
 
 
     public Deck() {
@@ -89,9 +92,9 @@ public class Deck implements Comparable<Deck> {
         manaAvg = sum / listOfCards.size();
     }
 
-    public void defineMostUsedCard(){
+    public void defineMostUsedCard() {
         Collections.sort(listOfCards);
-        mostUsedCard=listOfCards.get(0);
+        mostUsedCard = listOfCards.get(0);
     }
 
 
@@ -146,7 +149,7 @@ public class Deck implements Comparable<Deck> {
         this.numberOfUses = numberOfUses;
     }
 
-    public ArrayList<Cards> getListOfCards() {
+    public List<Cards> getListOfCards() {
         return listOfCards;
     }
 
@@ -162,18 +165,32 @@ public class Deck implements Comparable<Deck> {
         this.mostUsedCard = mostUsedCard;
     }
 
-    public HashMap<String, Integer> getUsesHashMap() {
+    public Map<String, Integer> getUsesHashMap() {
         return usesHashMap;
     }
 
+    public void setManaAvg(int manaAvg) {
+        this.manaAvg = manaAvg;
+    }
 
+    public int getCups() {
+        return cups;
+    }
+
+    public void setCups(int cups) {
+        this.cups = cups;
+    }
 
 
     @Override
     public int compareTo(Deck deck) {
         double a = (double) this.numberOfWins / this.numberOfUses;
         double b = (double) deck.numberOfWins / deck.numberOfUses;
-        if (a < b) {
+        if(this.cups<deck.cups){
+            return 1;
+        }else if(this.cups>deck.cups){
+            return -1;
+        }else if (a < b) {
             return 1;
         } else if (a > b) {
             return -1;

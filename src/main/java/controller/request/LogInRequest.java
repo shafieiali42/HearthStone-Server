@@ -1,6 +1,7 @@
 package controller.request;
 
 import Models.Player.Player;
+import controller.Status;
 import controller.controllers.PlayerController;
 import controller.response.LogInResponse;
 import controller.response.Response;
@@ -29,6 +30,7 @@ public class LogInRequest extends Request {
             if (player==null){
                 response=new LogInResponse(false,"Invalid userName with this password");
             }else {
+                player.setPlayerStatusInGame(Status.MAIN_MENU_PAGE);
                 response =new LogInResponse(true,player.getUserName());
             }
             Server.getDataBaseHandler().save(player);
@@ -37,9 +39,11 @@ public class LogInRequest extends Request {
             if (player==null){
                 response=new LogInResponse(false,"There is an user with this userName");
             }else {
+                player.setPlayerStatusInGame(Status.MAIN_MENU_PAGE);
                 response =new LogInResponse(true,player.getUserName());
+                Server.getDataBaseHandler().save(player);
             }
-            Server.getDataBaseHandler().save(player);
+
         }
         return response;
     }

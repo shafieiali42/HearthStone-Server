@@ -7,6 +7,8 @@ import controller.response.Response;
 import controller.response.ShowDeckResponse;
 import server.Server;
 
+import java.util.HashMap;
+
 public class ShowDeckRequest extends Request {
 
 
@@ -29,7 +31,7 @@ public class ShowDeckRequest extends Request {
                 player.setDeckToChange(deck);
             }
         }
-        response=new ShowDeckResponse(player.getDeckToChange().getUsesHashMap());
+        response=new ShowDeckResponse((HashMap<String, Integer>) player.getDeckToChange().getUsesHashMap());
         Server.getDataBaseHandler().save(player);
         return response;
     }

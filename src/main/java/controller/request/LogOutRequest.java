@@ -9,21 +9,28 @@ import server.Server;
 public class LogOutRequest extends Request {
 
 
+    private boolean exit;
 
-
-
-    public LogOutRequest(String sendersToken, String userName) {
+    public LogOutRequest(String sendersToken, String userName, boolean exit) {
         setUserName(userName);
         setRequestType("LogOutRequest");
         setRequestSendersToken(sendersToken);
+        this.exit=exit;
     }
 
     @Override
     public Response execute() {
         Player player = Server.getDataBaseHandler().fetchPlayer(getUserName());
-        Response response =new LogOutResponse(PlayerController.logOut(player));
+        Response response = new LogOutResponse(PlayerController.logOut(player),exit);
         Server.getDataBaseHandler().save(player);
         return response;
     }
 
+    public boolean isExit() {
+        return exit;
+    }
+
+    public void setExit(boolean exit) {
+        this.exit = exit;
+    }
 }

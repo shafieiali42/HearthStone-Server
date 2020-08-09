@@ -74,8 +74,8 @@ public class PlayerController {
                 player.setOnline(true);
                 player.setSignInOrSignup("Signin");
                 player.setSignInOrSignup("Signin");
-                player.setLoggerOfMyPlayer();
-                player.getLoggerOfMyPlayer().info("sign_in " + player.getUserName());
+//                player.setLoggerOfMyPlayer();
+//                player.getLoggerOfMyPlayer().info("sign_in " + player.getUserName());
 
                 return player;
             }
@@ -109,12 +109,12 @@ public class PlayerController {
             player.setSignInOrSignup("Signup");
             player.setSignInOrSignup("Signup");
             player.setOnline(true);
-            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-            Calendar cal = Calendar.getInstance();
-            player.getLoggerOfMyPlayer().info("USER: " + player.getUserName());
-            player.getLoggerOfMyPlayer().info("CREATED_AT:" + dateFormat.format(cal.getTime()));
-            player.getLoggerOfMyPlayer().info("PASSWORD: " + player.getPassWord());
-            player.getLoggerOfMyPlayer().info("sign_up " + player.getUserName());
+//            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//            Calendar cal = Calendar.getInstance();
+//            player.getLoggerOfMyPlayer().info("USER: " + player.getUserName());
+//            player.getLoggerOfMyPlayer().info("CREATED_AT:" + dateFormat.format(cal.getTime()));
+//            player.getLoggerOfMyPlayer().info("PASSWORD: " + player.getPassWord());
+//            player.getLoggerOfMyPlayer().info("sign_up " + player.getUserName());
             return player;
         } else {
             return null;
@@ -125,9 +125,9 @@ public class PlayerController {
         player.setOnline(false);
         Server.getDataBaseHandler().save(player);
 //            ParsePlayerObjectIntoJson.serializePlayer(player);
-        player.getLoggerOfMyPlayer().info("Log_out " + player.getUserName());
-        player.getLoggerOfMyPlayer().getHandlers()[0].close();
-        player = null;
+//        player.getLoggerOfMyPlayer().info("Log_out " + player.getUserName());
+//        player.getLoggerOfMyPlayer().getHandlers()[0].close();
+//        player = null;
         return true;
     }
 

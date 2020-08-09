@@ -36,6 +36,8 @@ public class Server extends Thread {
             this.serverPort = 8000;
             serverSocket = new ServerSocket(serverPort);
             sockets = new HashMap<>();
+            playQueue=new HashMap<>();
+            runningGames=new ArrayList<>();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -44,7 +46,7 @@ public class Server extends Thread {
     @Override
     public void run() {
         running = true;
-        while (running) {
+        while (true) {
             Socket socket = null;
             try {
                 socket = serverSocket.accept();

@@ -6,6 +6,8 @@ import controller.Status;
 import controller.response.*;
 import server.Server;
 
+import java.util.HashMap;
+
 public class LeftClickRequest extends Request {
 
 
@@ -46,7 +48,7 @@ public class LeftClickRequest extends Request {
             case CHANGE_DECK:
 
                 Administer.addGivenCardToCollectionDeck(player, cardName, isLock);//todo
-                response =new AddCardToDeckResponse(player.getUserName(),player.getDeckToChange().getUsesHashMap());
+                response =new AddCardToDeckResponse(player.getUserName(), (HashMap<String, Integer>) player.getDeckToChange().getUsesHashMap());
                 break;
 
 

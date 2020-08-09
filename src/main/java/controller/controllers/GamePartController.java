@@ -778,7 +778,7 @@ public class GamePartController {
             }
         }
 
-        if (game.getWhitePlayer().getHero().getHealthPower() <= 0) {
+        if (game.getBlackPlayer().getHero().getHealthPower() <= 0) {
             game.getWhitePlayer().getDeck().
                     setNumberOfUses(game.getWhitePlayer().getDeck().getNumberOfUses() + 1);
 
@@ -789,10 +789,16 @@ public class GamePartController {
                     setNumberOfWins(game.getWhitePlayer().getDeck().getNumberOfWins() + 1);
 
 
+            game.getWhitePlayer().getDeck().setCups(game.getWhitePlayer().getDeck().getCups()+1);
+            game.getBlackPlayer().getDeck().setCups(game.getBlackPlayer().getDeck().getCups()-1);
+
+            game.getBlackPlayer().getPlayer().setNumOfCups(Math.max(0,(game.getBlackPlayer().getPlayer().getNumOfCups()-1)));
+            game.getWhitePlayer().getPlayer().setNumOfCups(game.getWhitePlayer().getPlayer().getNumOfCups()+1);
+
             result = "Friendly Player wins!";
 //            JOptionPane.showMessageDialog(MyMainFrame.getInstance(),
 //                    "Friendly Player wins!", "End Match", JOptionPane.INFORMATION_MESSAGE);
-        } else if (game.getBlackPlayer().getHero().getHealthPower() <= 0) {
+        } else if (game.getWhitePlayer().getHero().getHealthPower() <= 0) {
 
             game.getWhitePlayer().getDeck().
                     setNumberOfUses(game.getWhitePlayer().getDeck().getNumberOfUses() + 1);
@@ -802,6 +808,12 @@ public class GamePartController {
 
             game.getBlackPlayer().getDeck().
                     setNumberOfWins(game.getBlackPlayer().getDeck().getNumberOfWins() + 1);
+
+            game.getBlackPlayer().getDeck().setCups(game.getBlackPlayer().getDeck().getCups()+1);
+            game.getWhitePlayer().getDeck().setCups(game.getWhitePlayer().getDeck().getCups()-1);
+
+            game.getWhitePlayer().getPlayer().setNumOfCups(Math.max(0,(game.getWhitePlayer().getPlayer().getNumOfCups()-1)));
+            game.getBlackPlayer().getPlayer().setNumOfCups(game.getBlackPlayer().getPlayer().getNumOfCups()+1);
 
             result = "Enemy Player wins!";
 

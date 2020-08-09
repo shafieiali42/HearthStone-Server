@@ -10,6 +10,8 @@ import controller.response.ShowSpecificCardsResponse;
 import server.Server;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class ShowSpecificCardsRequest extends Request {
 
@@ -29,21 +31,21 @@ public class ShowSpecificCardsRequest extends Request {
     @Override
     public Response execute() {
         Player player = Server.getDataBaseHandler().fetchPlayer(getUserName());
-        ArrayList<Cards> cards = new ArrayList<>();
+        List<Cards> cards = new ArrayList<>();
         switch (group) {
             case "Buyable":
-                cards = player.getBuyableCards();
+                cards =  player.getBuyableCards();
                 player.setPlayerStatusInGame(Status.BUY_PAGE);
                 break;
             case "Salable":
-                cards = player.getSalableCards();
+                cards =  player.getSalableCards();
                 player.setPlayerStatusInGame(Status.SELL_PAGE);
                 break;
             case "LockCards":
                 cards = player.getLockCards();
                 break;
             case "UnLockCards":
-                cards =player.getAllCardsOfPlayer();
+                cards = player.getAllCardsOfPlayer();
                 break;
             case "AllCards":
                 cards = Cards.getAllCards();

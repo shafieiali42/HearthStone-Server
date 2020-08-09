@@ -8,8 +8,10 @@ import Models.Cards.GameCards.SpellCards.SpellFactory;
 import Models.Cards.GameCards.SpellCards.SpellNames;
 import Models.Cards.GameCards.WeaponCards.WeaponFactory;
 import Models.Cards.GameCards.WeaponCards.WeaponNames;
+import Models.Heroes.HeroFactory;
+import Models.Heroes.HeroNames;
 
-public class SaveAllCards {
+public class SaveAllCardsAndHeroes {
 
 
     private static DataBaseHandler dataBaseHandler = new DataBaseHandler(new MyPostrgeSqlDataBase());
@@ -17,9 +19,17 @@ public class SaveAllCards {
     private static SpellFactory spellFactory = new SpellFactory();
     private static WeaponFactory weaponFactory = new WeaponFactory();
     private static PassiveFactory passiveFactory = new PassiveFactory();
+    private static HeroFactory heroFactory=new HeroFactory();
 
     public static void main(String[] args) {
         saveCards();
+        saveHeroes();
+    }
+
+    private static void saveHeroes(){
+        for (HeroNames heroName:HeroNames.values()){
+            dataBaseHandler.save(heroFactory.buildHero(heroName));
+        }
     }
 
     private static void saveMinions(){
