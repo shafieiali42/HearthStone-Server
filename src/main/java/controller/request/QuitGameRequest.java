@@ -13,6 +13,7 @@ public class QuitGameRequest extends Request {
 
 
     public QuitGameRequest(String userName) {
+        setRequestType("QuitGameRequest");
         setUserName(userName);
     }
 

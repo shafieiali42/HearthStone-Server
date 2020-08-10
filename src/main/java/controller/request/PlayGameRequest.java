@@ -55,7 +55,8 @@ public class PlayGameRequest extends Request {
         if (thisGameModePlayer.size() >= 2) {
             InGamePlayer whitePlayer = new InGamePlayer(thisGameModePlayer.get(0), false);
             InGamePlayer blackPlayer = new InGamePlayer(thisGameModePlayer.get(1), false);//this player
-            Game game = new Game(whitePlayer, blackPlayer);
+            System.out.println("++++++++++++++"+gameMode);
+            Game game = new Game(whitePlayer, blackPlayer,gameMode);
             Server.getRunningGames().add(game);
             Server.getPlayQueue().remove(thisGameModePlayer.get(0));
             Server.getPlayQueue().remove(thisGameModePlayer.get(1));
@@ -78,8 +79,10 @@ public class PlayGameRequest extends Request {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            thisGameModePlayer.remove(0);
+            thisGameModePlayer.remove(0);
         } else {
-            response = new PLayGameResponse(false,getUserName(), null, null,null);
+            response = new PLayGameResponse(false,getUserName(), "", "",new ArrayList<>());//TODO NULLLLLLL
         }
         Server.getDataBaseHandler().save(player);
         return response;

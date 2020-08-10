@@ -29,17 +29,34 @@ public class OkButtonOnFirstThreeCardsPageRequest extends Request {
         if (!Server.giveGameWithPlayer(getUserName()).getGameMode().equalsIgnoreCase("OfflineGame")) {
             ArrayList<String> whiteHandsCards = GamePartController.giveNameOfCardsList(whitePlayer.getHandsCards());
             ArrayList<String> whiteBattleGroundCards = GamePartController.giveNameOfCardsList(whitePlayer.getBattleGroundCards());
-            response = new ShowPlayPanelResponse(getUserName(),whiteHandsCards, null, whiteBattleGroundCards,
-                    null, whitePlayer.getHero().getName(), blackPlayer.getHero().getName(),
-                    whitePlayer.getCurrentWeapon().getName(), blackPlayer.getCurrentWeapon().getName(),"StartGame");
+
+            response = new ShowPlayPanelResponse(getUserName(),whiteHandsCards, new ArrayList<>(), whiteBattleGroundCards,
+                    new ArrayList<>(), whitePlayer.getHeroesName(), blackPlayer.getHeroesName(),
+                    whitePlayer.getCurrentWeaponsName(), blackPlayer.getCurrentWeaponsName(),"StartGame",
+                    whitePlayer.getPlayer().getCurrentHero().getHealthPower()+"",
+                    blackPlayer.getPlayer().getCurrentHero().getHealthPower()+"",
+                    whitePlayer.getPlayer().getCurrentHero().getAttackPower()+"",
+                    blackPlayer.getPlayer().getCurrentHero().getAttackPower()+"",
+                    whitePlayer.giveCurrentWeaponDurability()+"",
+                    blackPlayer.giveCurrentWeaponDurability()+"",
+                    whitePlayer.giveCurrentWeaponAttackPower()+"",
+                    blackPlayer.giveCurrentWeaponAttackPower()+"");
         }else {
             ArrayList<String> whiteHandsCards = GamePartController.giveNameOfCardsList(whitePlayer.getHandsCards());
             ArrayList<String> whiteBattleGroundCards = GamePartController.giveNameOfCardsList(whitePlayer.getBattleGroundCards());
             ArrayList<String> blackHandsCards = GamePartController.giveNameOfCardsList(blackPlayer.getHandsCards());
             ArrayList<String> blackBattleGroundCards = GamePartController.giveNameOfCardsList(blackPlayer.getBattleGroundCards());
             response = new ShowPlayPanelResponse(getUserName(),whiteHandsCards, blackHandsCards, whiteBattleGroundCards,
-                    blackBattleGroundCards, whitePlayer.getHero().getName(), blackPlayer.getHero().getName(),
-                    whitePlayer.getCurrentWeapon().getName(), blackPlayer.getCurrentWeapon().getName(),"StartGame");
+                    blackBattleGroundCards, whitePlayer.getHeroesName(), blackPlayer.getHeroesName(),
+                    whitePlayer.getCurrentWeaponsName(), blackPlayer.getCurrentWeaponsName(),"StartGame",
+                    whitePlayer.getPlayer().getCurrentHero().getHealthPower()+"",
+                    blackPlayer.getPlayer().getCurrentHero().getHealthPower()+"",
+                    whitePlayer.getPlayer().getCurrentHero().getAttackPower()+"",
+                    blackPlayer.getPlayer().getCurrentHero().getAttackPower()+"",
+                    whitePlayer.giveCurrentWeaponDurability()+"",
+                    blackPlayer.giveCurrentWeaponDurability()+"",
+                    whitePlayer.giveCurrentWeaponAttackPower()+"",
+                    blackPlayer.giveCurrentWeaponAttackPower()+"");
         }
         Server.getDataBaseHandler().save(player);
         return response;

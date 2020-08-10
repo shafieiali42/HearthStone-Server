@@ -13,7 +13,7 @@ import controller.controllers.Mapper;
 public class Game {
 
 
-    private static Object[] gameModes = new Object[]{"Normal Game", "Two Player", "Training Game", "Deck Reader"};
+    private static Object[] gameModes = new Object[]{"OnlineGame", "DeckReader", "OfflineGame"};
 
 
     private InGamePlayer whitePlayer;
@@ -43,7 +43,8 @@ public class Game {
 
     private String selectedWeaponInDiscoverPage;
 
-    public Game(InGamePlayer whitePlayer, InGamePlayer blackPlayer) {
+    public Game(InGamePlayer whitePlayer, InGamePlayer blackPlayer,String gameMode) {
+        this.gameMode=gameMode;
         initGameState(whitePlayer, blackPlayer);
         whitePlayer.setMyTimer(new MyTimer(whitePlayer.getPlayer().getUserName()));
         blackPlayer.setMyTimer(new MyTimer(blackPlayer.getPlayer().getUserName()));

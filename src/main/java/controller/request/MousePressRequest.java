@@ -47,6 +47,8 @@ public class MousePressRequest extends Request {
         Game game = Server.giveGameWithPlayer(getUserName());
         Response response = null;
 
+
+
         if (player.getPlayerStatusInGame().equals(Status.FIRST_THREE_CARDS_PAGE)) {
             int changedCardIndex;
             changedCardIndex = GamePartController.ChangeThisCardFromHands(cardName, firstCardNameOfThreeCards, secondCardNameOfThreeCards,

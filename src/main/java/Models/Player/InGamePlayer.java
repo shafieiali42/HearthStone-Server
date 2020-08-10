@@ -69,6 +69,33 @@ public class InGamePlayer {
 
 
 
+
+    public String giveCurrentWeaponDurability(){
+        if (currentWeapon==null){
+            return "";
+        }else {
+            return currentWeapon.getDurability()+"";
+        }
+    }
+
+
+    public String giveCurrentWeaponAttackPower(){
+        if (currentWeapon==null){
+            return "";
+        }else {
+            return currentWeapon.getAttackPower()+"";
+        }
+    }
+
+
+    public String getHeroesName(){
+        if (hero==null){
+            return "";
+        }else {
+            return hero.getName();
+        }
+    }
+
     public ArrayList<String> givePassiveToChooseNames(){
         ArrayList<String>passiveToChooseNames=new ArrayList<>();
         for (Passive passive:passivesToChoose){
@@ -172,6 +199,14 @@ public class InGamePlayer {
         this.battleGroundCards = battleGroundCards;
     }
 
+    public String getCurrentWeaponsName(){
+        if (currentWeapon==null){
+            return "";
+        }else {
+            return currentWeapon.getName();
+        }
+    }
+
     public Weapon getCurrentWeapon() {
         return currentWeapon;
     }
@@ -235,4 +270,5 @@ public class InGamePlayer {
     public void setMyTimer(MyTimer myTimer) {
         this.myTimer = myTimer;
     }
+
 }

@@ -98,11 +98,13 @@ public class ClientHandler extends Thread {
         while (itr.hasNext()) {
             Request request = itr.next();
             Response response = request.execute();
-            System.out.println("type: "+response.getResponseType());
-            response.setResponseReceiversToken(request.getRequestSendersToken());
-            String message = new Gson().toJson(response);
-            sendToThisClient(response.getResponseReceiversToken(), response.getResponseType(), message);
-            checkIfShouldMakeTokenNull(response);
+            if(response!=null){
+                System.out.println("type: "+response.getResponseType());
+                response.setResponseReceiversToken(request.getRequestSendersToken());
+                String message = new Gson().toJson(response);
+                sendToThisClient(response.getResponseReceiversToken(), response.getResponseType(), message);
+                checkIfShouldMakeTokenNull(response);
+            }
             itr.remove();
         }
     }

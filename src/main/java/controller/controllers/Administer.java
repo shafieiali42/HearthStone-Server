@@ -11,7 +11,7 @@ import java.util.*;
 public class Administer {
 
 
-    public static String givetMyRank(String userName){
+    public static String giveMyRank(String userName){
         List<Player> players = Server.getDataBaseHandler().fetchAll(Player.class);
         Collections.sort(players);
         for (int i=0;i<players.size();i++){

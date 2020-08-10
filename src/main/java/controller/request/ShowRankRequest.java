@@ -1,10 +1,8 @@
 package controller.request;
 
-import Models.Player.Player;
 import controller.controllers.Administer;
 import controller.response.Response;
 import controller.response.ShowRankResponse;
-import server.Server;
 
 public class ShowRankRequest extends Request {
 
@@ -23,7 +21,7 @@ public class ShowRankRequest extends Request {
         Response response = null;
         if (typeOfRank.equalsIgnoreCase("MyRank")) {
             response =new ShowRankResponse(Administer.givePlayersAroundMe(getUserName(),"name"),
-                    Administer.givePlayersAroundMe(getUserName(),"cup"),typeOfRank,Administer.givetMyRank(getUserName()));
+                    Administer.givePlayersAroundMe(getUserName(),"cup"),typeOfRank,Administer.giveMyRank(getUserName()));
         } else if (typeOfRank.equalsIgnoreCase("Top10")) {
             response =new ShowRankResponse(Administer.giveBestPlayers("name"),
                     Administer.giveBestPlayers("cup"),typeOfRank,"");
