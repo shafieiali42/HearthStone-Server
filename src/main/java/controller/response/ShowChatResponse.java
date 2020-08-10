@@ -6,6 +6,7 @@ public class ShowChatResponse extends Response{
     private String text;
 
     public ShowChatResponse(String text) {
+        setResponseType("ShowChatResponse");
         this.text = text;
     }
 

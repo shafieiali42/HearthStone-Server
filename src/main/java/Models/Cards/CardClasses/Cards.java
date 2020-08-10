@@ -9,10 +9,7 @@ import Visitors.CardVisitors.Visitable;
 import Visitors.CardVisitors.Visitor;
 import com.google.gson.annotations.Expose;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.util.ArrayList;
 
 @Entity
@@ -20,6 +17,9 @@ public  abstract class Cards implements Comparable<Cards>, Visitable, Cloneable 
 
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Column
     private String name;
     @Column
     private int manaCost;

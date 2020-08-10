@@ -31,7 +31,7 @@ public class ShowDeckRequest extends Request {
                 player.setDeckToChange(deck);
             }
         }
-        response=new ShowDeckResponse((HashMap<String, Integer>) player.getDeckToChange().getUsesHashMap());
+        response=new ShowDeckResponse(player.getDeckToChange().getUsesHashMap());
         Server.getDataBaseHandler().save(player);
         return response;
     }

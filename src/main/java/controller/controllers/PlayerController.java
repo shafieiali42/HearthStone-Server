@@ -133,51 +133,47 @@ public class PlayerController {
 
     public static boolean deletePlayer(String userName, String password, Player player) {
         if (password.equals(player.getPassWord())) {
-            try {
-                player.setOnline(false);
-                File temp = new File("logs/" + "temp.txt");
-                FileReader fileReader = null;
-                fileReader = new FileReader("logs/" + player.getUserName() + ".log");
-                BufferedReader bufferedReader = new BufferedReader(fileReader);
-                FileWriter fileWriter = null;
-                fileWriter = new FileWriter(temp);
-                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-                String st = new String();
-                while ((st = bufferedReader.readLine()) != null) {
-                    bufferedWriter.write(st + "\n");
-                    if (st.contains("PASSWORD")) {
-                        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                        Calendar cal = Calendar.getInstance();
-                        bufferedWriter.write("DELETED_AT: " + dateFormat.format(cal.getTime()) + "\n");
-                    }
-                }
-                bufferedReader.close();
-                bufferedWriter.close();
-                fileReader.close();
-                fileWriter.close();
-                FileReader fileReader1 = new FileReader(temp);
-                FileWriter fileWriter1 = new FileWriter("logs/" + player.getUserName() + ".log");
-                BufferedReader bufferedReader1 = new BufferedReader(fileReader1);
-                BufferedWriter bufferedWriter1 = new BufferedWriter(fileWriter1);
-                String string = new String();
-                while ((string = bufferedReader1.readLine()) != null) {
-                    bufferedWriter1.write(string + "\n");
-                }
-                bufferedWriter1.write("Deleted Account!");
-                bufferedReader1.close();
-                bufferedWriter1.flush();
-                bufferedWriter1.close();
-                fileReader1.close();
-                fileWriter1.close();
-                ParsePlayerObjectIntoJson.removePlayer(player);
-                return true;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            player.setOnline(false);
+//                File temp = new File("logs/" + "temp.txt");
+//                FileReader fileReader = null;
+//                fileReader = new FileReader("logs/" + player.getUserName() + ".log");
+//                BufferedReader bufferedReader = new BufferedReader(fileReader);
+//                FileWriter fileWriter = null;
+//                fileWriter = new FileWriter(temp);
+//                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+//                String st = new String();
+//                while ((st = bufferedReader.readLine()) != null) {
+//                    bufferedWriter.write(st + "\n");
+//                    if (st.contains("PASSWORD")) {
+//                        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//                        Calendar cal = Calendar.getInstance();
+//                        bufferedWriter.write("DELETED_AT: " + dateFormat.format(cal.getTime()) + "\n");
+//                    }
+//                }
+//                bufferedReader.close();
+//                bufferedWriter.close();
+//                fileReader.close();
+//                fileWriter.close();
+//                FileReader fileReader1 = new FileReader(temp);
+//                FileWriter fileWriter1 = new FileWriter("logs/" + player.getUserName() + ".log");
+//                BufferedReader bufferedReader1 = new BufferedReader(fileReader1);
+//                BufferedWriter bufferedWriter1 = new BufferedWriter(fileWriter1);
+//                String string = new String();
+//                while ((string = bufferedReader1.readLine()) != null) {
+//                    bufferedWriter1.write(string + "\n");
+//                }
+//                bufferedWriter1.write("Deleted Account!");
+//                bufferedReader1.close();
+//                bufferedWriter1.flush();
+//                bufferedWriter1.close();
+//                fileReader1.close();
+//                fileWriter1.close();
+            Server.getDataBaseHandler().delete(player);
+//                ParsePlayerObjectIntoJson.removePlayer(player);
+            return true;
         } else {
             return false;
         }
-        return false;
     }
 
 }

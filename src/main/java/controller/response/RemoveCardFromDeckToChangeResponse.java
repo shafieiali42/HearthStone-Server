@@ -3,15 +3,16 @@ package controller.response;
 
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class RemoveCardFromDeckToChangeResponse extends Response {
 
 
     private String userName;
-    private HashMap<String, Integer> usesMap;
+    private Map<String, Integer> usesMap;
 
 
-    public RemoveCardFromDeckToChangeResponse(String userName, HashMap<String, Integer> usesMap) {
+    public RemoveCardFromDeckToChangeResponse(String userName, Map<String, Integer> usesMap) {
         setResponseType("RemoveCardFromDeckToChangeResponse");
         this.userName = userName;
         this.usesMap = usesMap;
@@ -29,7 +30,7 @@ public class RemoveCardFromDeckToChangeResponse extends Response {
     }
 
 
-    public HashMap<String, Integer> getUsesMap() {
+    public Map<String, Integer> getUsesMap() {
         return usesMap;
     }
 

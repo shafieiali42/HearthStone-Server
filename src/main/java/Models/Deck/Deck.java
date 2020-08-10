@@ -49,7 +49,7 @@ public class Deck implements Comparable<Deck> {
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @ElementCollection
     @JoinTable
-    @MapKeyColumn
+//    @MapKeyColumn
     private Map<String, Integer> usesHashMap = new HashMap<String, Integer>();
 
     public void initUsesHashMapFromArrayList() {
@@ -186,11 +186,11 @@ public class Deck implements Comparable<Deck> {
     public int compareTo(Deck deck) {
         double a = (double) this.numberOfWins / this.numberOfUses;
         double b = (double) deck.numberOfWins / deck.numberOfUses;
-        if(this.cups<deck.cups){
+        if (this.cups < deck.cups) {
             return 1;
-        }else if(this.cups>deck.cups){
+        } else if (this.cups > deck.cups) {
             return -1;
-        }else if (a < b) {
+        } else if (a < b) {
             return 1;
         } else if (a > b) {
             return -1;

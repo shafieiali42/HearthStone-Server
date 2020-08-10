@@ -23,9 +23,10 @@ public class ShowRankRequest extends Request {
         Response response = null;
         if (typeOfRank.equalsIgnoreCase("MyRank")) {
             response =new ShowRankResponse(Administer.givePlayersAroundMe(getUserName(),"name"),
-                    Administer.givePlayersAroundMe(getUserName(),"cup"));
+                    Administer.givePlayersAroundMe(getUserName(),"cup"),typeOfRank,Administer.givetMyRank(getUserName()));
         } else if (typeOfRank.equalsIgnoreCase("Top10")) {
-            response =new ShowRankResponse(Administer.giveBestPlayers("name"),Administer.giveBestPlayers("cup"));
+            response =new ShowRankResponse(Administer.giveBestPlayers("name"),
+                    Administer.giveBestPlayers("cup"),typeOfRank,"");
         }
         return response;
     }

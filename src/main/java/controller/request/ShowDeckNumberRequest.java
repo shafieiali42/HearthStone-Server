@@ -21,19 +21,26 @@ public class ShowDeckNumberRequest extends Request {
     @Override
     public Response execute() {
         Player player = Server.getDataBaseHandler().fetchPlayer(getUserName());
+        Response response=null;
         Administer.sortDecksOfPlayer(player);
-        Deck deck = player.getAllDecksOfPlayer().get(number - 1);
-        String winsPerPlay;
-        if (deck.getNumberOfUses()!=0){
-            winsPerPlay =  (deck.getNumberOfWins() / deck.getNumberOfUses()) * 100 + " %";
+        if ((number-1)<player.getAllDecksOfPlayer().size()){
+            Deck deck = player.getAllDecksOfPlayer().get(number - 1);
+            String winsPerPlay;
+            if (deck.getNumberOfUses()!=0){
+                winsPerPlay =  (deck.getNumberOfWins() / deck.getNumberOfUses()) * 100 + " %";
+            }else {
+                winsPerPlay="0";
+            }
+            deck.defineManaAvg();
+            deck.defineMostUsedCard();
+            response = new ShowDeckNumberResponse(deck.getName(),deck.getHeroName(),
+                    deck.getNumberOfWins() + "",deck.getNumberOfUses() + "",
+                    deck.getMostUsedCard().getName(), deck.getManaAvg() + "", winsPerPlay + "");
         }else {
-            winsPerPlay="0";
+            response = new ShowDeckNumberResponse("you dont have that much deck:))"," ",
+                    " " + "","  " + "",
+                   " ", "  " + "", "  " + "");
         }
-        deck.defineManaAvg();
-        deck.defineMostUsedCard();
-        Response response = new ShowDeckNumberResponse(deck.getName(),deck.getHeroName(),
-                deck.getNumberOfWins() + "",deck.getNumberOfUses() + "",
-                deck.getMostUsedCard().getName(), deck.getManaAvg() + "", winsPerPlay + "");
 
         Server.getDataBaseHandler().save(player);
         return response;

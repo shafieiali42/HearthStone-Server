@@ -11,9 +11,22 @@ import java.util.*;
 public class Administer {
 
 
+    public static String givetMyRank(String userName){
+        List<Player> players = Server.getDataBaseHandler().fetchAll(Player.class);
+        Collections.sort(players);
+        for (int i=0;i<players.size();i++){
+            if (players.get(i).getUserName().equalsIgnoreCase(userName)){
+                return ((i+1)+"");
+            }
+        }
+        return null;
+    }
+
+
     public static ArrayList<String> givePlayersAroundMe(String userName, String cupOrName) {
         ArrayList<String> result = new ArrayList<>();
         List<Player> players = Server.getDataBaseHandler().fetchAll(Player.class);
+        Collections.sort(players);
         int index = 0;
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).getUserName().equalsIgnoreCase(userName)) {
@@ -39,7 +52,7 @@ public class Administer {
         ArrayList<String> names = new ArrayList<>();
         List<Player> players = Server.getDataBaseHandler().fetchAll(Player.class);
         Collections.sort(players);
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < Math.min(10,players.size()); i++) {
             if (cupOrName.equalsIgnoreCase("name")) {
                 names.add(players.get(i).getUserName());
             } else {

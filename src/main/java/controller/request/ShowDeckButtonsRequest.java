@@ -22,7 +22,7 @@ public class ShowDeckButtonsRequest extends Request {
         Player player = Server.getDataBaseHandler().fetchPlayer(getUserName());
         Response response = null;
 
-        ArrayList<String> listOfAllDeckOfPlayer = null;
+        ArrayList<String> listOfAllDeckOfPlayer = new ArrayList<>();
         for (Deck deck : player.getAllDecksOfPlayer()) {
             listOfAllDeckOfPlayer.add(deck.getName());
         }
