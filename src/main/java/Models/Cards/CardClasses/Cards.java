@@ -38,7 +38,7 @@ public  abstract class Cards implements Comparable<Cards>, Visitable, Cloneable 
     @Transient
     private transient boolean isPlayed = false;
     @Transient
-    private static ArrayList<Cards> allCards = new ArrayList<Cards>();
+    private transient static ArrayList<Cards> allCards = new ArrayList<Cards>();
 
 
     public boolean isPlayed() {

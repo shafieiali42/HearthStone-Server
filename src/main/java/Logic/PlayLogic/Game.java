@@ -73,7 +73,9 @@ public class Game {
             this.blackPlayer = blackPlayer;
             blackPlayer.setDeckCards(deckReader.getDeck("FRIEND"));
             blackPlayer.setHero(new Mage());
+            blackPlayer.initPassiveToChoose();
             blackPlayer.initHandsCards();
+
 //            playingCard = new Cards();//todo
             currentPlayer = whitePlayer;
             formerPlayer = blackPlayer;
@@ -82,7 +84,8 @@ public class Game {
         } else if (gameMode.equalsIgnoreCase("OfflineGame")) {//OfflineGame
             DeckReader deckReader = new DeckReader("src/main/resources/DeckReader/DeckReader.properties");
             this.whitePlayer = whitePlayer;
-            blackPlayer = new InGamePlayer();
+            this.blackPlayer=blackPlayer;
+//            blackPlayer = new InGamePlayer();
             blackPlayer.setHero(new Mage());
             blackPlayer.setDeckCards(deckReader.getDeck("ENEMY"));
             blackPlayer.initHandsCards();
@@ -102,6 +105,12 @@ public class Game {
                 blackPlayer.getDeckCards(), whitePlayer.getDeckCards(), null, null, null,this );
 
 
+    }
+
+
+    public void endGame(){
+        whitePlayer.getMyTimer().pause();
+        blackPlayer.getMyTimer().pause();
     }
 
 

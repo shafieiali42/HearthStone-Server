@@ -37,7 +37,7 @@ public class Administer {
 
         int lastIndex = Math.min(index + 5, players.size() - 1);
         int firstIndex = Math.max(0, index - 5);
-        for (int i = firstIndex; i < lastIndex; i++) {
+        for (int i = firstIndex; i <=lastIndex; i++) {
             if (cupOrName.equalsIgnoreCase("name")) {
                 result.add(players.get(i).getUserName());
             } else {
@@ -127,7 +127,7 @@ public class Administer {
                 if (Integer.parseInt(usesHashMap.values().toArray()[i].toString()) < 2) {
 
                     if (!isLock) {
-                        player.getDeckToChange().getListOfCards().add(cards);
+                        player.getDeckToChange().getListOfCards().add(cards.copy());
                     }
 //                    DeckViewer.getInstance().showCardsInDecK();
                     int k = Integer.parseInt(usesHashMap.values().toArray()[i].toString()) + 1;
@@ -142,7 +142,7 @@ public class Administer {
         }
 
         if (!isInMap){
-            player.getDeckToChange().getListOfCards().add(cards);
+            player.getDeckToChange().getListOfCards().add(cards.copy());
             usesHashMap.put(cardName,1);
         }
 

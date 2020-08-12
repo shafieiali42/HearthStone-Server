@@ -3,6 +3,8 @@ package controller.request;
 import controller.controllers.Administer;
 import controller.response.Response;
 import controller.response.ShowRankResponse;
+import server.Server;
+import utility.Log.Log;
 
 public class ShowRankRequest extends Request {
 
@@ -22,9 +24,13 @@ public class ShowRankRequest extends Request {
         if (typeOfRank.equalsIgnoreCase("MyRank")) {
             response =new ShowRankResponse(Administer.givePlayersAroundMe(getUserName(),"name"),
                     Administer.givePlayersAroundMe(getUserName(),"cup"),typeOfRank,Administer.giveMyRank(getUserName()));
+            Log log =new Log(getUserName(),"SeeMyRank");
+            Server.getDataBaseHandler().save(log);
         } else if (typeOfRank.equalsIgnoreCase("Top10")) {
             response =new ShowRankResponse(Administer.giveBestPlayers("name"),
                     Administer.giveBestPlayers("cup"),typeOfRank,"");
+            Log log =new Log(getUserName(),"SeeTop10");
+            Server.getDataBaseHandler().save(log);
         }
         return response;
     }

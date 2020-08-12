@@ -5,6 +5,7 @@ import Models.Player.Player;
 import controller.response.Response;
 import controller.response.ShowChatResponse;
 import server.Server;
+import utility.Log.Log;
 
 public class SendTextRequest extends Request {
 
@@ -24,6 +25,8 @@ public class SendTextRequest extends Request {
         Player player= Server.getDataBaseHandler().fetchPlayer(getUserName());
         InGamePlayer inGamePlayer=Server.giveAnotherPlayer(getUserName());
         Response response=new ShowChatResponse(text);
+        Log log =new Log(getUserName(),"SendText");
+        Server.getDataBaseHandler().save(log);
         Server.sendResponse(inGamePlayer.getPlayer().getUserName(),response);
         return response;
     }

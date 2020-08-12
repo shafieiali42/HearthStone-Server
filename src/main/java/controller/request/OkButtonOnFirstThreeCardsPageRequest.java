@@ -88,6 +88,7 @@ public class OkButtonOnFirstThreeCardsPageRequest extends Request {
             ArrayList<String> whiteBattleGroundCards = GamePartController.giveNameOfCardsList(whitePlayer.getBattleGroundCards());
             ArrayList<String> blackHandsCards = GamePartController.giveNameOfCardsList(blackPlayer.getHandsCards());
             ArrayList<String> blackBattleGroundCards = GamePartController.giveNameOfCardsList(blackPlayer.getBattleGroundCards());
+
             response = new ShowPlayPanelResponse(getUserName(), whiteHandsCards, blackHandsCards, whiteBattleGroundCards,
                     blackBattleGroundCards, whitePlayer.getHeroesName(), blackPlayer.getHeroesName(),
                     whitePlayer.getCurrentWeaponsName(), blackPlayer.getCurrentWeaponsName(), "StartGame",
@@ -117,7 +118,7 @@ public class OkButtonOnFirstThreeCardsPageRequest extends Request {
                             whitePlayer.giveCurrentWeaponAttackPower() + "",
                             game.getCurrentPlayer().getMana() + "",
                             blackPlayerHp,blackPlayerAttack,whitePlayerHp,whitePlayerAttack);
-            Server.sendResponse(blackPlayer.getPlayer().getUserName(),responseForAnotherPlayer);
+//            Server.sendResponse(blackPlayer.getPlayer().getUserName(),responseForAnotherPlayer);
         }
         Server.getDataBaseHandler().save(player);
         return response;

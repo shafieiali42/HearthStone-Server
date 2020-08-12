@@ -8,6 +8,7 @@ import controller.controllers.CollectionController;
 import controller.response.Response;
 import controller.response.ShowSpecificCardsResponse;
 import server.Server;
+import utility.Log.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -72,6 +73,8 @@ public class ShowSpecificCardsRequest extends Request {
 
         ArrayList<String> names = Administer.giveListOfCardsNames(cards);
         Response response = new ShowSpecificCardsResponse(names,group,panelName);
+        Log log =new Log(getUserName(),"see"+group);
+        Server.getDataBaseHandler().save(log);
         Server.getDataBaseHandler().save(player);
         return response;
     }

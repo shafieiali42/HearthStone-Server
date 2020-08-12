@@ -75,7 +75,7 @@ public class ShopController {
         }
 
         if (canBuyThisCard) {
-            player.getAllCardsOfPlayer().add(card);
+            player.getAllCardsOfPlayer().add(card.copy());
 //            player.getLoggerOfMyPlayer().info("Buy " + card.getName());
             setBuyableCardsOfPlayer(player);
 

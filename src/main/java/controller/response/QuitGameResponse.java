@@ -6,4 +6,7 @@ public class QuitGameResponse extends Response {
     public QuitGameResponse() {
         setResponseType("QuitGameResponse");
     }
+
+
+
 }

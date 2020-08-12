@@ -30,7 +30,7 @@ public class MouseClickRequest extends Request {
 
 
     public MouseClickRequest(String userName, String cardName, String typeOfCard, boolean clicked,
-                             int xCoordinateOfCard, int yCoordinateOfCard, Alliance alliance, String typeOfClick,boolean isLock) {
+                             int xCoordinateOfCard, int yCoordinateOfCard, Alliance alliance, String typeOfClick, boolean isLock) {
 
         setUserName(userName);
         setRequestType("MouseClickRequest");
@@ -41,7 +41,7 @@ public class MouseClickRequest extends Request {
         this.yCoordinateOfCard = yCoordinateOfCard;
         this.alliance = alliance;
         this.typeOfClick = typeOfClick;
-        this.isLock=isLock;
+        this.isLock = isLock;
     }
 
 
@@ -62,6 +62,7 @@ public class MouseClickRequest extends Request {
                 player.getPlayerStatusInGame().equals(Status.SELL_PAGE)) {
 
             response = new ShowBuyAndSellCardResponse(cardName);
+            Server.getDataBaseHandler().save(player);
             return response;
         }
 
@@ -69,9 +70,11 @@ public class MouseClickRequest extends Request {
             if (this.isLock) {
                 player.setPlayerStatusInGame(Status.BUY_PAGE_FROM_COLLECTION);
                 response = new GoToPageResponse("ShopPage");
+                Server.getDataBaseHandler().save(player);
                 return response;
             } else {
                 response = new ShowJOptionPaneResponse("You can't Buy this card:((");
+                Server.getDataBaseHandler().save(player);
                 return response;
             }
         }
@@ -79,12 +82,11 @@ public class MouseClickRequest extends Request {
 
         if (player.getPlayerStatusInGame().equals(Status.MAKE_DECK) ||
                 player.getPlayerStatusInGame().equals(Status.CHANGE_DECK)) {
-                Administer.addGivenCardToCollectionDeck(player, cardName, isLock);//todo
-                response = new AddCardToDeckResponse(player.getUserName(), player.getDeckToChange().getUsesHashMap());
-                return response;
+            Administer.addGivenCardToCollectionDeck(player, cardName, isLock);//todo
+            response = new AddCardToDeckResponse(player.getUserName(), player.getDeckToChange().getUsesHashMap());
+            Server.getDataBaseHandler().save(player);
+            return response;
         }
-
-
 
 
         if (player.getPlayerStatusInGame().equals(Status.CHOOSE_TARGET_FOR_SPELL)) {
@@ -209,7 +211,7 @@ public class MouseClickRequest extends Request {
 
 
         }
-        response=new MouseClickResponse(clicked);
+        response = new MouseClickResponse(clicked);
         Server.getDataBaseHandler().save(player);
         return response;
     }

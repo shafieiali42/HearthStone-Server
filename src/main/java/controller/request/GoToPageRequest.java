@@ -6,6 +6,7 @@ import controller.controllers.Administer;
 import controller.response.GoToPageResponse;
 import controller.response.Response;
 import server.Server;
+import utility.Log.Log;
 
 public class GoToPageRequest extends Request {
 
@@ -46,6 +47,8 @@ public class GoToPageRequest extends Request {
             player.setPlayerStatusInGame(Status.PLAY_PAGE);
         }
 
+        Log log =new Log(getUserName(),"GoToPage"+pageName);
+        Server.getDataBaseHandler().save(log);
         Server.getDataBaseHandler().save(player);
         System.out.println("send go to page response "+pageName);
         Response response =new GoToPageResponse(pageName);

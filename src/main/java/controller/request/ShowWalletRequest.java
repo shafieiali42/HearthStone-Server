@@ -5,6 +5,7 @@ import controller.Status;
 import controller.response.Response;
 import controller.response.ShowWalletResponse;
 import server.Server;
+import utility.Log.Log;
 
 public class ShowWalletRequest extends Request {
 
@@ -24,6 +25,8 @@ public class ShowWalletRequest extends Request {
         player.setPlayerStatusInGame(Status.WALLET_PAGE);
         Response response =new ShowWalletResponse(player.getMoney());
         player.setPlayerStatusInGame(Status.BUY_PAGE);
+        Log log =new Log(getUserName(),"SeeWallet");
+        Server.getDataBaseHandler().save(log);
         Server.getDataBaseHandler().save(player);
         return response;
     }

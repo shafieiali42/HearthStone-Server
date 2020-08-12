@@ -7,6 +7,7 @@ import controller.controllers.PlayerController;
 import controller.response.LogInResponse;
 import controller.response.Response;
 import server.Server;
+import utility.Log.Log;
 
 import java.util.ArrayList;
 
@@ -37,8 +38,10 @@ public class LogInRequest extends Request {
                 player.setPlayerStatusInGame(Status.MAIN_MENU_PAGE);
                 response =new LogInResponse(true,player.getUserName(),
                         GamePartController.giveNameOfCardList(player.getAllCardsOfPlayer()));
+                Log log =new Log(getUserName(),"SignIn");
+                Server.getDataBaseHandler().save(log);
+                Server.getDataBaseHandler().save(player);
             }
-            Server.getDataBaseHandler().save(player);
         } else if (mode.equalsIgnoreCase("SignUp")) {
             Player player=PlayerController.signUp(getUserName(),password);
             if (player==null){
@@ -48,6 +51,8 @@ public class LogInRequest extends Request {
                 player.setPlayerStatusInGame(Status.MAIN_MENU_PAGE);
                 response =new LogInResponse(true,player.getUserName(),
                         GamePartController.giveNameOfCardList(player.getAllCardsOfPlayer()));
+                Log log =new Log(getUserName(),"SignUp");
+                Server.getDataBaseHandler().save(log);
                 Server.getDataBaseHandler().save(player);
             }
 

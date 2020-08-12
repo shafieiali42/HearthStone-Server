@@ -49,7 +49,7 @@ public class MouseReleasedRequest extends Request {
                 player.getPlayerStatusInGame().equals(Status.PLAY_PAGE)) {
 
             if (!GamePartController.checkThatCanReleaseCard(Integer.parseInt(xCoordinateOfReleased),
-                    Integer.parseInt(yCoordinateOfReleased))) {
+                    Integer.parseInt(yCoordinateOfReleased),game)){
                 response = new ShowJOptionPaneResponse("Its Not Your Turn:))");
                 return response;
             }

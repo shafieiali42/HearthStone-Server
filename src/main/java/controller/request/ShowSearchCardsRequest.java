@@ -6,6 +6,7 @@ import controller.Status;
 import controller.response.Response;
 import controller.response.ShowSpecificCardsResponse;
 import server.Server;
+import utility.Log.Log;
 
 import java.util.ArrayList;
 
@@ -39,6 +40,8 @@ public class ShowSearchCardsRequest extends Request {
                     "cardPanelOfDeckPage");
 
         }
+        Log log =new Log(getUserName(),"SeeSearchCards");
+        Server.getDataBaseHandler().save(log);
         Server.getDataBaseHandler().save(player);
         return response;
     }

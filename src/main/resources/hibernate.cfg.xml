@@ -30,7 +30,7 @@
         <mapping class="Models.Cards.CardClasses.Spell"/>
         <mapping class="Models.Cards.CardClasses.Weapon"/>
         <mapping class="Models.Cards.CardClasses.Passive"/>
-<!--        <mapping class="Models.Cards.CardClasses.Weapon"/>&ndash;&gt;-->
+        <!--        <mapping class="Models.Cards.CardClasses.Weapon"/>&ndash;&gt;-->
         <mapping class="Models.Cards.GameCards.WeaponCards.Ashbringer"/>
         <mapping class="Models.Cards.GameCards.WeaponCards.BattleAxe"/>
         <mapping class="Models.Cards.GameCards.WeaponCards.Gearblade"/>
@@ -77,6 +77,8 @@
         <mapping class="Models.Cards.GameCards.Passives.Nurse"/>
         <mapping class="Models.Cards.GameCards.Passives.OffCards"/>
         <mapping class="Models.Cards.GameCards.Passives.TwiceDraw"/>
+
+        <mapping class="utility.Log.Log"/>
 
     </session-factory>
 </hibernate-configuration>

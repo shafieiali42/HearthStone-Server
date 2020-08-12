@@ -9,6 +9,7 @@ import Models.Cards.CardClasses.Weapon;
 import Models.HeroPower.HeroPower;
 import Models.Heroes.Heroes;
 import Models.Player.InGamePlayer;
+import Models.Player.Player;
 import Visitors.CardVisitors.*;
 import Visitors.PassiveVisitor.InfoPassiveVisitor;
 import Visitors.PassiveVisitor.PassiveEndTurnVisitor;
@@ -19,6 +20,7 @@ import controller.Status;
 import controller.response.Response;
 import controller.response.WriteOnLogPanelResponse;
 import server.Server;
+import utility.Log.Log;
 
 import javax.swing.*;
 import java.util.*;
@@ -26,37 +28,29 @@ import java.util.*;
 public class GamePartController {
 
 
-//    public static void writeOnLogPanel(String log) {
-//        StringBuilder addToLog = new StringBuilder(LogPanel.getInstance().getLog());
-//        for (int i = 0; i < log.length(); i++) {
-//            char c = log.charAt(i);
-//            if (Character.isUpperCase(c)) {
-//                addToLog.append("\n");
-//                addToLog.append(c);
-//            } else {
-//                addToLog.append(c);
-//            }
-//        }
-//        LogPanel.getInstance().setLog(addToLog.toString() + "\n\n");
-//        LogPanel.getInstance().repaint();
-//        LogPanel.getInstance().revalidate();
-//    }
+    public static int giveIndexOfStarter(ArrayList<Player> players, String userName) {
+        int index = 0;
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).getUserName().equalsIgnoreCase(userName)) {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
 
 
-
-
-    public static HashMap<String,String> giveMapOfHpAndAttack(ArrayList<Minion> minions,String hpOrAttack){
-       HashMap<String,String> map=new HashMap<>();
-        for (int i=0;i<minions.size();i++){
-            if(hpOrAttack.equalsIgnoreCase("Hp")){
-                map.put((i+1)+"",minions.get(i).getHealthPower()+"");
-            }else if (hpOrAttack.equalsIgnoreCase("Attack")){
-                map.put((i+1)+"",minions.get(i).getAttackPower()+"");
+    public static HashMap<String, String> giveMapOfHpAndAttack(ArrayList<Minion> minions, String hpOrAttack) {
+        HashMap<String, String> map = new HashMap<>();
+        for (int i = 0; i < minions.size(); i++) {
+            if (hpOrAttack.equalsIgnoreCase("Hp")) {
+                map.put((i + 1) + "", minions.get(i).getHealthPower() + "");
+            } else if (hpOrAttack.equalsIgnoreCase("Attack")) {
+                map.put((i + 1) + "", minions.get(i).getAttackPower() + "");
             }
         }
         return map;
     }
-
 
 
     public static ArrayList<String> setThreeWeapon() {
@@ -107,13 +101,7 @@ public class GamePartController {
         } else {
             result = "Spell";
         }
-//        PlayPanel.getInstance().repaint();
-//        PlayPanel.getInstance().revalidate();
         game.getCurrentPlayer().getHandsCards().remove(playingCard);
-
-//        writeOnLogPanel("Play " + playingCard.getName());
-//        Sounds.playActionSounds("src/main/resources/Sounds/ActionVoices/PlayCards.wav");
-//        ControllerOfMainComponents.currentPlayer.getLoggerOfMyPlayer().info("Play" + playingCard.getType());
         return result;
     }
 
@@ -159,110 +147,7 @@ public class GamePartController {
         }
     }
 
-//    public static void drawCard() {
-////        System.out.println(Game.getInstance().getEnemyPlayer().getHandsCards());
-//        Game.getInstance().getFormerPlayer().getInfoPassive().accept(new PassiveEndTurnVisitor(),
-//                Game.getInstance().getCurrentPlayer(), Game.getInstance().getCurrentPlayer().getBattleGroundCards(),
-//                Game.getInstance().getCurrentPlayer().getHandsCards(), Game.getInstance().getCurrentPlayer().getDeckCards());
-//        if (Game.getInstance().getCurrentPlayer().getHandsCards().size() < 12) {
-//            if (Game.getInstance().getCurrentPlayer().getDeckCards().size() == 0) {
-//                JOptionPane.showMessageDialog(null,
-//                        "Your deck is empty.\nContinue game with your hand's cards", "Error", JOptionPane.ERROR_MESSAGE);
-//            } else {
-//                Game.getInstance().getCurrentPlayer().getHandsCards().add(Game.getInstance().getCurrentPlayer().getDeckCards().get(0));
-//
-//                Game.getInstance().getCurrentPlayer().getDeckCards().remove(0);
-//
-//            }
-//        } else {
-//            Game.getInstance().getCurrentPlayer().getDeckCards().remove(0);
-//            JOptionPane.showMessageDialog(null,
-//                    "You can't have more than 12 cards in your hand", "Error", JOptionPane.ERROR_MESSAGE);
-//        }
-//
-//        for (Minion minion : Game.getInstance().getCurrentPlayer().getBattleGroundCards()) {
-//            minion.accept(new DrawCardVisitor(), Game.getInstance().getCurrentPlayer().getBattleGroundCards(),
-//                    Game.getInstance().getCurrentPlayer().getHandsCards(), new ArrayList<Cards>(), minion, null, new Minion(),
-//                    null, null);
-//        }
-//
-//
-//        if (Game.getInstance().getCurrentPlayer().getNumberOfDrawCard() > 1) {
-//            for (int i = 0; i < Game.getInstance().getCurrentPlayer().getNumberOfDrawCard() - 1; i++) {
-//                if (Game.getInstance().getCurrentPlayer().getHandsCards().size() < 12) {
-//                    if (Game.getInstance().getCurrentPlayer().getDeckCards().size() != 0) {
-//                        Game.getInstance().getCurrentPlayer().getHandsCards().add(Game.getInstance().getCurrentPlayer().getDeckCards().get(0));
-//                        Game.getInstance().getCurrentPlayer().getDeckCards().remove(0);
-//                    }
-//                }
-//            }
-//        }
-//
-//    }
-//
-//    public static void nextTurn() {
-//        Game.getInstance().getMyTimer().reStart();
-//        Game.getInstance().getCurrentPlayer().setTurn(Game.getInstance().getCurrentPlayer().getTurn() + 1);
-//        Game.getInstance().getCurrentPlayer().setMana((int) Math.min(Game.getInstance().getCurrentPlayer().getTurn(), 10));
-//        if (Game.getInstance().getCurrentAlliance().equals(Alliance.FRIENDLY)) {
-//            Game.getInstance().setCurrentPlayer(Game.getInstance().getEnemyPlayer());
-//            Game.getInstance().setFormerPlayer(Game.getInstance().getFriendlyPlayer());
-//            Game.getInstance().setCurrentAlliance(Alliance.ENEMY);
-//        } else if (Game.getInstance().getCurrentAlliance().equals(Alliance.ENEMY)) {
-//            Game.getInstance().setCurrentPlayer(Game.getInstance().getFriendlyPlayer());
-//            Game.getInstance().setFormerPlayer(Game.getInstance().getEnemyPlayer());
-//            Game.getInstance().setCurrentAlliance(Alliance.FRIENDLY);
-//        }
-//
-//    }
 
-
-//    public static void setCanBeAttacked(InGamePlayer player) {
-//        boolean hasTaunt = false;
-//        for (Minion minion : player.getBattleGroundCards()) {
-//            if (minion.isTaunt()) {
-//                hasTaunt = true;
-//                break;
-//            }
-//        }
-//        if (hasTaunt) {
-//            player.getHero().setCanBeAttacked(false);
-//            for (Minion minion : player.getBattleGroundCards()) {
-//                if (!minion.isTaunt()) {
-//                    minion.setCanBeAttacked(false);
-//                }
-//            }
-//        }
-//    }
-//
-//    public static void setIsActives(InGamePlayer player) {
-//        for (Minion minion : player.getBattleGroundCards()) {
-//            minion.setHasAttackInThisTurn(false);
-//            minion.setIsActive(true);
-//        }
-//    }
-//
-//    public static void endTurn(InGamePlayer player) {
-//        setCanBeAttacked(player);
-//        setIsActives(player);
-//        player.getPlayer().setPlayerStatusInGame(Status.PLAY_PAGE);
-//        GamePartController.setNeedTimer(false);
-////        System.out.println(Game.getInstance().getCurrentPlayer().getBattleGroundCards());
-//        Iterator<Minion> itr = player.getBattleGroundCards().iterator();
-//
-//        while (itr.hasNext()) {
-//            Minion minion = itr.next();
-//            minion.accept(new EndTurnVisitor(), player.getBattleGroundCards(),
-//                    player.getHandsCards(), new ArrayList<Cards>(), minion, null,
-//                    new Minion(), null, null);//todo json
-//
-//        }
-//
-//        nextTurn();
-//        drawCard();
-//        Sounds.playActionSounds("src/main/resources/Sounds/ActionVoices/EndTurn.wav");
-//        ControllerOfMainComponents.currentPlayer.getLoggerOfMyPlayer().info("End turn");
-//    }
 
     public static String playMinion(Minion playingCard, Game game, int k) {
 //        System.out.println(playingCard);
@@ -371,17 +256,17 @@ public class GamePartController {
                 null, null, null, null, game);
 
         playingCard.accept(new DrawCardVisitor(), game.getCurrentPlayer().getBattleGroundCards(),
-                game.getCurrentPlayer().getHandsCards(), new ArrayList<Cards>(),null,
+                game.getCurrentPlayer().getHandsCards(), new ArrayList<Cards>(), null,
                 null, null, null, null, game);
 
         playingCard.accept(new ActionVisitor(), game.getCurrentPlayer().getBattleGroundCards(),
                 game.getCurrentPlayer().getHandsCards(),
                 game.getCurrentPlayer().getDeckCards(), null, null,
-               null, null, null, game);
+                null, null, null, game);
 
         playingCard.accept(new TargetVisitor(), game.getCurrentPlayer().getBattleGroundCards(),
                 game.getCurrentPlayer().getHandsCards(), game.getCurrentPlayer().getDeckCards(),
-                null, null,null, null, null, game);//todo ...............
+                null, null, null, null, null, game);//todo ...............
         //todo json
         return result;
     }
@@ -399,8 +284,10 @@ public class GamePartController {
     }
 
 
-
-    public static boolean checkThatCanReleaseCard(int x, int y) {//todo
+    public static boolean checkThatCanReleaseCard(int x, int y,Game game) {//todo
+        if (game.getGameMode().equalsIgnoreCase("OfflineGame")){
+            return true;
+        }
         return x > 0 && x < 1200 && y > 385 && y < 770;
     }
 
@@ -658,7 +545,7 @@ public class GamePartController {
                 game.getFormerPlayer().getHandsCards(),
                 game.getCurrentPlayer().getDeckCards(),
                 game.getFormerPlayer().getDeckCards(),
-              null, null, null, game);//todo json
+                null, null, null, game);//todo json
 
         //for heroPowers witch need target
         System.out.println("playHeroPower");
@@ -701,9 +588,12 @@ public class GamePartController {
                     weapon.setDurability(weapon.getDurability() - 1);
                     weapon.setHasAttackInThisTurn(true);
                     result = removeDeadCharacters(game);
-                    Response response =new WriteOnLogPanelResponse(weapon.getName() + " Attack " + hero.getName());
-                    Server.sendResponse(game.getWhitePlayer().getPlayer().getUserName(),response);
-                    Server.sendResponse(game.getBlackPlayer().getPlayer().getUserName(),response);
+                    Log log =new Log(game.getCurrentPlayer().getPlayer().getUserName(),
+                            weapon.getName() + " Attack " + hero.getName());
+                    Server.getDataBaseHandler().save(log);
+                    Response response = new WriteOnLogPanelResponse(weapon.getName() + " Attack " + hero.getName());
+                    Server.sendResponse(game.getWhitePlayer().getPlayer().getUserName(), response);
+                    Server.sendResponse(game.getBlackPlayer().getPlayer().getUserName(), response);
 //                    writeOnLogPanel(weapon.getName() + " Attack " + hero.getName());
                 }
             } else {// weapon vs minion
@@ -730,9 +620,12 @@ public class GamePartController {
                             null, null, game);
 
                     result = removeDeadCharacters(game);
-                    Response response =new WriteOnLogPanelResponse(weapon.getName() + " Attack " + minion.getName());
-                    Server.sendResponse(game.getWhitePlayer().getPlayer().getUserName(),response);
-                    Server.sendResponse(game.getBlackPlayer().getPlayer().getUserName(),response);
+                    Log log =new Log(game.getCurrentPlayer().getPlayer().getUserName(),
+                            weapon.getName() + " Attack " + minion.getName());
+                    Server.getDataBaseHandler().save(log);
+                    Response response = new WriteOnLogPanelResponse(weapon.getName() + " Attack " + minion.getName());
+                    Server.sendResponse(game.getWhitePlayer().getPlayer().getUserName(), response);
+                    Server.sendResponse(game.getBlackPlayer().getPlayer().getUserName(), response);
 //                    Mapper.writeOnLogPanel(weapon.getName() + " Attack " + minion.getName());
                 }
             }
@@ -745,9 +638,12 @@ public class GamePartController {
                     hero.setHealthPower(hero.getHealthPower() - minion.getAttackPower());
                     minion.setHasAttackInThisTurn(true);
                     result = removeDeadCharacters(game);
-                    Response response =new WriteOnLogPanelResponse(minion.getName() + " Attack " + hero.getName());
-                    Server.sendResponse(game.getWhitePlayer().getPlayer().getUserName(),response);
-                    Server.sendResponse(game.getBlackPlayer().getPlayer().getUserName(),response);
+                    Log log =new Log(game.getCurrentPlayer().getPlayer().getUserName(),
+                            minion.getName() + " Attack " + hero.getName());
+                    Server.getDataBaseHandler().save(log);
+                    Response response = new WriteOnLogPanelResponse(minion.getName() + " Attack " + hero.getName());
+                    Server.sendResponse(game.getWhitePlayer().getPlayer().getUserName(), response);
+                    Server.sendResponse(game.getBlackPlayer().getPlayer().getUserName(), response);
 //                    Mapper.writeOnLogPanel(minion.getName() + " Attack " + hero.getName());
                 }
             } else {//minion vs minion
@@ -772,9 +668,12 @@ public class GamePartController {
                         }
                         minion.setHasAttackInThisTurn(true);
                         result = removeDeadCharacters(game);
-                        Response response =new WriteOnLogPanelResponse(minion.getName() + " Attack " + minion2.getName());
-                        Server.sendResponse(game.getWhitePlayer().getPlayer().getUserName(),response);
-                        Server.sendResponse(game.getBlackPlayer().getPlayer().getUserName(),response);
+                        Log log =new Log(game.getCurrentPlayer().getPlayer().getUserName(),
+                                minion.getName() + " Attack " + minion2.getName());
+                        Server.getDataBaseHandler().save(log);
+                        Response response = new WriteOnLogPanelResponse(minion.getName() + " Attack " + minion2.getName());
+                        Server.sendResponse(game.getWhitePlayer().getPlayer().getUserName(), response);
+                        Server.sendResponse(game.getBlackPlayer().getPlayer().getUserName(), response);
 //                        Mapper.writeOnLogPanel(minion.getName() + " Attack " + minion2.getName());
 
 
@@ -821,11 +720,11 @@ public class GamePartController {
                     setNumberOfWins(game.getWhitePlayer().getDeck().getNumberOfWins() + 1);
 
 
-            game.getWhitePlayer().getDeck().setCups(game.getWhitePlayer().getDeck().getCups()+1);
-            game.getBlackPlayer().getDeck().setCups(game.getBlackPlayer().getDeck().getCups()-1);
+            game.getWhitePlayer().getDeck().setCups(game.getWhitePlayer().getDeck().getCups() + 1);
+            game.getBlackPlayer().getDeck().setCups(game.getBlackPlayer().getDeck().getCups() - 1);
 
-            game.getBlackPlayer().getPlayer().setNumOfCups(Math.max(0,(game.getBlackPlayer().getPlayer().getNumOfCups()-1)));
-            game.getWhitePlayer().getPlayer().setNumOfCups(game.getWhitePlayer().getPlayer().getNumOfCups()+1);
+            game.getBlackPlayer().getPlayer().setNumOfCups(Math.max(0, (game.getBlackPlayer().getPlayer().getNumOfCups() - 1)));
+            game.getWhitePlayer().getPlayer().setNumOfCups(game.getWhitePlayer().getPlayer().getNumOfCups() + 1);
 
             result = "Friendly Player wins!";
 //            JOptionPane.showMessageDialog(MyMainFrame.getInstance(),
@@ -841,11 +740,11 @@ public class GamePartController {
             game.getBlackPlayer().getDeck().
                     setNumberOfWins(game.getBlackPlayer().getDeck().getNumberOfWins() + 1);
 
-            game.getBlackPlayer().getDeck().setCups(game.getBlackPlayer().getDeck().getCups()+1);
-            game.getWhitePlayer().getDeck().setCups(game.getWhitePlayer().getDeck().getCups()-1);
+            game.getBlackPlayer().getDeck().setCups(game.getBlackPlayer().getDeck().getCups() + 1);
+            game.getWhitePlayer().getDeck().setCups(game.getWhitePlayer().getDeck().getCups() - 1);
 
-            game.getWhitePlayer().getPlayer().setNumOfCups(Math.max(0,(game.getWhitePlayer().getPlayer().getNumOfCups()-1)));
-            game.getBlackPlayer().getPlayer().setNumOfCups(game.getBlackPlayer().getPlayer().getNumOfCups()+1);
+            game.getWhitePlayer().getPlayer().setNumOfCups(Math.max(0, (game.getWhitePlayer().getPlayer().getNumOfCups() - 1)));
+            game.getBlackPlayer().getPlayer().setNumOfCups(game.getBlackPlayer().getPlayer().getNumOfCups() + 1);
 
             result = "Enemy Player wins!";
 
@@ -974,10 +873,13 @@ public class GamePartController {
     public static String drawCard(InGamePlayer player) {
         String message = "Successful";
         Game game = Server.giveGameWithPlayer(player.getPlayer().getUserName());
-        game.getFormerPlayer().getInfoPassive().accept(new PassiveEndTurnVisitor(),
-                game.getCurrentPlayer(), game.getCurrentPlayer().getBattleGroundCards(),
-                game.getCurrentPlayer().getHandsCards(), game.getCurrentPlayer().getDeckCards(),
-                Server.giveGameWithPlayer(player.getPlayer().getUserName()));
+        if (!Server.giveGameWithPlayer(player.getPlayer().getUserName()).getGameMode().equalsIgnoreCase("OfflineGame")) {
+
+            game.getFormerPlayer().getInfoPassive().accept(new PassiveEndTurnVisitor(),
+                    game.getCurrentPlayer(), game.getCurrentPlayer().getBattleGroundCards(),
+                    game.getCurrentPlayer().getHandsCards(), game.getCurrentPlayer().getDeckCards(),
+                    Server.giveGameWithPlayer(player.getPlayer().getUserName()));
+        }
         if (game.getCurrentPlayer().getHandsCards().size() < 12) {
             if (game.getCurrentPlayer().getDeckCards().size() == 0) {
                 message = "Empty";
@@ -994,7 +896,7 @@ public class GamePartController {
 
         for (Minion minion : game.getCurrentPlayer().getBattleGroundCards()) {
             minion.accept(new DrawCardVisitor(), game.getCurrentPlayer().getBattleGroundCards(),
-                    game.getCurrentPlayer().getHandsCards(), new ArrayList<Cards>(), minion, null,null,
+                    game.getCurrentPlayer().getHandsCards(), new ArrayList<Cards>(), minion, null, null,
                     null, null, game);
         }
 
@@ -1035,7 +937,7 @@ public class GamePartController {
             Minion minion = itr.next();
             minion.accept(new EndTurnVisitor(), player.getBattleGroundCards(),
                     player.getHandsCards(), new ArrayList<Cards>(), minion, null,
-                   null, null, null,
+                    null, null, null,
                     Server.giveGameWithPlayer(player.getPlayer().getUserName()));//todo
 
         }

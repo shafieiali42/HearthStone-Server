@@ -44,7 +44,7 @@ public class JsonDeSerializerForResponse {
         map.put("ShowSpecificCardsResponse", ShowSpecificCardsResponse.class);
         map.put("ShowTimerResponse", ShowTimerResponse.class);
         map.put("ShowWalletResponse", ShowWalletResponse.class);
-        map.put("TransactionResponse", TransactionResponse.class);
+        map.put("BuyOrSellResponse", BuyOrSellResponse.class);
         map.put("ShowRankResponse", ShowRankResponse.class);
         map.put("ShowChatResponse", ShowChatResponse.class);
         map.put("MouseClickResponse",MouseClickResponse.class);

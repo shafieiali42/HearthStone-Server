@@ -69,7 +69,7 @@ public class MakeChangeToDeckToChangeRequest extends Request {
                 for (Cards cards1:player.getCurrentDeck().getListOfCards()){
                     for (Cards cards2:Cards.getAllCards()){
                         if (cards1.getName().equalsIgnoreCase(cards2.getName())){
-                            cards.add(cards2);
+                            cards.add(cards2.copy());
                         }
                     }
                 }

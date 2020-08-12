@@ -11,17 +11,6 @@ import java.util.ArrayList;
 
 public class CollectionController {
 
-//    private static Deck DeckToChange;
-//
-//    public static Deck getDeckToChange() {
-//        return DeckToChange;
-//    }
-//
-//    public static void setDeckToChange(Deck deckToChange) {
-//        DeckToChange = deckToChange;
-//    }
-
-
 
     public static void makeNewDeck(Player player,String name, String heroName) {
 
@@ -66,14 +55,6 @@ public class CollectionController {
         }
 
     }
-
-
-
-
-
-
-
-
 
 
     public static ArrayList<Cards> getCardsWithSpecificGroup(String group) {

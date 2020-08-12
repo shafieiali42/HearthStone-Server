@@ -48,23 +48,26 @@ public class Player implements Comparable<Player> {
     @Column
     @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)//todo
     @JoinTable(name = "allCardsOfPlayer")
     private List<Cards> allCardsOfPlayer = new ArrayList<Cards>();
     @Column
     @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)//todo
     @JoinTable(name = "SalableCards")
     private List<Cards> SalableCards = new ArrayList<Cards>();
     @Column
     @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)//todo
     @JoinTable(name = "BuyableCards")
     private List<Cards> BuyableCards = new ArrayList<Cards>();
     @Column
     @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(name = "lockCards")
-    private List<Cards> lockCards = new ArrayList<Cards>();
+    private List<Cards> lockCards = new ArrayList<>();
     @Column
     @OneToMany
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -84,8 +87,7 @@ public class Player implements Comparable<Player> {
     private boolean online;
     @Column
     private int numOfCups;
-//    @Transient
-//    private transient Logger loggerOfMyPlayer;
+
 
 
 
@@ -296,9 +298,9 @@ public class Player implements Comparable<Player> {
     @Override
     public int compareTo(Player o) {
         if (this.numOfCups>o.numOfCups){
-            return 1;
-        }else if(this.numOfCups<o.numOfCups){
             return -1;
+        }else if(this.numOfCups<o.numOfCups){
+            return 1;
         }else {
           return (this.userName.compareTo(o.userName));
         }

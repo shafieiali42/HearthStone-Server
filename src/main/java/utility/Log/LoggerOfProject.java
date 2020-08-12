@@ -9,7 +9,7 @@ import java.util.logging.SimpleFormatter;
 public class LoggerOfProject implements Serializable {
     static FileHandler fileTxt;
     static SimpleFormatter formatterTxt;
-//    public static final Logger logger = Logger.getLogger("");
+    
 
     public static Logger getMyLogger(String FilePath)  {
 

@@ -3,7 +3,7 @@ package controller.response;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TransactionResponse extends Response {
+public class BuyOrSellResponse extends Response {
 
 
     private boolean successful;
@@ -11,8 +11,8 @@ public class TransactionResponse extends Response {
     private ArrayList<String> allCardsNames;
 
 
-    public TransactionResponse(boolean successful, String transactionType,ArrayList<String> allCardsNames) {
-        setResponseReceiversToken("TransactionResponse");
+    public BuyOrSellResponse(boolean successful, String transactionType, ArrayList<String> allCardsNames) {
+        setResponseType("BuyOrSellResponse");
         this.successful = successful;
         this.transactionType = transactionType;
         this.allCardsNames=allCardsNames;

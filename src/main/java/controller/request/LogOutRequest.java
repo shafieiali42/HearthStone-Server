@@ -5,6 +5,7 @@ import controller.controllers.PlayerController;
 import controller.response.LogOutResponse;
 import controller.response.Response;
 import server.Server;
+import utility.Log.Log;
 
 public class LogOutRequest extends Request {
 
@@ -22,6 +23,8 @@ public class LogOutRequest extends Request {
     public Response execute() {
         Player player = Server.getDataBaseHandler().fetchPlayer(getUserName());
         Response response = new LogOutResponse(PlayerController.logOut(player),exit);
+        Log log =new Log(getUserName(),"LogOut");
+        Server.getDataBaseHandler().save(log);
         Server.getDataBaseHandler().save(player);
         return response;
     }

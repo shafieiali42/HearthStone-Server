@@ -7,6 +7,7 @@ import controller.controllers.CollectionController;
 import controller.response.Response;
 import controller.response.ShowSpecificCardsResponse;
 import server.Server;
+import utility.Log.Log;
 
 import java.util.ArrayList;
 
@@ -30,6 +31,8 @@ public class ShowSpecialCardsOfHeroRequest extends Request {
         Response response = new ShowSpecificCardsResponse(names,
                 "SpecialCardsInCollections", "cardPanelOfDeckPage");
 
+        Log log =new Log(getUserName(),"SeeSpecialCards");
+        Server.getDataBaseHandler().save(log);
         Server.getDataBaseHandler().save(player);
         return response;
     }
