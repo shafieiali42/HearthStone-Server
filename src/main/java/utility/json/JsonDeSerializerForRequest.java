@@ -47,6 +47,7 @@ public class JsonDeSerializerForRequest {
         map.put("TransactionRequest", TransactionRequest.class);
         map.put("SendTextRequest", SendTextRequest.class);
         map.put("ShowRankRequest", ShowRankRequest.class);
+
     }
 
 

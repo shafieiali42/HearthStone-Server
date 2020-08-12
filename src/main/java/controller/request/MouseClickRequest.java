@@ -55,20 +55,24 @@ public class MouseClickRequest extends Request {
         int hp;
         int attackPower;
         int numberOfCardInBattleGround;
+        System.out.println("Executing mouseClick response");
 
 
         if (player.getPlayerStatusInGame().equals(Status.BUY_PAGE) ||
                 player.getPlayerStatusInGame().equals(Status.SELL_PAGE)) {
 
             response = new ShowBuyAndSellCardResponse(cardName);
+            return response;
         }
 
         if (player.getPlayerStatusInGame().equals(Status.COLLECTIONS_PAGE)) {
             if (this.isLock) {
                 player.setPlayerStatusInGame(Status.BUY_PAGE_FROM_COLLECTION);
                 response = new GoToPageResponse("ShopPage");
+                return response;
             } else {
                 response = new ShowJOptionPaneResponse("You can't Buy this card:((");
+                return response;
             }
         }
 
@@ -77,6 +81,7 @@ public class MouseClickRequest extends Request {
                 player.getPlayerStatusInGame().equals(Status.CHANGE_DECK)) {
                 Administer.addGivenCardToCollectionDeck(player, cardName, isLock);//todo
                 response = new AddCardToDeckResponse(player.getUserName(), player.getDeckToChange().getUsesHashMap());
+                return response;
         }
 
 
@@ -150,8 +155,8 @@ public class MouseClickRequest extends Request {
                                     GamePartController.getTarget(game), GamePartController.getAllianceOfAttacker(game),
                                     GamePartController.getAllianceOfTarget(game), game);
 
-                            hp = GamePartController.giveMinionHpWithName(numberOfCardInBattleGround, alliance, game);
-                            attackPower = GamePartController.giveMinionAttackWithName(numberOfCardInBattleGround, alliance, game);
+//                            hp = GamePartController.giveMinionHpWithName(numberOfCardInBattleGround, alliance, game);
+//                            attackPower = GamePartController.giveMinionAttackWithName(numberOfCardInBattleGround, alliance, game);
                             clicked = false;
                             doubleClick = false;
                             GamePartController.setAttacker(-5, game);
@@ -173,8 +178,8 @@ public class MouseClickRequest extends Request {
                                     GamePartController.getTarget(game), GamePartController.getAllianceOfAttacker(game),
                                     GamePartController.getAllianceOfTarget(game), game);
 
-                            hp = GamePartController.giveMinionHpWithName(numberOfCardInBattleGround, alliance, game);
-                            attackPower = GamePartController.giveMinionAttackWithName(numberOfCardInBattleGround, alliance, game);
+//                            hp = GamePartController.giveMinionHpWithName(numberOfCardInBattleGround, alliance, game);
+//                            attackPower = GamePartController.giveMinionAttackWithName(numberOfCardInBattleGround, alliance, game);
                             clicked = false;
                             doubleClick = false;
                             GamePartController.setAttacker(-5, game);
@@ -203,6 +208,7 @@ public class MouseClickRequest extends Request {
 
 
         }
+        response=new MouseClickResponse(clicked);
         Server.getDataBaseHandler().save(player);
         return response;
     }

@@ -2,10 +2,13 @@ package controller.request;
 
 import Models.Player.Player;
 import controller.Status;
+import controller.controllers.GamePartController;
 import controller.controllers.PlayerController;
 import controller.response.LogInResponse;
 import controller.response.Response;
 import server.Server;
+
+import java.util.ArrayList;
 
 public class LogInRequest extends Request {
 
@@ -28,19 +31,23 @@ public class LogInRequest extends Request {
         if (mode.equalsIgnoreCase("SignIn")) {
             Player player=PlayerController.signIn(getUserName(),password);
             if (player==null){
-                response=new LogInResponse(false,"Invalid userName with this password");
+                response=new LogInResponse(false,"Invalid userName with this password",
+                      new ArrayList<>());
             }else {
                 player.setPlayerStatusInGame(Status.MAIN_MENU_PAGE);
-                response =new LogInResponse(true,player.getUserName());
+                response =new LogInResponse(true,player.getUserName(),
+                        GamePartController.giveNameOfCardList(player.getAllCardsOfPlayer()));
             }
             Server.getDataBaseHandler().save(player);
         } else if (mode.equalsIgnoreCase("SignUp")) {
             Player player=PlayerController.signUp(getUserName(),password);
             if (player==null){
-                response=new LogInResponse(false,"There is an user with this userName");
+                response=new LogInResponse(false,"There is an user with this userName",
+                        new ArrayList<>());
             }else {
                 player.setPlayerStatusInGame(Status.MAIN_MENU_PAGE);
-                response =new LogInResponse(true,player.getUserName());
+                response =new LogInResponse(true,player.getUserName(),
+                        GamePartController.giveNameOfCardList(player.getAllCardsOfPlayer()));
                 Server.getDataBaseHandler().save(player);
             }
 

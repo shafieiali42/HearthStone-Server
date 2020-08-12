@@ -1,6 +1,7 @@
 package controller.response;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ShowPlayPanelResponse extends Response {
 
@@ -23,6 +24,11 @@ public class ShowPlayPanelResponse extends Response {
     private String blackWeaponDurability;
     private String whiteWeaponAttackPower;
     private String blackWeaponAttackPower;
+    private String whitePlayerMana;
+    private HashMap<String, String> friendlyHpHashMap;
+    private HashMap<String, String> friendlyAttackPowerHashMap;
+    private HashMap<String, String> enemyHpHashMap;
+    private HashMap<String, String> enemyAttackPowerHashMap;
 
 
     public ShowPlayPanelResponse(String userName, ArrayList<String> nameOfWhiteHandsCards,
@@ -30,11 +36,16 @@ public class ShowPlayPanelResponse extends Response {
                                  ArrayList<String> nameOfWhiteBattleGroundCards,
                                  ArrayList<String> nameOfBlackBattleGroundCards,
                                  String whitePlayerHeroName, String blackPlayerHeroName,
-                                 String whitePlayerWeaponName, String blackPlayerWeaponName, String state,
-                                 String friendlyHeroHp, String enemyHeroHp,
+                                 String whitePlayerWeaponName, String blackPlayerWeaponName,
+                                 String state, String friendlyHeroHp, String enemyHeroHp,
                                  String friendlyHeroAttackPower, String enemyHeroAttackPower,
                                  String whiteWeaponDurability, String blackWeaponDurability,
-                                 String whiteWeaponAttackPower, String blackWeaponAttackPower) {
+                                 String whiteWeaponAttackPower, String blackWeaponAttackPower,
+                                 String whitePlayerMana,
+                                 HashMap<String, String> friendlyHpHashMap,
+                                 HashMap<String, String> friendlyAttackPowerHashMap,
+                                 HashMap<String, String> enemyHpHashMap,
+                                 HashMap<String, String> enemyAttackPowerHashMap) {
 
         setResponseType("ShowPlayPanelResponse");
         this.userName = userName;
@@ -55,6 +66,11 @@ public class ShowPlayPanelResponse extends Response {
         this.blackWeaponDurability = blackWeaponDurability;
         this.whiteWeaponAttackPower = whiteWeaponAttackPower;
         this.blackWeaponAttackPower = blackWeaponAttackPower;
+        this.whitePlayerMana = whitePlayerMana;
+        this.friendlyHpHashMap = friendlyHpHashMap;
+        this.friendlyAttackPowerHashMap = friendlyAttackPowerHashMap;
+        this.enemyHpHashMap = enemyHpHashMap;
+        this.enemyAttackPowerHashMap = enemyAttackPowerHashMap;
     }
 
 
@@ -203,5 +219,45 @@ public class ShowPlayPanelResponse extends Response {
 
     public void setBlackWeaponAttackPower(String blackWeaponAttackPower) {
         this.blackWeaponAttackPower = blackWeaponAttackPower;
+    }
+
+    public String getWhitePlayerMana() {
+        return whitePlayerMana;
+    }
+
+    public void setWhitePlayerMana(String whitePlayerMana) {
+        this.whitePlayerMana = whitePlayerMana;
+    }
+
+    public HashMap<String, String> getFriendlyHpHashMap() {
+        return friendlyHpHashMap;
+    }
+
+    public void setFriendlyHpHashMap(HashMap<String, String> friendlyHpHashMap) {
+        this.friendlyHpHashMap = friendlyHpHashMap;
+    }
+
+    public HashMap<String, String> getFriendlyAttackPowerHashMap() {
+        return friendlyAttackPowerHashMap;
+    }
+
+    public void setFriendlyAttackPowerHashMap(HashMap<String, String> friendlyAttackPowerHashMap) {
+        this.friendlyAttackPowerHashMap = friendlyAttackPowerHashMap;
+    }
+
+    public HashMap<String, String> getEnemyHpHashMap() {
+        return enemyHpHashMap;
+    }
+
+    public void setEnemyHpHashMap(HashMap<String, String> enemyHpHashMap) {
+        this.enemyHpHashMap = enemyHpHashMap;
+    }
+
+    public HashMap<String, String> getEnemyAttackPowerHashMap() {
+        return enemyAttackPowerHashMap;
+    }
+
+    public void setEnemyAttackPowerHashMap(HashMap<String, String> enemyAttackPowerHashMap) {
+        this.enemyAttackPowerHashMap = enemyAttackPowerHashMap;
     }
 }

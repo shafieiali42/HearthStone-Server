@@ -16,6 +16,7 @@ public class RogueHeroPower extends HeroPower {
     public RogueHeroPower(){
         this.setName("RogueHeroPower");
         this.setMana(3);
+        setNeedsTarget(false);
     }
 
 

@@ -2,6 +2,7 @@ package controller.request;
 
 import Models.Player.Player;
 import controller.controllers.Administer;
+import controller.controllers.GamePartController;
 import controller.response.Response;
 import controller.response.ShowJOptionPaneResponse;
 import controller.response.TransactionResponse;
@@ -28,13 +29,16 @@ public class TransactionRequest extends Request {
         } else {
             switch (player.getPlayerStatusInGame()) {
                 case BUY_PAGE:
-                    response = new TransactionResponse(Administer.buyShopStateCard(player, cardName), "Buy");
+                    response = new TransactionResponse(Administer.buyShopStateCard(player, cardName), "Buy",
+                            GamePartController.giveNameOfCardList(player.getAllCardsOfPlayer()));
                     break;
                 case SELL_PAGE:
                     if (!Administer.isShopStateCardInMyDecks(player, cardName)) {
-                        response = new TransactionResponse(Administer.sellShopStateCard(player, cardName), "Sell");
+                        response = new TransactionResponse(Administer.sellShopStateCard(player, cardName), "Sell",
+                                GamePartController.giveNameOfCardList(player.getAllCardsOfPlayer()));
                     } else {
-                        response = new TransactionResponse(false,"sell");
+                        response = new TransactionResponse(false,"sell",
+                                GamePartController.giveNameOfCardList(player.getAllCardsOfPlayer()));
                     }
                     break;
             }

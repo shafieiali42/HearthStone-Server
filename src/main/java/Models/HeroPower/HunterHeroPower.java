@@ -15,6 +15,7 @@ public class HunterHeroPower extends HeroPower {
     public HunterHeroPower(){
         this.setName("HunterHeroPower");
         this.setMana(2);
+        setNeedsTarget(false);
     }
 
 

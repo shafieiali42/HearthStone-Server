@@ -66,6 +66,13 @@ public class HeroPower implements HeroPowerVisitable {
     public void setHasAttackInThisTurn(boolean hasAttackInThisTurn) {
         this.hasAttackInThisTurn = hasAttackInThisTurn;
     }
-
-
+    public boolean isNeedsTarget() {
+        return needsTarget;
+    }
+    public void setNeedsTarget(boolean needsTarget) {
+        this.needsTarget = needsTarget;
+    }
+    public boolean isHasAttackInThisTurn() {
+        return hasAttackInThisTurn;
+    }
 }

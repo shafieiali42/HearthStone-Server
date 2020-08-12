@@ -19,9 +19,7 @@ import controller.Status;
 import server.Server;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Random;
+import java.util.*;
 
 public class GamePartController {
 
@@ -41,6 +39,22 @@ public class GamePartController {
 //        LogPanel.getInstance().repaint();
 //        LogPanel.getInstance().revalidate();
 //    }
+
+
+
+
+    public static HashMap<String,String> giveMapOfHpAndAttack(ArrayList<Minion> minions,String hpOrAttack){
+       HashMap<String,String> map=new HashMap<>();
+        for (int i=0;i<minions.size();i++){
+            if(hpOrAttack.equalsIgnoreCase("Hp")){
+                map.put((i+1)+"",minions.get(i).getHealthPower()+"");
+            }else if (hpOrAttack.equalsIgnoreCase("Attack")){
+                map.put((i+1)+"",minions.get(i).getAttackPower()+"");
+            }
+        }
+        return map;
+    }
+
 
 
     public static ArrayList<String> setThreeWeapon() {
@@ -105,7 +119,7 @@ public class GamePartController {
         String result = "Successful";
         Cards playingCard = game.getPlayingCard();
         if (playingCard.getManaCost() > game.getCurrentPlayer().getMana()) {
-            result = "You don't have enough mana";
+            result = "mana";
 //            JOptionPane.showMessageDialog(null, "You don't have enough mana");
         } else if (playingCard.getManaCost() <= game.getCurrentPlayer().getMana()) {
             if (playingCard.getType().equalsIgnoreCase("minion")) {
@@ -125,7 +139,7 @@ public class GamePartController {
         if (game.getCurrentPlayer().getHandsCards().size() < 12) {
             if (game.getCurrentPlayer().getDeckCards().size() == 0) {
                 JOptionPane.showMessageDialog(null,
-                        "Your deck is empty.\nContinue game with your hand's cards", "Error", JOptionPane.ERROR_MESSAGE);
+                        "Your deck is empty.Continue game with your hand's cards", "Error", JOptionPane.ERROR_MESSAGE);
 
                 return null;
 
@@ -383,6 +397,7 @@ public class GamePartController {
     }
 
 
+
     public static boolean checkThatCanReleaseCard(int x, int y) {//todo
         return x > 0 && x < 1200 && y > 385 && y < 770;
     }
@@ -626,6 +641,8 @@ public class GamePartController {
             result = "You don't have enough mana";
             return result;
         }
+
+
         game.getCurrentPlayer().setMana(game.getCurrentPlayer().getMana() -
                 game.getCurrentPlayer().getHero().getHeroPower().getMana());
 
@@ -642,6 +659,7 @@ public class GamePartController {
               null, null, null, game);//todo json
 
         //for heroPowers witch need target
+        System.out.println("playHeroPower");
         game.getCurrentPlayer().getHero().getHeroPower().accept(new TargetVisitorOfPowers(),
                 game.getCurrentPlayer(),
                 game.getCurrentPlayer().getBattleGroundCards(),
@@ -846,6 +864,14 @@ public class GamePartController {
         return handsCardNames;
     }
 
+    public static ArrayList<String> giveNameOfCardList(List<Cards> cards) {
+        ArrayList<String> handsCardNames = new ArrayList<>();
+        for (Cards card : cards) {
+            handsCardNames.add(card.getName());
+        }
+        return handsCardNames;
+    }
+
     public static void setPlayingCardOfGameState(String cardName, Game game) {
         for (Cards cards : Cards.getAllCards()) {
             if (cards.getName().equals(cardName)) {
@@ -940,7 +966,7 @@ public class GamePartController {
                 Server.giveGameWithPlayer(player.getPlayer().getUserName()));
         if (game.getCurrentPlayer().getHandsCards().size() < 12) {
             if (game.getCurrentPlayer().getDeckCards().size() == 0) {
-                message = "Your deck is empty.\nContinue game with your hand's cards";
+                message = "Empty";
             } else {
                 game.getCurrentPlayer().getHandsCards().add(game.getCurrentPlayer().getDeckCards().get(0));
 
@@ -949,7 +975,7 @@ public class GamePartController {
             }
         } else {
             game.getCurrentPlayer().getDeckCards().remove(0);
-            message = "You can't have more than 12 cards in your hand";
+            message = "Full";
         }
 
         for (Minion minion : game.getCurrentPlayer().getBattleGroundCards()) {
@@ -975,10 +1001,10 @@ public class GamePartController {
     public static void nextTurn(InGamePlayer player) {
         Game game = Server.giveGameWithPlayer(player.getPlayer().getUserName());
 //        game.getMyTimer().reStart();
-        game.getFormerPlayer().getMyTimer().reStart();
         game.getCurrentPlayer().setTurn(game.getCurrentPlayer().getTurn() + 1);
         game.getCurrentPlayer().setMana((int) Math.min(game.getCurrentPlayer().getTurn(), 10));
         game.changeTurn();
+        game.getCurrentPlayer().getMyTimer().reStart();
     }
 
 
@@ -987,6 +1013,7 @@ public class GamePartController {
         setCanBeAttacked(player);
         setIsActives(player);
         player.getPlayer().setPlayerStatusInGame(Status.PLAY_PAGE);
+        player.getMyTimer().pause();
 //        System.out.println(Game.getInstance().getCurrentPlayer().getBattleGroundCards());
         Iterator<Minion> itr = player.getBattleGroundCards().iterator();
 
