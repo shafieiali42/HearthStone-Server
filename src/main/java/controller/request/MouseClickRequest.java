@@ -141,6 +141,7 @@ public class MouseClickRequest extends Request {
                 Game game = Server.giveGameWithPlayer(getUserName());
                 if (this.typeOfCard.equalsIgnoreCase("heroPower")) {
                     GamePartController.playHeroPower(game);
+                    player.setPlayerStatusInGame(game.getCurrentPlayer().getPlayer().getPlayerStatusInGame());
                     number = -3;
                     numberOfCardInBattleGround = -3;
                 } else {

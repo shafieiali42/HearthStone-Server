@@ -48,6 +48,7 @@ public class JsonDeSerializerForResponse {
         map.put("ShowRankResponse", ShowRankResponse.class);
         map.put("ShowChatResponse", ShowChatResponse.class);
         map.put("MouseClickResponse",MouseClickResponse.class);
+        map.put("WriteOnLogPanelResponse",WriteOnLogPanelResponse.class);
     }
 
 

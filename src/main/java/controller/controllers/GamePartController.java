@@ -16,6 +16,8 @@ import Visitors.PowerVisitor.HeroPowerVisitor.HeroPowerVisitor;
 import Visitors.PowerVisitor.HeroPowerVisitor.SummonVisitorOfHeroPowers;
 import Visitors.PowerVisitor.HeroPowerVisitor.TargetVisitorOfPowers;
 import controller.Status;
+import controller.response.Response;
+import controller.response.WriteOnLogPanelResponse;
 import server.Server;
 
 import javax.swing.*;
@@ -435,9 +437,9 @@ public class GamePartController {
         }
 
         if (game.getTargetAllianceOfHeroPower().equals(Alliance.WHITE)) {
-            return game.getWhitePlayer().getBattleGroundCards().get(game.getTargetOfHeroPower() - 1);
-        } else if (game.getTargetAllianceOfHeroPower().equals(Alliance.BLACK)) {
             return game.getBlackPlayer().getBattleGroundCards().get(game.getTargetOfHeroPower() - 1);
+        } else if (game.getTargetAllianceOfHeroPower().equals(Alliance.BLACK)) {
+            return game.getWhitePlayer().getBattleGroundCards().get(game.getTargetOfHeroPower() - 1);
         }
         return null;
 
@@ -699,6 +701,9 @@ public class GamePartController {
                     weapon.setDurability(weapon.getDurability() - 1);
                     weapon.setHasAttackInThisTurn(true);
                     result = removeDeadCharacters(game);
+                    Response response =new WriteOnLogPanelResponse(weapon.getName() + " Attack " + hero.getName());
+                    Server.sendResponse(game.getWhitePlayer().getPlayer().getUserName(),response);
+                    Server.sendResponse(game.getBlackPlayer().getPlayer().getUserName(),response);
 //                    writeOnLogPanel(weapon.getName() + " Attack " + hero.getName());
                 }
             } else {// weapon vs minion
@@ -725,6 +730,9 @@ public class GamePartController {
                             null, null, game);
 
                     result = removeDeadCharacters(game);
+                    Response response =new WriteOnLogPanelResponse(weapon.getName() + " Attack " + minion.getName());
+                    Server.sendResponse(game.getWhitePlayer().getPlayer().getUserName(),response);
+                    Server.sendResponse(game.getBlackPlayer().getPlayer().getUserName(),response);
 //                    Mapper.writeOnLogPanel(weapon.getName() + " Attack " + minion.getName());
                 }
             }
@@ -737,6 +745,9 @@ public class GamePartController {
                     hero.setHealthPower(hero.getHealthPower() - minion.getAttackPower());
                     minion.setHasAttackInThisTurn(true);
                     result = removeDeadCharacters(game);
+                    Response response =new WriteOnLogPanelResponse(minion.getName() + " Attack " + hero.getName());
+                    Server.sendResponse(game.getWhitePlayer().getPlayer().getUserName(),response);
+                    Server.sendResponse(game.getBlackPlayer().getPlayer().getUserName(),response);
 //                    Mapper.writeOnLogPanel(minion.getName() + " Attack " + hero.getName());
                 }
             } else {//minion vs minion
@@ -761,6 +772,9 @@ public class GamePartController {
                         }
                         minion.setHasAttackInThisTurn(true);
                         result = removeDeadCharacters(game);
+                        Response response =new WriteOnLogPanelResponse(minion.getName() + " Attack " + minion2.getName());
+                        Server.sendResponse(game.getWhitePlayer().getPlayer().getUserName(),response);
+                        Server.sendResponse(game.getBlackPlayer().getPlayer().getUserName(),response);
 //                        Mapper.writeOnLogPanel(minion.getName() + " Attack " + minion2.getName());
 
 
