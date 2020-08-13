@@ -39,7 +39,7 @@ public class LogInRequest extends Request {
                 response =new LogInResponse(true,player.getUserName(),
                         GamePartController.giveNameOfCardList(player.getAllCardsOfPlayer()));
                 Log log =new Log(getUserName(),"SignIn");
-                Server.getDataBaseHandler().save(log);
+//                Server.getDataBaseHandler().save(log);
                 Server.getDataBaseHandler().save(player);
             }
         } else if (mode.equalsIgnoreCase("SignUp")) {
@@ -52,7 +52,7 @@ public class LogInRequest extends Request {
                 response =new LogInResponse(true,player.getUserName(),
                         GamePartController.giveNameOfCardList(player.getAllCardsOfPlayer()));
                 Log log =new Log(getUserName(),"SignUp");
-                Server.getDataBaseHandler().save(log);
+//                Server.getDataBaseHandler().save(log);
                 Server.getDataBaseHandler().save(player);
             }
 

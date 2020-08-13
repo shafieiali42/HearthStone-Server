@@ -79,6 +79,7 @@ public class ClientHandler extends Thread {
                 }
             }
         } catch (IOException e) {
+            System.out.println("Client DisConnected");
             e.printStackTrace();
         }
     }

@@ -13,7 +13,7 @@ public class DataBaseHandler {
         this.dataBase = dataBase;
     }
 
-    public synchronized void save(Object o) {
+    public  void save(Object o) {
         dataBase.save(o);
     }
 
